@@ -70,6 +70,17 @@ export interface PromptGenerationResult {
   version?: number;
 }
 
+export interface VideoPromptResult {
+  title: string;
+  prompt: string;
+  summary: {
+    subjectContinuity: string;
+    poseTransition: string;
+    transitionEffect: string;
+  };
+  warnings: string[];
+}
+
 export interface PromptHistoryItem {
   id: string;
   createdAt: string;

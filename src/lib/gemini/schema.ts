@@ -43,3 +43,22 @@ export const RESPONSE_SCHEMA = {
     consistencyRules: { type: "array", items: { type: "string" } }, warnings: { type: "array", items: { type: "string" } },
   },
 };
+
+export const VIDEO_PROMPT_SCHEMA = {
+  type: "object",
+  required: ["title", "prompt", "summary", "warnings"],
+  properties: {
+    title: { type: "string" },
+    prompt: { type: "string" },
+    summary: {
+      type: "object",
+      required: ["subjectContinuity", "poseTransition", "transitionEffect"],
+      properties: {
+        subjectContinuity: { type: "string" },
+        poseTransition: { type: "string" },
+        transitionEffect: { type: "string" },
+      },
+    },
+    warnings: { type: "array", items: { type: "string" } },
+  },
+};

@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, ChevronDown, Clock3, ExternalLink, History as HistoryIcon, KeyRound, LoaderCircle, Plus, RefreshCw, Settings as SettingsIcon, Sparkles, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Clock3, ExternalLink, Film, History as HistoryIcon, KeyRound, LoaderCircle, Plus, RefreshCw, Settings as SettingsIcon, Sparkles, X } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ApiKeyDialog } from "@/components/settings/ApiKeyDialog";
 import { SettingsDialog } from "@/components/settings/SettingsDialog";
@@ -17,7 +18,6 @@ import type { AppSettings, PromptGenerationResult, PromptHistoryItem, UploadedIm
 
 const PROGRESS_STAGES = ["Đang đọc ảnh người mẫu", "Đang phân tích sản phẩm", "Đang phân tích bối cảnh", "Đang lên kế hoạch 5 khung hình", "Đang hoàn thiện bộ prompt"];
 
-const ASPECT_RATIO_OPTIONS = ["9:16", "4:5", "3:4", "1:1", "16:9", "Custom"].map((value) => ({ value, label: value === "Custom" ? "Tùy chỉnh" : value }));
 const LANGUAGE_OPTIONS = [
   { value: "Vietnamese", label: "Tiếng Việt" },
   { value: "English", label: "Tiếng Anh" },
@@ -59,6 +59,7 @@ export function BuilderApp() {
     queueMicrotask(() => {
       if (!active) return;
       setApiOpen(!localStorage.getItem(API_KEY_STORAGE));
+      if (window.location.hash === "#history") setHistoryOpen(true);
       setReady(true);
     });
 
@@ -179,6 +180,7 @@ export function BuilderApp() {
       <a className="brand" href="#top" aria-label="Trang chủ Fashion Prompt Builder">Fashion Prompt Builder</a>
       <nav aria-label="Điều hướng chính">
         <button onClick={() => reset()}><Plus size={17} />Tạo mới</button>
+        <Link href="/video-prompt"><Film size={17} />Video Prompt</Link>
         <button onClick={() => setHistoryOpen(true)}><HistoryIcon size={17} />Lịch sử <span className="nav-count">{history.length}</span></button>
       </nav>
       <div className="header-actions">
@@ -204,7 +206,7 @@ export function BuilderApp() {
 
       <section className="generation-rail" aria-label="Cài đặt tạo prompt">
         <Control label="Mô hình"><div className="select-control"><Sparkles size={16} /><select aria-label="Mô hình Gemini" value={settings.modelId} onChange={(e) => setSettings({ ...settings, modelId: e.target.value })}>{modelOptions.map((model) => <option key={model.id} value={model.id}>{model.label}{model.recommended ? " · Đề xuất" : ""}</option>)}</select><ChevronDown size={15} /></div><button className="refresh-models" onClick={refreshModels} title="Làm mới danh sách mô hình" aria-label="Làm mới danh sách mô hình Gemini"><RefreshCw size={15} /></button></Control>
-        <Control label="Tỷ lệ"><Select label="Tỷ lệ khung hình" value={settings.aspectRatio} onChange={(value) => setSettings({ ...settings, aspectRatio: value })} options={ASPECT_RATIO_OPTIONS} /></Control>
+        <Control label="Tỷ lệ"><div className="select-control locked-control" aria-label="Tỷ lệ khung hình cố định"><span>9:16 · Cố định</span></div></Control>
         <Control label="Ngôn ngữ"><Select label="Ngôn ngữ đầu ra" value={settings.language} onChange={(value) => setSettings({ ...settings, language: value as AppSettings["language"] })} options={LANGUAGE_OPTIONS} /></Control>
         <Control label="Mức độ chi tiết"><Select label="Mức độ chi tiết của prompt" value={settings.detailLevel} onChange={(value) => setSettings({ ...settings, detailLevel: value as AppSettings["detailLevel"] })} options={DETAIL_OPTIONS} /></Control>
         <button className="generate-button" type="button" disabled={!canGenerate} onClick={handleGenerate}>{generating ? <LoaderCircle className="spin" size={20} /> : <Sparkles size={20} />}{generating ? PROGRESS_STAGES[progressStage] : "Tạo bộ prompt"}{!generating && <ArrowRight size={20} />}</button>
@@ -215,7 +217,7 @@ export function BuilderApp() {
 
       {error && <section className="error-panel" role="alert"><div><h3>{error.status === 429 ? "Đã chạm giới hạn Gemini" : "Không thể hoàn tất quá trình tạo"}</h3><p>{error.message}</p>{error.technical && <details><summary>Chi tiết kỹ thuật</summary><pre>{error.technical}</pre></details>}</div><div>{error.status === 429 && <a href={RATE_LIMITS_URL} target="_blank" rel="noreferrer">Xem giới hạn <ExternalLink size={15} /></a>}<button onClick={handleGenerate}>Thử lại</button><button onClick={() => setError(undefined)} aria-label="Đóng lỗi"><X size={17} /></button></div></section>}
 
-      {!result && !generating && <section className="empty-guide"><h2>Bốn nguồn tham chiếu. Một thế giới nhất quán.</h2><ol><li><strong>1. Người mẫu</strong><span>Ai sẽ mặc trang phục?</span></li><li><strong>2. Sản phẩm</strong><span>Người mẫu sẽ mặc gì?</span></li><li><strong>3. Bối cảnh</strong><span>Buổi chụp diễn ra ở đâu?</span></li><li><strong>4. Ghi chú</strong><span>Bạn còn yêu cầu nào khác?</span></li></ol><p>Khi bạn tạo prompt, các ảnh đã chọn sẽ được gửi thẳng đến Gemini API bằng API key của bạn.</p></section>}
+      {!result && !generating && <section className="empty-guide pose-guide"><h2>Master Prompt 9:16 và 5 tư thế đã khóa sẵn.</h2><ol><li><strong>01 · Hero slay</strong><span>Chính diện 3/4, ánh nhìn mạnh.</span></li><li><strong>02 · Bước đi</strong><span>Chuyển động thời trang tự nhiên.</span></li><li><strong>03 · Qua vai</strong><span>Xoay 3/4, nhìn lại ống kính.</span></li><li><strong>04 · Tựa nhẹ</strong><span>Tương tác hợp lý với bối cảnh.</span></li><li><strong>05 · Ngồi</strong><span>Thanh lịch, tôn dáng và outfit.</span></li></ol><p>Mỗi keyframe sẽ được tách độc lập từ đúng một tư thế trên; Gemini không được tự đổi hoặc hoán đổi thứ tự.</p></section>}
       {result && <PromptOutput result={result} onChange={handleResultChange} onRegenerate={handleRegenerate} regenerating={regenerating} />}
     </main>
 

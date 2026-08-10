@@ -49,7 +49,7 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
   return (
     <section className="results" id="results">
       <div className="results-heading">
-        <div><h2>Bộ prompt của bạn</h2><p>Một prompt tham chiếu chính và 5 khung hình có thể sử dụng độc lập.</p></div>
+        <div><h2>Bộ prompt của bạn</h2><p>Master Prompt mặc định và 5 keyframe tách đúng theo 5 tư thế đã khóa.</p></div>
         <div className="result-actions"><span className={`score score-${diversity.score >= 80 ? "great" : diversity.score >= 60 ? "good" : "weak"}`}><Sparkles size={15} />Độ đa dạng {diversity.score}/100</span><CopyButton text={formatAllPrompts(result)} label="Sao chép tất cả" /></div>
       </div>
 
@@ -66,12 +66,12 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
       {(result.warnings.length > 0 || diversity.issues.length > 0 || semanticWarnings.length > 0) && <details className="quality-warnings"><summary><TriangleAlert size={16} />Lưu ý chất lượng ({result.warnings.length + diversity.issues.length + semanticWarnings.length})</summary><ul>{[...result.warnings, ...diversity.issues, ...semanticWarnings].map((warning, i) => <li key={`${warning}-${i}`}>{warning}</li>)}</ul></details>}
 
       <article className="master-card">
-        <div className="prompt-card-top"><div><span className="prompt-number">M</span><h3>{result.masterPrompt.title || "Prompt tham chiếu chính"}</h3></div><div className="prompt-tools"><CopyButton text={result.masterPrompt.prompt} /><button className="text-action" type="button" onClick={toggleMasterEdit}>{editing === "master" ? <Save size={15} /> : <Pencil size={15} />}{editing === "master" ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("master")} disabled={Boolean(regenerating)}><RotateCw className={regenerating === "master" ? "spin" : ""} size={15} />Tạo lại</button></div></div>
+        <div className="prompt-card-top"><div><span className="prompt-number">M</span><h3>{result.masterPrompt.title || "Prompt tham chiếu chính"}</h3></div><div className="prompt-tools"><CopyButton text={result.masterPrompt.prompt} /><button className="text-action" type="button" onClick={toggleMasterEdit}>{editing === "master" ? <Save size={15} /> : <Pencil size={15} />}{editing === "master" ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("master")} disabled={Boolean(regenerating)}><RotateCw className={regenerating === "master" ? "spin" : ""} size={15} />Khôi phục mặc định</button></div></div>
         {editing === "master" ? <textarea className="prompt-editor" value={drafts.master ?? result.masterPrompt.prompt} onChange={(e) => setDrafts((current) => ({ ...current, master: e.target.value }))} /> : <p className="prompt-copy">{result.masterPrompt.prompt}</p>}
         <footer>{result.masterPrompt.prompt.length.toLocaleString("vi-VN")} ký tự · Phiên bản {result.version ?? 1}{editing === "master" && " · Đã chỉnh sửa"}</footer>
       </article>
 
-      <div className="keyframe-title"><h3>Năm khung hình</h3><span>Cùng một thế giới, đa dạng ngôn ngữ tạo dáng.</span></div>
+      <div className="keyframe-title"><h3>Năm keyframe mặc định</h3><span>Mỗi keyframe tách từ đúng một tư thế trong Master Prompt.</span></div>
       <div className="keyframe-list">
         {result.keyframes.map((keyframe, position) => {
           const key = `keyframe-${keyframe.index}`;
