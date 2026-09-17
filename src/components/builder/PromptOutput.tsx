@@ -3,6 +3,7 @@
 import { Check, ChevronDown, Clipboard, Copy, Pencil, RotateCw, Save, Sparkles, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { consistencyWarnings, formatAllPrompts, scorePoseDiversity } from "@/lib/prompts/quality";
+import { FASHION_POSE_COUNT } from "@/lib/prompts/fashion-defaults";
 import type { PromptGenerationResult } from "@/types";
 
 interface PromptOutputProps {
@@ -25,6 +26,7 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const diversity = scorePoseDiversity(result);
   const semanticWarnings = consistencyWarnings(result);
+  const isLegacyLayout = result.keyframes.length !== FASHION_POSE_COUNT;
   const toggleMasterEdit = () => {
     if (editing === "master") {
       const prompt = drafts.master ?? result.masterPrompt.prompt;
@@ -49,7 +51,7 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
   return (
     <section className="results" id="results">
       <div className="results-heading">
-        <div><h2>Bộ prompt của bạn</h2><p>Master Prompt mặc định và 5 keyframe tách đúng theo 5 tư thế đã khóa.</p></div>
+        <div><h2>Bộ prompt của bạn</h2><p>{isLegacyLayout ? "Bộ prompt đã lưu theo bố cục cũ. Nhấn Tạo bộ prompt để tạo lại 4 pose trong một ảnh 9:16." : "Master Prompt cho một ảnh 9:16 ghép 2×2, kèm 4 prompt mô tả từng ô: phía trước, phía sau, góc 3/4 và slay."}</p></div>
         <div className="result-actions"><span className={`score score-${diversity.score >= 80 ? "great" : diversity.score >= 60 ? "good" : "weak"}`}><Sparkles size={15} />Độ đa dạng {diversity.score}/100</span><CopyButton text={formatAllPrompts(result)} label="Sao chép tất cả" /></div>
       </div>
 
@@ -66,19 +68,19 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
       {(result.warnings.length > 0 || diversity.issues.length > 0 || semanticWarnings.length > 0) && <details className="quality-warnings"><summary><TriangleAlert size={16} />Lưu ý chất lượng ({result.warnings.length + diversity.issues.length + semanticWarnings.length})</summary><ul>{[...result.warnings, ...diversity.issues, ...semanticWarnings].map((warning, i) => <li key={`${warning}-${i}`}>{warning}</li>)}</ul></details>}
 
       <article className="master-card">
-        <div className="prompt-card-top"><div><span className="prompt-number">M</span><h3>{result.masterPrompt.title || "Prompt tham chiếu chính"}</h3></div><div className="prompt-tools"><CopyButton text={result.masterPrompt.prompt} /><button className="text-action" type="button" onClick={toggleMasterEdit}>{editing === "master" ? <Save size={15} /> : <Pencil size={15} />}{editing === "master" ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("master")} disabled={Boolean(regenerating)}><RotateCw className={regenerating === "master" ? "spin" : ""} size={15} />Khôi phục mặc định</button></div></div>
+        <div className="prompt-card-top"><div><span className="prompt-number">M</span><h3>{result.masterPrompt.title || "Prompt tham chiếu chính"}</h3></div><div className="prompt-tools"><CopyButton text={result.masterPrompt.prompt} /><button className="text-action" type="button" onClick={toggleMasterEdit}>{editing === "master" ? <Save size={15} /> : <Pencil size={15} />}{editing === "master" ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("master")} disabled={Boolean(regenerating) || isLegacyLayout}><RotateCw className={regenerating === "master" ? "spin" : ""} size={15} />Khôi phục mặc định</button></div></div>
         {editing === "master" ? <textarea className="prompt-editor" value={drafts.master ?? result.masterPrompt.prompt} onChange={(e) => setDrafts((current) => ({ ...current, master: e.target.value }))} /> : <p className="prompt-copy">{result.masterPrompt.prompt}</p>}
         <footer>{result.masterPrompt.prompt.length.toLocaleString("vi-VN")} ký tự · Phiên bản {result.version ?? 1}{editing === "master" && " · Đã chỉnh sửa"}</footer>
       </article>
 
-      <div className="keyframe-title"><h3>Năm keyframe mặc định</h3><span>Mỗi keyframe tách từ đúng một tư thế trong Master Prompt.</span></div>
+      <div className="keyframe-title"><h3>{isLegacyLayout ? `${result.keyframes.length} keyframe đã lưu` : "Bốn pose trong ảnh ghép"}</h3><span>{isLegacyLayout ? "Nội dung lịch sử được giữ nguyên." : "Mỗi prompt mô tả một ô dọc 9:16 trong lưới 2×2 của Master Prompt."}</span></div>
       <div className="keyframe-list">
         {result.keyframes.map((keyframe, position) => {
           const key = `keyframe-${keyframe.index}`;
           return <article className="keyframe-card" key={keyframe.index}>
             <div className="keyframe-index">{String(keyframe.index).padStart(2, "0")}</div>
             <div className="keyframe-body">
-              <div className="prompt-card-top"><div><h3>{keyframe.title}</h3><p>{keyframe.poseSummary}</p></div><div className="prompt-tools"><CopyButton text={keyframe.prompt} /><button className="text-action" type="button" onClick={() => toggleKeyframeEdit(position, key)}>{editing === key ? <Save size={15} /> : <Pencil size={15} />}{editing === key ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("keyframe", position)} disabled={Boolean(regenerating)}><RotateCw className={regenerating === key ? "spin" : ""} size={15} />Tạo lại</button></div></div>
+              <div className="prompt-card-top"><div><h3>{keyframe.title}</h3><p>{keyframe.poseSummary}</p></div><div className="prompt-tools"><CopyButton text={keyframe.prompt} /><button className="text-action" type="button" onClick={() => toggleKeyframeEdit(position, key)}>{editing === key ? <Save size={15} /> : <Pencil size={15} />}{editing === key ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("keyframe", position)} disabled={Boolean(regenerating) || isLegacyLayout}><RotateCw className={regenerating === key ? "spin" : ""} size={15} />Tạo lại</button></div></div>
               <div className="pose-facts"><span>Cơ thể · {keyframe.bodyDirection}</span><span>Khuôn mặt · {keyframe.faceDirection}</span><span>Máy ảnh · {keyframe.camera}</span></div>
               {editing === key ? <textarea className="prompt-editor compact" value={drafts[key] ?? keyframe.prompt} onChange={(e) => setDrafts((current) => ({ ...current, [key]: e.target.value }))} /> : <p className="prompt-copy compact">{keyframe.prompt}</p>}
             </div>

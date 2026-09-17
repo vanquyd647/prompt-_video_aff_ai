@@ -3,94 +3,95 @@ import type { PromptGenerationResult } from "@/types";
 export const DEFAULT_FASHION_POSES = [
   {
     index: 1,
-    title: "Hero slay chính diện",
-    poseSummary: "Tư thế hero mạnh nhất, đứng toàn thân chếch 3/4 nhẹ, một tay đặt eo và ánh nhìn trực diện.",
-    bodyDirection: "Đứng toàn thân, thân chếch 3/4 nhẹ, trọng tâm dồn vào chân sau, chân trước kéo dài tự nhiên",
-    faceDirection: "Nhìn thẳng máy ảnh, cằm nâng rất nhẹ, thần thái tự tin và sắc sảo",
-    camera: "Máy ngang tầm mắt, khung hình toàn thân dọc 9:16, góc hero tôn dáng",
+    title: "Phía trước",
+    poseSummary: "Đứng chính diện toàn thân để thấy rõ mặt trước và phom dáng sản phẩm.",
+    bodyDirection: "Vai và hông hướng thẳng về máy ảnh, đứng cân bằng tự nhiên, hai tay thả nhẹ không che trang phục",
+    faceDirection: "Mặt hướng thẳng và nhìn vào máy ảnh, biểu cảm tự tin tự nhiên",
+    camera: "Camera cố định ở tầm mắt trước bối cảnh ảnh 03; người mẫu hướng chính diện, toàn thân trong ô dọc 9:16 phía trên bên trái",
   },
   {
     index: 2,
-    title: "Bước đi thời trang",
-    poseSummary: "Bước đi chéo nhẹ trong không gian, tay chuyển động tự nhiên và outfit vẫn được nhìn rõ.",
-    bodyDirection: "Bước một nhịp tự nhiên theo đường chéo về phía máy ảnh, vai và hông tạo nhịp chuyển động mềm",
-    faceDirection: "Nhìn lệch nhẹ khỏi ống kính theo hướng bước đi, biểu cảm bình tĩnh và sang trọng",
-    camera: "Máy ngang hông đến ngang ngực, toàn thân dọc 9:16, bắt khoảnh khắc giữa bước chân",
+    title: "Phía sau",
+    poseSummary: "Đứng quay lưng hoàn toàn về máy ảnh để thấy rõ mặt sau sản phẩm, không xoay 3/4 hay nhìn qua vai.",
+    bodyDirection: "Lưng, vai và hông quay thẳng về phía máy ảnh, hai tay thả tự nhiên không che chi tiết phía sau",
+    faceDirection: "Đầu cùng hướng với cơ thể, nhìn ra xa máy ảnh; không quay mặt lại, không ép thấy khuôn mặt ở góc sau",
+    camera: "Giữ nguyên camera và bối cảnh như ô 1; người mẫu quay lưng về máy, toàn thân trong ô dọc 9:16 phía trên bên phải",
   },
   {
     index: 3,
-    title: "Xoay người nhìn qua vai",
-    poseSummary: "Cơ thể xoay 3/4 khỏi máy ảnh rồi nhìn lại qua vai để khoe phom sau và đường nét outfit.",
-    bodyDirection: "Thân xoay 3/4 ra xa máy ảnh, lưng thẳng, hông chuyển nhẹ, một chân đặt sau để giữ cân bằng",
-    faceDirection: "Quay đầu nhìn qua vai về phía ống kính, giữ rõ khuôn mặt và không để tóc che mặt",
-    camera: "Góc máy 3/4 phía sau ở tầm mắt, khung toàn thân dọc 9:16",
+    title: "Góc 3/4",
+    poseSummary: "Đứng chếch khoảng 45 độ về phía máy ảnh, đồng thời thấy mặt trước và một bên sản phẩm.",
+    bodyDirection: "Vai và hông xoay khoảng 45 độ so với máy ảnh, trọng tâm dồn nhẹ vào chân sau, tay không che đường nét outfit",
+    faceDirection: "Mặt chếch nhẹ theo cơ thể, mắt hướng về ống kính, giữ rõ đường nét khuôn mặt",
+    camera: "Giữ nguyên camera và bối cảnh như ô 1; người mẫu xoay 45 độ để thấy góc 3/4 phía trước, toàn thân trong ô dọc 9:16 phía dưới bên trái",
   },
   {
     index: 4,
-    title: "Tựa nhẹ vào bối cảnh",
-    poseSummary: "Tựa nhẹ vào một chi tiết có thật của background, chân tạo đường chéo và hai tay bất đối xứng tự nhiên.",
-    bodyDirection: "Tựa rất nhẹ vào kiến trúc hoặc đạo cụ phù hợp, một chân duỗi chéo, chân còn lại chịu lực, không làm biến dạng outfit",
-    faceDirection: "Nhìn nghiêng sang một bên rồi đưa mắt nhẹ về máy ảnh, biểu cảm nữ tính và thư thái",
-    camera: "Máy chếch 3/4 ở tầm mắt, khung toàn thân hoặc 3/4 dọc 9:16 tùy không gian",
-  },
-  {
-    index: 5,
-    title: "Ngồi tương tác sang trọng",
-    poseSummary: "Ngồi trên điểm tựa hợp lý trong bối cảnh, thân trên kéo dài, chân đặt chéo và tay thả tự nhiên.",
-    bodyDirection: "Ngồi thẳng thanh lịch trên điểm tựa có thật, thân trên kéo dài, hai chân đặt chéo tự nhiên; nếu không có chỗ ngồi thì dùng tư thế bán tựa tương đương",
-    faceDirection: "Hướng mặt về máy ảnh hoặc chếch nhẹ, giữ gương mặt rõ và thần thái tự tin",
-    camera: "Máy ngang tầm mắt hoặc thấp hơn rất nhẹ, khung toàn thân dọc 9:16 và giữ đúng phối cảnh",
+    title: "Slay",
+    poseSummary: "Pose thời trang nổi bật nhất: một tay đặt nhẹ ở eo, một chân đưa lên trước, thần thái tự tin và sắc sảo.",
+    bodyDirection: "Đứng thẳng, dồn trọng tâm vào chân sau, đặt chân trước lên trước tự nhiên nhưng không kéo dài chân hoặc thay đổi tỷ lệ cơ thể, hông lệch nhẹ; một tay đặt eo không che chi tiết sản phẩm, tay còn lại thả mềm",
+    faceDirection: "Nhìn trực diện máy ảnh, cằm nâng rất nhẹ, thần thái slay mạnh và cuốn hút",
+    camera: "Giữ nguyên camera và bối cảnh như ô 1; toàn thân, phối cảnh tự nhiên, không dùng góc rộng kéo dài chân hoặc bóp dáng, trong ô dọc 9:16 phía dưới bên phải",
   },
 ] as const;
+
+export const FASHION_POSE_COUNT = DEFAULT_FASHION_POSES.length;
+export const DEFAULT_FASHION_MASTER_TITLE = "Master Prompt mặc định · 4 ảnh dọc 9:16 trong 1 ảnh 9:16";
+
+export const FASHION_REFERENCE_LOCK = `KHÓA THAM CHIẾU BẮT BUỘC CHO CẢ 4 Ô
+01 — Người mẫu / Nhận diện: Giữ nguyên người mẫu, khuôn mặt, làn da, tóc và toàn bộ vóc dáng, kích thước tương đối, tỷ lệ vai–ngực–eo–hông, chiều dài thân, tay và chân theo ảnh 01. Giữ nguyên mọi số đo thực tế do người dùng cung cấp rõ ràng; không suy đoán số đo cm, chiều cao hay cân nặng từ ảnh. Không làm gầy hoặc đầy hơn, không tăng giảm ngực/eo/hông, không kéo dài chân, không áp dáng đồng hồ cát, không lấy cơ thể từ ảnh sản phẩm. Nếu ảnh 01 không thấy đủ cơ thể, nêu rõ phần chưa xác định và yêu cầu ảnh toàn thân để giữ đúng vóc dáng; không khẳng định độ chính xác cho phần không nhìn thấy.
+02 — Sản phẩm / Trang phục: Sao chép đúng sản phẩm từ ảnh 02: thiết kế, màu sắc, chất liệu, bề mặt vải, họa tiết và vị trí họa tiết, logo/chữ, đường may, cổ áo, tay áo, túi, nút, khóa, gấu, chiều dài và cấu trúc phom. Chỉ cho phép nếp vải, độ rủ và độ căng thay đổi tự nhiên khi mặc lên cơ thể ảnh 01; không sửa cơ thể để vừa đồ, không cắt sửa thiết kế hoặc thêm/bớt chi tiết. Không bịa chi tiết mặt sau hay phần bị che; ghi rõ thiếu ảnh bổ trợ nếu chưa xác định.
+03 — Bối cảnh: Tái hiện đúng ảnh bối cảnh 03: địa điểm, kiến trúc, nền/tường/sàn, vật thể và vị trí tương đối, chất liệu, màu sắc, hướng sáng, độ mềm của ánh sáng và bóng đổ. Không thay cảnh, không dùng nền từ ảnh 01/02, không thêm/bớt đồ vật, không tự trang trí hay đổi ánh sáng. Đặt người mẫu tự nhiên trong đúng không gian đó; giữ cùng camera và bố cục nền, chỉ đổi tư thế/hướng cơ thể để có phía trước, phía sau, góc 3/4 và slay. Không dựng thêm phần bối cảnh chưa nhìn thấy.
+Các khóa trên có ưu tiên cao hơn yêu cầu làm đẹp, phong cách slay hoặc ghi chú mâu thuẫn. Cả 4 ô phải dùng cùng cơ thể, cùng sản phẩm và cùng bối cảnh; chỉ thay đổi tư thế.`;
 
 const POSE_SECTION = DEFAULT_FASHION_POSES.map((pose) =>
   `${pose.index}. ${pose.title}: ${pose.poseSummary} Cơ thể: ${pose.bodyDirection}. Khuôn mặt: ${pose.faceDirection}. Góc máy: ${pose.camera}.`,
 ).join("\n");
 
-export const DEFAULT_FASHION_MASTER_PROMPT = `Tạo một bộ 5 ảnh dọc tỷ lệ 9:16 theo concept review model thời trang.
+export const DEFAULT_FASHION_MASTER_PROMPT = `Tạo duy nhất 1 ảnh dọc tỷ lệ 9:16 chứa 4 khung ảnh dọc 9:16 theo concept review model thời trang, bố cục lưới 2×2.
 
 1. Quy tắc sử dụng ảnh tham chiếu
-Ảnh tham chiếu 1 – Nhân vật: Dùng làm chuẩn tuyệt đối cho khuôn mặt, đặc điểm nhận diện, kiểu tóc, màu tóc, làn da, thần thái, chiều cao, tỷ lệ cơ thể và toàn bộ vóc dáng của người mẫu.
-Ảnh tham chiếu 2 – Trang phục: Chỉ dùng làm chuẩn cho trang phục/outfit, bao gồm thiết kế, màu sắc, chất liệu, họa tiết, đường may, form dáng, độ ôm, độ dài và các chi tiết đặc trưng của sản phẩm.
-Ảnh tham chiếu cuối cùng – Background: Dùng làm chuẩn cho bối cảnh cố định của toàn bộ 5 ảnh. Nếu không có ảnh background riêng, hãy ưu tiên dùng bối cảnh trong ảnh sản phẩm. Nếu vẫn không phù hợp, hãy tạo một background thời trang phù hợp với outfit, sang trọng, chân thực và có tính thẩm mỹ cao.
+${FASHION_REFERENCE_LOCK}
 
 2. Quy tắc ưu tiên bắt buộc
 Body, tỷ lệ cơ thể, đường cong, chiều cao, dáng người, khuôn mặt và thần thái phải luôn lấy từ ảnh tham chiếu 1. Không sử dụng body, tỷ lệ người, pose, dáng đứng, góc chụp hoặc thần thái của ảnh tham chiếu 2. Ảnh tham chiếu 2 chỉ là nguồn tham chiếu về trang phục, không phải nguồn tham chiếu về cơ thể.
-Outfit từ ảnh tham chiếu 2 phải được mặc lại và fit lại theo đúng body của ảnh tham chiếu 1. Toàn bộ các yếu tố như độ ôm, độ rủ, chiều dài, vị trí chi tiết thiết kế và cách trang phục nằm trên cơ thể phải được điều chỉnh tự nhiên để phù hợp với body của ảnh tham chiếu 1, thay vì giữ nguyên cách outfit bám trên body của ảnh tham chiếu 2.
+Mặc đúng sản phẩm từ ảnh 02 lên cơ thể giữ nguyên của ảnh 01. Chỉ điều chỉnh nếp vải, độ rủ và độ căng theo trọng lực và tư thế; giữ nguyên chiều dài thiết kế, cấu trúc, tỷ lệ chi tiết và vị trí logo/họa tiết trên sản phẩm. Không đổi số đo cơ thể, không thiết kế lại trang phục để ép độ vừa vặn giống người trong ảnh 02.
 
 3. Yêu cầu đầu ra
-Tạo 5 ảnh riêng biệt, mỗi ảnh là một file độc lập. Tỷ lệ chuẩn 9:16. Không collage, không contact sheet, không chia khung, không ghép nhiều ảnh trong một file. Cả 5 ảnh phải giữ cùng một người mẫu, cùng một outfit, cùng một background và cùng overall styling. Ảnh mang phong cách nhiếp ảnh thời trang review, chân thực, sắc nét và thẩm mỹ cao.
+Chỉ xuất 1 file ảnh tổng tỷ lệ 9:16, chia thành lưới 2 hàng × 2 cột với 4 ô bằng nhau, liền mép, không viền, không khoảng cách và không chữ hay số thứ tự trên ảnh. Mỗi ô chiếm một nửa chiều rộng và một nửa chiều cao ảnh tổng, nên từng ô cũng có tỷ lệ 9:16. Ví dụ: ảnh tổng 2160×3840 px chứa 4 ô 1080×1920 px. Không xuất 4 file riêng, không thêm ô thứ năm, không chồng khung hoặc trộn nhiều pose trong một ô. Mỗi ô có đúng một hình người mẫu toàn thân, không cắt đầu hoặc bàn chân. Cả 4 ô phải giữ cùng một người mẫu, cùng một outfit, cùng một background và cùng overall styling. Ảnh mang phong cách nhiếp ảnh thời trang review, chân thực, sắc nét và thẩm mỹ cao.
 
 4. Yêu cầu về người mẫu
-Người mẫu là nữ trưởng thành, mang vẻ đẹp quyến rũ, sang trọng, nữ tính và tự tin. Giữ đúng ảnh tham chiếu 1 về khuôn mặt, đặc điểm nhận diện, kiểu tóc, màu tóc, làn da, thần thái, tỷ lệ cơ thể và vóc dáng.
-Vóc dáng phải đúng theo ảnh tham chiếu 1: dáng đồng hồ cát gợi cảm, cân đối và hài hòa; vòng một rất đầy đặn, nổi bật, lớn nhưng vẫn tự nhiên, mềm mại và cân đối với tổng thể; eo thon rõ nét; hông nở cân đối; chân dài đẹp. Tổng thể cuốn hút nhưng vẫn chân thực, thẩm mỹ và không phóng đại phi thực tế.
+Giữ đúng người mẫu trưởng thành trong ảnh 01 về khuôn mặt, đặc điểm nhận diện, kiểu tóc, màu tóc, làn da và vóc dáng thực tế. Không thay bằng một người mẫu lý tưởng hóa. Phong cách slay chỉ thể hiện bằng tư thế và biểu cảm, không bằng việc sửa số đo hay hình thể.
+Giữ nguyên tỷ lệ và kích thước tương đối của cơ thể trong cả 4 góc nhìn. Không tăng ngực, bóp eo, nở hông, kéo dài chân hoặc thay đổi chiều cao/cân nặng. Chỉ dùng số đo cụ thể nếu người dùng đã cung cấp; nếu thiếu ảnh toàn thân, ghi rõ giới hạn tham chiếu thay vì tự dựng vóc dáng rồi coi là chính xác.
 
 5. Yêu cầu về trang phục
-Tái hiện chính xác outfit từ ảnh tham chiếu 2: đúng thiết kế, màu sắc, chất liệu, họa tiết, đường may, form dáng, độ ôm, độ dài và các chi tiết nổi bật của sản phẩm. Outfit phải được fit theo body của ảnh tham chiếu 1, không được fit theo body của ảnh tham chiếu 2.
+Tái hiện chính xác sản phẩm từ ảnh 02 theo khóa tham chiếu, không biến tấu thiết kế hay thay chất liệu, màu sắc hoặc chi tiết. Trang phục nằm tự nhiên trên body giữ nguyên của ảnh 01; độ rủ/nếp gấp có thể đổi theo tư thế nhưng cấu trúc sản phẩm phải nhất quán ở cả 4 ô. Chi tiết chưa thấy trong ảnh phải được ghi nhận là chưa xác định.
 
-6. Năm tư thế mặc định bắt buộc
-Mỗi ảnh phải sử dụng đúng một tư thế dưới đây theo đúng thứ tự. Không tự đổi pose, không hoán đổi thứ tự và không gộp nhiều pose vào cùng một ảnh. Ảnh 1 phải là ảnh đẹp nhất, nổi bật nhất, “slay” nhất và có thần thái mạnh nhất.
+6. Bốn tư thế mặc định bắt buộc
+Mỗi ô chỉ sử dụng đúng một tư thế dưới đây, theo thứ tự đọc từ trái sang phải, từ trên xuống dưới: phía trước (trên trái), phía sau (trên phải), góc 3/4 (dưới trái), slay (dưới phải). Không tự đổi pose hoặc hoán đổi vị trí. Ô 4 là pose “slay” nổi bật nhất; ô 2 phải thể hiện đúng mặt sau, không nhìn qua vai.
 ${POSE_SECTION}
 
 7. Yêu cầu về background và tính nhất quán
-Giữ cùng một background cho cả 5 ảnh. Không thay đổi địa điểm, kiến trúc, đồ vật lớn hay nguồn sáng chính. Chỉ thay đổi nhẹ góc máy, bố cục và vị trí đứng/ngồi theo năm tư thế đã khóa. Người mẫu phải hòa hợp tự nhiên với background, đúng phối cảnh, tỷ lệ, ánh sáng và bóng đổ. Không tạo cảm giác cắt ghép hoặc lạc khỏi không gian.
+Giữ nguyên đúng bối cảnh ảnh 03 cho cả 4 ô, bao gồm bố cục vật thể, màu sắc, chất liệu, ánh sáng và bóng đổ. Giữ camera cố định so với bối cảnh; người mẫu đổi hướng và tư thế theo bốn pose đã khóa, không dựng góc phòng mới. Người mẫu phải hòa hợp tự nhiên với background trong từng ô, đúng phối cảnh, tỷ lệ và ánh sáng nguồn. Giữ cỡ người mẫu nhất quán giữa các ô, không kéo giãn người hoặc sản phẩm để lấp đầy khung.
 
 8. Yêu cầu chất lượng hình ảnh
-Phong cách high-end fashion review photography; chân thực, sắc nét, high detail; ánh sáng đẹp và tự nhiên; da thật, không nhựa; chất liệu vải rõ; bố cục sạch, sang trọng; gương mặt rõ ở mọi góc thấy mặt. Không để tóc, tay hoặc phụ kiện che mặt quá nhiều. Không lỗi giải phẫu, không méo người, không thừa tay chân, không sai tỷ lệ cơ thể, không xuyên vật thể và không lỗi phối cảnh.`;
+Phong cách fashion review photography; chân thực, sắc nét, high detail; giữ đúng ánh sáng ảnh 03, da thật theo ảnh 01 và chất liệu vải theo ảnh 02. Không retouch làm đổi hình thể, không nâng cấp hay thay thế bối cảnh để đạt vẻ sang trọng. Gương mặt rõ ở mọi góc thấy mặt. Không để tóc, tay hoặc phụ kiện che mặt quá nhiều. Không lỗi giải phẫu, không méo người, không thừa tay chân, không sai tỷ lệ cơ thể, không xuyên vật thể và không lỗi phối cảnh.`;
 
 export function attachLockedPoseBlueprint(position: number, prompt: string): string {
   const pose = DEFAULT_FASHION_POSES[position];
   if (!pose) return prompt;
   const marker = `TƯ THẾ MẶC ĐỊNH ${pose.index} — ${pose.title}`;
-  if (prompt.startsWith(marker)) return prompt;
-  return `${marker}\n${pose.poseSummary}\nCơ thể: ${pose.bodyDirection}.\nKhuôn mặt: ${pose.faceDirection}.\nGóc máy: ${pose.camera}.\n\n${prompt}`;
+  if (prompt.startsWith(marker) && prompt.includes(FASHION_REFERENCE_LOCK)) return prompt;
+  const content = prompt.startsWith(marker) ? prompt : `${marker}\n${pose.poseSummary}\nCơ thể: ${pose.bodyDirection}.\nKhuôn mặt: ${pose.faceDirection}.\nGóc máy: ${pose.camera}.\n\n${prompt}`;
+  return `${content}\n\n${FASHION_REFERENCE_LOCK}`;
 }
 
 export function applyDefaultFashionPlan(result: PromptGenerationResult): PromptGenerationResult {
+  if (result.keyframes.length !== FASHION_POSE_COUNT) throw new Error("Bộ prompt phải có đúng 4 pose: phía trước, phía sau, góc 3/4 và slay.");
   return {
     ...result,
     masterPrompt: {
-      title: "Master Prompt mặc định · 5 ảnh dọc 9:16",
+      title: DEFAULT_FASHION_MASTER_TITLE,
       prompt: DEFAULT_FASHION_MASTER_PROMPT,
     },
     keyframes: result.keyframes.map((keyframe, position) => {

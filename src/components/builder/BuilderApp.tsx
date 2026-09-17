@@ -14,9 +14,10 @@ import { createUploadedImage, fromStoredImage, toStoredImage } from "@/lib/image
 import { API_KEY_STORAGE, DEFAULT_SETTINGS, loadSettings, saveSettings } from "@/lib/storage/local-settings";
 import { clearHistory, deleteHistoryItem, getHistory, saveHistoryItem } from "@/lib/storage/history";
 import { createId } from "@/lib/utils/id";
+import { DEFAULT_FASHION_POSES } from "@/lib/prompts/fashion-defaults";
 import type { AppSettings, PromptGenerationResult, PromptHistoryItem, UploadedImage } from "@/types";
 
-const PROGRESS_STAGES = ["Đang đọc ảnh người mẫu", "Đang phân tích sản phẩm", "Đang phân tích bối cảnh", "Đang lên kế hoạch 5 khung hình", "Đang hoàn thiện bộ prompt"];
+const PROGRESS_STAGES = ["Đang đọc ảnh người mẫu", "Đang phân tích sản phẩm", "Đang phân tích bối cảnh", "Đang xếp 4 pose vào ảnh 9:16", "Đang hoàn thiện bộ prompt"];
 
 const LANGUAGE_OPTIONS = [
   { value: "Vietnamese", label: "Tiếng Việt" },
@@ -110,7 +111,7 @@ export function BuilderApp() {
   }, [background, currentHistoryId, history, modelImage, notes, products, settings]);
 
   const handleGenerate = async () => {
-    if (!apiKey || !modelImage || products.length === 0) return;
+    if (!apiKey || !modelImage || products.length === 0 || !background) return;
     const controller = new AbortController(); abortRef.current = controller;
     setGenerating(true); setProgressStage(0); setError(undefined);
     try {
@@ -170,7 +171,7 @@ export function BuilderApp() {
   const clearAllHistory = async () => { if (!window.confirm("Xóa toàn bộ lịch sử prompt trên thiết bị? API key của bạn vẫn được giữ lại.")) return; await clearHistory(); setHistory([]); setCurrentHistoryId(undefined); };
   const clearAllData = async () => { if (!window.confirm("Xóa API key, cài đặt và toàn bộ lịch sử trên thiết bị?")) return; await clearHistory(); localStorage.removeItem(API_KEY_STORAGE); localStorage.removeItem("fashion-prompt-builder:settings"); setApiKey(""); setSettings(DEFAULT_SETTINGS); setHistory([]); setSettingsOpen(false); setApiOpen(true); reset(); };
 
-  const canGenerate = Boolean(apiKey && modelImage && products.length && !generating);
+  const canGenerate = Boolean(apiKey && modelImage && products.length && background && !generating);
   const selectedModel = models.find((model) => model.id === settings.modelId) ?? GEMINI_MODEL_OPTIONS.find((model) => model.id === settings.modelId);
   const modelOptions = useMemo(() => models.some((model) => model.id === settings.modelId) ? models : [selectedModel!, ...models].filter(Boolean), [models, selectedModel, settings.modelId]);
   if (!ready) return <main className="boot"><LoaderCircle className="spin" /><span>Đang mở không gian làm việc trên thiết bị…</span></main>;
@@ -191,17 +192,17 @@ export function BuilderApp() {
 
     <main id="top" className="app-main">
       <section className="intro">
-        <div><h1>Tạo câu chuyện thời trang nhất quán</h1><p>Kết hợp ảnh người mẫu, trang phục và bối cảnh thành một prompt chính cùng 5 khung hình khác biệt.</p></div>
+        <div><h1>Tạo câu chuyện thời trang nhất quán</h1><p>Tạo prompt cho 4 khung dọc 9:16 trong một ảnh 9:16, bố cục 2×2: phía trước, phía sau, góc 3/4 và slay. Giữ nguyên cơ thể ảnh 01, chính xác sản phẩm ảnh 02 và bối cảnh ảnh 03.</p></div>
         <div className="step-thread" aria-label="Bốn bước thêm ảnh tham chiếu">{["01", "02", "03", "04"].map((step) => <span key={step}>{step}<i /></span>)}</div>
       </section>
 
       {fileMessage && <div className="notice" role="status"><span>{fileMessage}</span><button onClick={() => setFileMessage(undefined)} aria-label="Đóng thông báo"><X size={15} /></button></div>}
 
       <div className="input-grid">
-        <UploadCard index="01" title="Người mẫu / Nhận diện" description="Ai sẽ mặc trang phục? Tải lên một ảnh nhìn rõ khuôn mặt." images={modelImage ? [modelImage] : []} onFiles={(files) => setSingle("model", files)} onRemove={() => { revoke(modelImage); setModelImage(undefined); }} />
-        <UploadCard index="02" title="Sản phẩm / Trang phục" description="Người mẫu sẽ mặc gì? Thêm một hoặc nhiều góc chụp bổ trợ." images={products} multiple onFiles={addProducts} onRemove={(id) => setProducts((items) => { const target = items.find((item) => item.id === id); revoke(target); return items.filter((item) => item.id !== id); })} onReorder={(from, to) => setProducts((items) => { const next = [...items]; const [moved] = next.splice(from, 1); if (moved) next.splice(to, 0, moved); return next; })} />
-        <UploadCard index="03" title="Bối cảnh" description="Buổi chụp diễn ra ở đâu? AI có thể tự đề xuất nếu bạn bỏ trống." images={background ? [background] : []} optional onFiles={(files) => setSingle("background", files)} onRemove={() => { revoke(background); setBackground(undefined); }} />
-        <section className="upload-card notes-card" aria-labelledby="slot-04"><span className="watermark" aria-hidden>04</span><div className="card-heading"><div><h2 id="slot-04">04 — Ghi chú bổ sung</h2><p>Có yêu cầu nào khác? Ghi chú sẽ được ưu tiên hơn cài đặt mặc định.</p></div><span className="optional-label">Không bắt buộc</span></div><textarea value={notes} maxLength={3000} onChange={(e) => setNotes(e.target.value)} placeholder="Ví dụ: ảnh dọc 9:16, phong cách đánh giá thời trang thương mại, ánh sáng cửa sổ mềm, không sao chép dáng của ảnh người mẫu, ưu tiên thấy rõ phom váy..." /><span className="character-count">{notes.length} / 3000</span></section>
+        <UploadCard index="01" title="Người mẫu / Nhận diện" description="Dùng ảnh toàn thân, rõ mặt để giữ nguyên vóc dáng và tỷ lệ cơ thể. Có số đo thực tế thì nhập ở ghi chú; không suy đoán số đo từ ảnh." images={modelImage ? [modelImage] : []} onFiles={(files) => setSingle("model", files)} onRemove={() => { revoke(modelImage); setModelImage(undefined); }} />
+        <UploadCard index="02" title="Sản phẩm / Trang phục" description="Giữ đúng thiết kế, màu sắc, chất liệu và từng chi tiết. Thêm ảnh trước, sau và bên để thấy đủ sản phẩm." images={products} multiple onFiles={addProducts} onRemove={(id) => setProducts((items) => { const target = items.find((item) => item.id === id); revoke(target); return items.filter((item) => item.id !== id); })} onReorder={(from, to) => setProducts((items) => { const next = [...items]; const [moved] = next.splice(from, 1); if (moved) next.splice(to, 0, moved); return next; })} />
+        <UploadCard index="03" title="Bối cảnh" description="Bắt buộc có ảnh để giữ đúng không gian, đồ vật, bố cục và ánh sáng trong cả 4 ô. Không tự thay bối cảnh." images={background ? [background] : []} onFiles={(files) => setSingle("background", files)} onRemove={() => { revoke(background); setBackground(undefined); }} />
+        <section className="upload-card notes-card" aria-labelledby="slot-04"><span className="watermark" aria-hidden>04</span><div className="card-heading"><div><h2 id="slot-04">04 — Ghi chú bổ sung</h2><p>Nhập số đo thực tế nếu có hoặc chi tiết cần chú ý. Luôn giữ nguyên cơ thể, sản phẩm, bối cảnh và thứ tự 4 pose.</p></div><span className="optional-label">Không bắt buộc</span></div><textarea value={notes} maxLength={3000} onChange={(e) => setNotes(e.target.value)} placeholder="Nhập số đo thực tế của người mẫu (nếu biết). Ví dụ ghi chú: không bóp eo, không kéo dài chân; giữ đúng logo, đường may và ánh sáng của bối cảnh." /><span className="character-count">{notes.length} / 3000</span></section>
       </div>
 
       <section className="generation-rail" aria-label="Cài đặt tạo prompt">
@@ -217,7 +218,7 @@ export function BuilderApp() {
 
       {error && <section className="error-panel" role="alert"><div><h3>{error.status === 429 ? "Đã chạm giới hạn Gemini" : "Không thể hoàn tất quá trình tạo"}</h3><p>{error.message}</p>{error.technical && <details><summary>Chi tiết kỹ thuật</summary><pre>{error.technical}</pre></details>}</div><div>{error.status === 429 && <a href={RATE_LIMITS_URL} target="_blank" rel="noreferrer">Xem giới hạn <ExternalLink size={15} /></a>}<button onClick={handleGenerate}>Thử lại</button><button onClick={() => setError(undefined)} aria-label="Đóng lỗi"><X size={17} /></button></div></section>}
 
-      {!result && !generating && <section className="empty-guide pose-guide"><h2>Master Prompt 9:16 và 5 tư thế đã khóa sẵn.</h2><ol><li><strong>01 · Hero slay</strong><span>Chính diện 3/4, ánh nhìn mạnh.</span></li><li><strong>02 · Bước đi</strong><span>Chuyển động thời trang tự nhiên.</span></li><li><strong>03 · Qua vai</strong><span>Xoay 3/4, nhìn lại ống kính.</span></li><li><strong>04 · Tựa nhẹ</strong><span>Tương tác hợp lý với bối cảnh.</span></li><li><strong>05 · Ngồi</strong><span>Thanh lịch, tôn dáng và outfit.</span></li></ol><p>Mỗi keyframe sẽ được tách độc lập từ đúng một tư thế trên; Gemini không được tự đổi hoặc hoán đổi thứ tự.</p></section>}
+      {!result && !generating && <section className="empty-guide pose-guide"><h2>4 pose trong một ảnh dọc 9:16.</h2><ol>{DEFAULT_FASHION_POSES.map((pose) => <li key={pose.index}><strong>{String(pose.index).padStart(2, "0")} · {pose.title}</strong><span>{pose.poseSummary}</span></li>)}</ol><p>Lưới 2×2, đọc từ trái sang phải và từ trên xuống dưới. Mỗi ô dọc 9:16 chứa một pose; chỉ xuất một file ảnh tổng 9:16.</p></section>}
       {result && <PromptOutput result={result} onChange={handleResultChange} onRegenerate={handleRegenerate} regenerating={regenerating} />}
     </main>
 

@@ -70,6 +70,8 @@ export interface PromptGenerationResult {
   version?: number;
 }
 
+export type VideoPromptMode = "single" | "transition";
+
 export interface VideoPromptResult {
   title: string;
   prompt: string;

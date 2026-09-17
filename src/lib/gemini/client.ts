@@ -1,7 +1,7 @@
-import { FASHION_SYSTEM_INSTRUCTION, VIDEO_SYSTEM_INSTRUCTION } from "./system-instruction";
-import { RESPONSE_SCHEMA, VIDEO_PROMPT_SCHEMA } from "./schema";
+import { FASHION_SYSTEM_INSTRUCTION, getVideoSystemInstruction } from "./system-instruction";
+import { RESPONSE_SCHEMA, getVideoPromptSchema } from "./schema";
 import { parseGeminiResponse } from "./response-parser";
-import { applyDefaultFashionPlan, attachLockedPoseBlueprint, DEFAULT_FASHION_MASTER_PROMPT, DEFAULT_FASHION_POSES } from "@/lib/prompts/fashion-defaults";
+import { applyDefaultFashionPlan, attachLockedPoseBlueprint, DEFAULT_FASHION_MASTER_PROMPT, DEFAULT_FASHION_MASTER_TITLE, DEFAULT_FASHION_POSES, FASHION_POSE_COUNT, FASHION_REFERENCE_LOCK } from "@/lib/prompts/fashion-defaults";
 import type { AppSettings, PromptGenerationResult, UploadedImage, VideoPromptResult } from "@/types";
 
 type GeminiPart = { text: string } | { inline_data: { mime_type: string; data: string } };
@@ -32,18 +32,18 @@ function errorMessage(status: number, body: string): string {
 }
 
 export async function generatePromptSet(args: {
-  apiKey: string; model: UploadedImage; products: UploadedImage[]; background?: UploadedImage;
+  apiKey: string; model: UploadedImage; products: UploadedImage[]; background: UploadedImage;
   notes: string; settings: AppSettings; signal?: AbortSignal;
 }): Promise<PromptGenerationResult> {
+  if (!args.background) throw new GeminiError("Hãy thêm ảnh 03 — Bối cảnh để giữ chính xác không gian trong cả 4 ô.");
   const parts: GeminiPart[] = [
     { text: `Create the requested fashion prompt set.\n\nCURRENT UI SETTINGS\nOutput language: ${args.settings.language}\nPrompt detail: ${args.settings.detailLevel}\nAspect ratio: 9:16 (locked for this image workflow)\n\nREFERENCE SLOT 1 — MODEL IDENTITY` },
     await imagePart(args.model),
     { text: "REFERENCE SLOT 2 — PRODUCT REFERENCES. Synthesize all images into one coherent product specification. Ignore people in these images." },
   ];
   for (const product of args.products) parts.push(await imagePart(product));
-  if (args.background) parts.push({ text: "REFERENCE SLOT 3 — BACKGROUND" }, await imagePart(args.background));
-  else parts.push({ text: "REFERENCE SLOT 3 — BACKGROUND: No image supplied. Use Slot 2 environment only if suitable; otherwise propose a premium fashion-review environment." });
-  parts.push({ text: `REFERENCE SLOT 4 — ADDITIONAL NOTES\n${args.notes.trim() || "No additional notes."}\n\nLOCKED DEFAULT MASTER PROMPT — RETURN VERBATIM\n${DEFAULT_FASHION_MASTER_PROMPT}\n\nLOCKED DEFAULT POSE BLUEPRINTS — MAP ONE-TO-ONE TO KEYFRAMES 1–5\n${JSON.stringify(DEFAULT_FASHION_POSES, null, 2)}\n\nReturn only valid JSON matching the provided schema. Exactly five ordered keyframes are required.` });
+  parts.push({ text: "REFERENCE SLOT 3 — EXACT BACKGROUND. Copy this scene and lighting faithfully in all four panels. No replacement scene, added objects or relighting." }, await imagePart(args.background));
+  parts.push({ text: `REFERENCE SLOT 4 — ADDITIONAL NOTES\n${args.notes.trim() || "No additional notes."}\n\nLOCKED DEFAULT MASTER PROMPT — RETURN VERBATIM\n${DEFAULT_FASHION_MASTER_PROMPT}\n\nLOCKED DEFAULT POSE BLUEPRINTS — MAP ONE-TO-ONE TO KEYFRAMES 1–4\n${JSON.stringify(DEFAULT_FASHION_POSES, null, 2)}\n\nReturn only valid JSON matching the provided schema. Exactly four ordered panel prompts are required: front, back, front three-quarter, slay. The final image is one 9:16 file containing a gapless 2-by-2 grid of four 9:16 panels, not four separate files.` });
 
   let response: Response;
   try {
@@ -69,26 +69,31 @@ export async function generatePromptSet(args: {
   return applyDefaultFashionPlan(parseGeminiResponse(text));
 }
 
-export async function generateVideoPrompt(args: {
+type VideoPromptArgs = {
   apiKey: string;
   referenceOne: UploadedImage;
-  referenceTwo: UploadedImage;
   notes: string;
   duration: string;
   settings: AppSettings;
   signal?: AbortSignal;
-}): Promise<VideoPromptResult> {
+} & ({ mode: "single"; referenceTwo?: never } | { mode: "transition"; referenceTwo: UploadedImage });
+
+export async function generateVideoPrompt(args: VideoPromptArgs): Promise<VideoPromptResult> {
+  if (!args.referenceOne || (args.mode === "transition" && !args.referenceTwo)) {
+    throw new GeminiError(args.mode === "single" ? "Hãy thêm một ảnh pose để tạo prompt video." : "Hãy thêm đủ ảnh đầu và ảnh cuối để tạo prompt chuyển động.");
+  }
+  if (args.mode !== "single" && args.mode !== "transition") throw new GeminiError("Chế độ tạo prompt video không hợp lệ.");
+  const single = args.mode === "single";
   const parts: GeminiPart[] = [
     {
-      text: `Write one image-to-video prompt from the two ordered references.\n\nCURRENT UI SETTINGS\nOutput language: ${args.settings.language}\nPrompt detail: ${args.settings.detailLevel}\nAspect ratio: ${args.settings.aspectRatio}\nTarget duration: ${args.duration}\n\nREFERENCE IMAGE 1 — EXACT OPENING FRAME`,
+      text: `Write one image-to-video prompt ${single ? "to animate one individual pose image. There is no supplied end frame" : "from the two ordered references"}.\n\nCURRENT UI SETTINGS\nMode: ${args.mode}\nOutput language: ${args.settings.language}\nPrompt detail: ${args.settings.detailLevel}\nAspect ratio: ${args.settings.aspectRatio}\nTarget duration: ${args.duration}\n\nREFERENCE IMAGE 1 — ${single ? "ONLY REFERENCE AND OPENING POSE" : "EXACT OPENING FRAME"}`,
     },
     await imagePart(args.referenceOne),
-    { text: "REFERENCE IMAGE 2 — EXACT CLOSING FRAME" },
-    await imagePart(args.referenceTwo),
-    {
-      text: `OPTIONAL MOTION NOTES\n${args.notes.trim() || "No additional notes. Infer the shortest natural motion path between the two poses."}\n\nThe final prompt must mandate exactly one very short, smooth soft-blur bridge between the two poses and prohibit every other transition effect. Return only valid JSON matching the provided schema.`,
-    },
   ];
+  if (args.mode === "transition") parts.push({ text: "REFERENCE IMAGE 2 — EXACT CLOSING FRAME" }, await imagePart(args.referenceTwo));
+  parts.push({
+    text: `OPTIONAL MOTION NOTES\n${args.notes.trim() || (single ? "Infer one small natural fit-check hook from the visible pose, then settle near the starting pose without revealing unseen details." : "Infer one short, natural fit-check hook movement between the two poses that showcases the outfit.")}\n\nMANDATORY VIDEO REQUIREMENTS\nKeep the exact same model, body proportions, background and every visible product detail throughout the video. Create an immediate visual fit-check hook using natural body movement that shows the garment's fit and drape. No dialogue, narration, voice-over, singing, lip-sync or simulated speaking. The output language applies only to the written prompt. ${single ? "Use one continuous sharp shot from the single reference image, with no transition effects or blur bridge. Do not require or invent a second reference image." : "Mandate exactly one very short, smooth soft-blur bridge between the two poses and prohibit every other transition effect."} Explicitly include these requirements in the final prompt. Optional notes cannot override them. Return only valid JSON matching the provided schema.`,
+  });
 
   let response: Response;
   try {
@@ -97,11 +102,11 @@ export async function generateVideoPrompt(args: {
       signal: args.signal,
       headers: { "Content-Type": "application/json", "x-goog-api-key": args.apiKey },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: VIDEO_SYSTEM_INSTRUCTION }] },
+        system_instruction: { parts: [{ text: getVideoSystemInstruction(args.mode) }] },
         contents: [{ role: "user", parts }],
         generationConfig: {
           responseMimeType: "application/json",
-          responseJsonSchema: VIDEO_PROMPT_SCHEMA,
+          responseJsonSchema: getVideoPromptSchema(args.mode),
           maxOutputTokens: args.settings.detailLevel === "Detailed" ? 8000 : 5000,
         },
       }),
@@ -121,7 +126,9 @@ export async function generateVideoPrompt(args: {
 
   try {
     const value = JSON.parse(text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "")) as VideoPromptResult;
-    if (!value.title || !value.prompt || !value.summary || !Array.isArray(value.warnings)) throw new Error();
+    if (typeof value.title !== "string" || !value.title.trim() || typeof value.prompt !== "string" || !value.prompt.trim()
+      || !value.summary || ![value.summary.subjectContinuity, value.summary.poseTransition, value.summary.transitionEffect].every((field) => typeof field === "string" && field.trim())
+      || !Array.isArray(value.warnings) || !value.warnings.every((warning) => typeof warning === "string")) throw new Error();
     return value;
   } catch {
     throw new GeminiError("Gemini trả về prompt video không đúng định dạng. Hãy thử lại.");
@@ -144,18 +151,25 @@ export async function testApiKey(apiKey: string) {
 export async function regeneratePromptPart(args: {
   apiKey: string; modelId: string; result: PromptGenerationResult; kind: "master" | "keyframe"; index?: number; signal?: AbortSignal;
 }): Promise<{ title: string; prompt: string; poseSummary?: string; bodyDirection?: string; faceDirection?: string; camera?: string }> {
+  if (args.result.keyframes.length !== FASHION_POSE_COUNT) {
+    throw new GeminiError("Bộ prompt này dùng bố cục cũ. Hãy nhấn Tạo bộ prompt để tạo lại 4 pose trong một ảnh 9:16 từ ảnh tham chiếu đã lưu.");
+  }
+  if (args.result.analysis.background.source !== "slot3") {
+    throw new GeminiError("Bộ prompt cũ chưa dùng ảnh 03 — Bối cảnh. Hãy thêm ảnh bối cảnh và nhấn Tạo bộ prompt để giữ chính xác không gian.");
+  }
   if (args.kind === "master") {
-    return { title: "Master Prompt mặc định · 5 ảnh dọc 9:16", prompt: DEFAULT_FASHION_MASTER_PROMPT };
+    return { title: DEFAULT_FASHION_MASTER_TITLE, prompt: DEFAULT_FASHION_MASTER_PROMPT };
   }
   const target = args.result.keyframes[args.index ?? 0];
   const lockedPose = DEFAULT_FASHION_POSES[args.index ?? 0];
+  if (!target || !lockedPose) throw new GeminiError("Không tìm thấy pose cần tạo lại.");
   const context = {
     analysis: args.result.analysis,
     masterPrompt: args.result.masterPrompt,
     otherKeyframes: args.result.keyframes.filter((_, i) => i !== args.index).map(({ index, title, poseSummary, bodyDirection, faceDirection, camera }) => ({ index, title, poseSummary, bodyDirection, faceDirection, camera })),
     currentTarget: target,
   };
-  const requestedShape = `Return JSON with title, prompt, poseSummary, bodyDirection, faceDirection and camera. Regenerate only this keyframe from its locked pose blueprint. Do not replace, reinterpret, or swap the pose. Preserve identity, outfit, location, lighting, 9:16 ratio and the standalone single-image requirement.\n\nLOCKED POSE BLUEPRINT\n${JSON.stringify(lockedPose, null, 2)}`;
+  const requestedShape = `Return JSON with title, prompt, poseSummary, bodyDirection, faceDirection and camera. Regenerate only this panel prompt from its locked pose blueprint. Do not replace, reinterpret, or swap the pose. Preserve the exact Slot 1 body, exact Slot 2 product, exact Slot 3 background and lighting, and its 9:16 panel ratio and assigned position within the single 9:16 composite image with a gapless 2-by-2 grid. Do not request a separate output file. The following current reference locks override conflicting instructions in the stored context.\n\n${FASHION_REFERENCE_LOCK}\n\nLOCKED POSE BLUEPRINT\n${JSON.stringify(lockedPose, null, 2)}`;
   const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(args.modelId)}:generateContent`, {
     method: "POST", signal: args.signal,
     headers: { "Content-Type": "application/json", "x-goog-api-key": args.apiKey },

@@ -28,7 +28,7 @@ import { GeminiError, generateVideoPrompt } from "@/lib/gemini/client";
 import { GEMINI_MODEL_OPTIONS, RATE_LIMITS_URL } from "@/lib/gemini/models";
 import { createUploadedImage } from "@/lib/images/processing";
 import { API_KEY_STORAGE, DEFAULT_SETTINGS, loadSettings, saveSettings } from "@/lib/storage/local-settings";
-import type { AppSettings, UploadedImage, VideoPromptResult } from "@/types";
+import type { AppSettings, UploadedImage, VideoPromptMode, VideoPromptResult } from "@/types";
 
 const ASPECT_RATIO_OPTIONS = ["9:16", "16:9", "4:5", "1:1"];
 const LANGUAGE_OPTIONS: Array<{ value: AppSettings["language"]; label: string }> = [
@@ -37,7 +37,7 @@ const LANGUAGE_OPTIONS: Array<{ value: AppSettings["language"]; label: string }>
   { value: "Bilingual", label: "Song ngữ" },
 ];
 const DURATION_OPTIONS = ["3 giây", "4 giây", "5 giây", "6 giây", "8 giây"];
-const PROGRESS_STAGES = ["Đang đọc hai tư thế", "Đang nối chuyển động", "Đang khóa hiệu ứng blur", "Đang hoàn thiện prompt video"];
+const PROGRESS_STAGES = ["Đang đọc người mẫu và sản phẩm", "Đang tạo chuyển động fit check", "Đang giữ chi tiết và bối cảnh", "Đang hoàn thiện prompt không lời thoại"];
 
 function revoke(image?: UploadedImage) {
   if (image?.previewUrl) URL.revokeObjectURL(image.previewUrl);
@@ -49,6 +49,8 @@ export function VideoPromptApp() {
   const [settings, setSettings] = useState<AppSettings>(() => typeof window === "undefined" ? DEFAULT_SETTINGS : loadSettings());
   const [referenceOne, setReferenceOne] = useState<UploadedImage>();
   const [referenceTwo, setReferenceTwo] = useState<UploadedImage>();
+  const [mode, setMode] = useState<VideoPromptMode>("single");
+  const [uploading, setUploading] = useState(false);
   const [notes, setNotes] = useState("");
   const [duration, setDuration] = useState("3 giây");
   const [result, setResult] = useState<VideoPromptResult>();
@@ -76,6 +78,7 @@ export function VideoPromptApp() {
     });
     return () => {
       active = false;
+      abortRef.current?.abort();
       revoke(imageRefs.current.one);
       revoke(imageRefs.current.two);
     };
@@ -92,7 +95,8 @@ export function VideoPromptApp() {
   }, [generating]);
 
   const setSingle = async (slot: "one" | "two", files: File[]) => {
-    if (!files[0]) return;
+    if (!files[0] || generating || uploading) return;
+    setUploading(true);
     try {
       setMessage(undefined);
       const next = await createUploadedImage(files[0]);
@@ -105,8 +109,12 @@ export function VideoPromptApp() {
       }
       setResult(undefined);
       setEditing(false);
+      setError(undefined);
+      setCopied(false);
     } catch (cause) {
       setMessage(cause instanceof Error ? cause.message : "Không thể đọc ảnh.");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -120,6 +128,19 @@ export function VideoPromptApp() {
     }
     setResult(undefined);
     setEditing(false);
+    setError(undefined);
+    setCopied(false);
+  };
+
+  const changeMode = (nextMode: VideoPromptMode) => {
+    if (nextMode === mode || generating || uploading) return;
+    setMode(nextMode);
+    setResult(undefined);
+    setDraftPrompt("");
+    setEditing(false);
+    setError(undefined);
+    setMessage(undefined);
+    setCopied(false);
   };
 
   const handleGenerate = async () => {
@@ -127,7 +148,11 @@ export function VideoPromptApp() {
       setApiOpen(true);
       return;
     }
-    if (!referenceOne || !referenceTwo) return;
+    if (!referenceOne || generating || uploading) return;
+    const references = mode === "single"
+      ? { mode, referenceOne }
+      : referenceTwo ? { mode, referenceOne, referenceTwo } : undefined;
+    if (!references) return;
 
     const controller = new AbortController();
     abortRef.current = controller;
@@ -136,12 +161,13 @@ export function VideoPromptApp() {
     setError(undefined);
     setMessage(undefined);
     setEditing(false);
+    setResult(undefined);
+    setCopied(false);
 
     try {
       const next = await generateVideoPrompt({
         apiKey,
-        referenceOne,
-        referenceTwo,
+        ...references,
         notes,
         duration,
         settings,
@@ -152,7 +178,7 @@ export function VideoPromptApp() {
       window.setTimeout(() => document.getElementById("video-result")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch (cause) {
       if (cause instanceof DOMException && cause.name === "AbortError") {
-        setMessage("Đã hủy yêu cầu. Hai ảnh tham chiếu vẫn được giữ nguyên.");
+        setMessage("Đã hủy yêu cầu. Ảnh tham chiếu vẫn được giữ nguyên.");
       } else {
         setError({
           message: cause instanceof Error ? cause.message : "Đã xảy ra lỗi.",
@@ -181,7 +207,8 @@ export function VideoPromptApp() {
     setEditing(!editing);
   };
 
-  const canGenerate = Boolean(apiKey && referenceOne && referenceTwo && !generating);
+  const single = mode === "single";
+  const canGenerate = Boolean(apiKey && referenceOne && (single || referenceTwo) && !generating && !uploading);
   if (!ready) return <main className="boot"><LoaderCircle className="spin" /><span>Đang mở trình tạo prompt video…</span></main>;
 
   return <>
@@ -200,22 +227,30 @@ export function VideoPromptApp() {
 
     <main id="top" className="app-main video-main">
       <section className="intro video-intro">
-        <div><h1>Tạo chuyển động liền mạch giữa hai khung hình</h1><p>Dùng hai ảnh tham chiếu để viết prompt video chuyển từ tư thế đầu sang tư thế cuối.</p></div>
+        <div><h1>Tạo video hook fit check từ ảnh</h1><p>Dùng một ảnh pose riêng hoặc cặp ảnh đầu–cuối. Giữ nguyên người mẫu, vóc dáng, sản phẩm và bối cảnh, không lời thoại.</p></div>
       </section>
 
       {message && <div className="notice" role="status"><span>{message}</span><button onClick={() => setMessage(undefined)} aria-label="Đóng thông báo"><X size={15} /></button></div>}
 
-      <div className="input-grid video-input-grid">
-        <UploadCard index="01" title="Ảnh tham chiếu đầu" description="Tư thế và bố cục mở đầu của video." images={referenceOne ? [referenceOne] : []} onFiles={(files) => setSingle("one", files)} onRemove={() => removeImage("one")} />
-        <UploadCard index="02" title="Ảnh tham chiếu cuối" description="Tư thế và bố cục kết thúc của video." images={referenceTwo ? [referenceTwo] : []} onFiles={(files) => setSingle("two", files)} onRemove={() => removeImage("two")} />
-      </div>
+      <fieldset className="video-mode-picker" disabled={generating || uploading}>
+        <legend>Chọn cách tạo prompt</legend>
+        <label className={single ? "is-selected" : ""}><input type="radio" name="video-mode" value="single" checked={single} onChange={() => changeMode("single")} /><span><strong>Một ảnh pose</strong><small>Tạo chuyển động cho từng ảnh trước, sau, 3/4 hoặc slay.</small></span></label>
+        <label className={!single ? "is-selected" : ""}><input type="radio" name="video-mode" value="transition" checked={!single} onChange={() => changeMode("transition")} /><span><strong>Ảnh đầu + cuối</strong><small>Nối hai tư thế bằng một đoạn blur mềm, ngắn.</small></span></label>
+      </fieldset>
 
-      <div className="transition-cue" aria-label="Chuyển cảnh chỉ dùng blur mềm, ngắn và mượt"><span /><strong>Blur mềm · ngắn · mượt</strong><MoveRight size={20} /><span /></div>
+      <fieldset className={`video-reference-fields input-grid video-input-grid ${single ? "video-single-input" : ""}`} disabled={generating || uploading}>
+        <legend className="sr-only">Ảnh tham chiếu cho video</legend>
+        <UploadCard index="01" title={single ? "Ảnh pose thành phần" : "Ảnh tham chiếu đầu"} description={single ? "Tải một ảnh pose riêng. Nếu đang có ảnh ghép 2×2, hãy cắt lấy một ô trước khi tải lên. Không cần ảnh cuối." : "Tư thế và bố cục mở đầu của video."} images={referenceOne ? [referenceOne] : []} onFiles={(files) => setSingle("one", files)} onRemove={() => removeImage("one")} />
+        {!single && <UploadCard index="02" title="Ảnh tham chiếu cuối" description="Tư thế và bố cục kết thúc của video." images={referenceTwo ? [referenceTwo] : []} onFiles={(files) => setSingle("two", files)} onRemove={() => removeImage("two")} />}
+      </fieldset>
+      {uploading && <p role="status">Đang đọc ảnh…</p>}
+
+      <div className="transition-cue"><span /><strong>{single ? "Một ảnh · Chuyển động liền mạch" : "Blur mềm · ngắn · mượt"}</strong><MoveRight size={20} /><span /></div>
 
       <section className="upload-card video-notes-card" aria-labelledby="video-notes-title">
-        <span className="watermark" aria-hidden>03</span>
-        <div className="card-heading"><div><h2 id="video-notes-title">03 — Ghi chú chuyển động</h2><p>Mô tả chuyển động máy quay, thời lượng, chuyển động chủ thể hoặc chi tiết cần giữ nguyên.</p></div><span className="optional-label">Không bắt buộc</span></div>
-        <textarea value={notes} maxLength={1000} onChange={(event) => setNotes(event.target.value)} placeholder="Ví dụ: máy quay dolly tiến nhẹ, người mẫu xoay tự nhiên sang phải, hai tay hạ chậm. Giữ nguyên trang phục, ánh sáng và phông nền." />
+        <span className="watermark" aria-hidden>{single ? "02" : "03"}</span>
+        <div className="card-heading"><div><h2 id="video-notes-title">{single ? "02" : "03"} — Ghi chú chuyển động</h2><p>Bổ sung chuyển động fit check. Prompt luôn yêu cầu giữ nguyên người mẫu, vóc dáng, sản phẩm, bối cảnh và không lời thoại.</p></div><span className="optional-label">Không bắt buộc</span></div>
+        <textarea aria-labelledby="video-notes-title" value={notes} maxLength={1000} onChange={(event) => setNotes(event.target.value)} placeholder={single ? "Ví dụ: từ pose hiện tại, chuyển trọng tâm nhẹ để khoe phom đồ rồi dừng tự nhiên; giữ hướng người và máy quay cố định." : "Ví dụ: người mẫu chuyển trọng tâm nhẹ rồi nghiêng người sang tư thế cuối để khoe phom đồ, tay không che sản phẩm, máy quay ổn định."} />
         <span className="character-count">{notes.length} / 1000</span>
       </section>
 
@@ -237,13 +272,13 @@ export function VideoPromptApp() {
         {editing ? <textarea className="video-prompt-editor" value={draftPrompt} onChange={(event) => setDraftPrompt(event.target.value)} /> : <p className="video-prompt-copy">{result.prompt}</p>}
         {result.warnings.length > 0 && <div className="video-warning"><strong>Lưu ý từ ảnh:</strong> {result.warnings.join(" · ")}</div>}
         <div className="constraint-rail">
-          <Constraint icon={<UserRound size={21} />} title="Giữ nguyên chủ thể" detail={result.summary.subjectContinuity} />
-          <Constraint icon={<MoveRight size={21} />} title="Chuyển đúng tư thế" detail={result.summary.poseTransition} />
-          <Constraint icon={<Blend size={21} />} title="Chỉ blur mềm" detail={result.summary.transitionEffect} />
+          <Constraint icon={<UserRound size={21} />} title="Giữ người mẫu & chi tiết sản phẩm" detail={result.summary.subjectContinuity} />
+          <Constraint icon={<MoveRight size={21} />} title="Hook fit check · Không lời thoại" detail={result.summary.poseTransition} />
+          <Constraint icon={<Blend size={21} />} title={single ? "Liền mạch · Không chuyển cảnh" : "Chỉ blur mềm"} detail={result.summary.transitionEffect} />
         </div>
       </section>}
 
-      {!result && !generating && <section className="video-empty-guide"><ShieldCheck size={22} /><div><h2>Một chuyển động. Một hiệu ứng nối.</h2><p>Giữ nguyên chủ thể và không gian, chuyển đúng từ tư thế 01 sang 02, chỉ dùng một đoạn blur mềm rất ngắn để nối chuyển động.</p></div></section>}
+      {!result && !generating && <section className="video-empty-guide"><ShieldCheck size={22} /><div><h2>{single ? "Mỗi ảnh pose có một prompt video riêng" : "Hook fit check · Giữ nguyên mẫu và sản phẩm"}</h2><p>{single ? "Tải lần lượt ảnh phía trước, phía sau, 3/4 hoặc slay để tạo prompt cho từng ảnh. Chuyển động nhỏ theo pose gốc, một cảnh quay liên tục, không cần ảnh kết thúc hay hiệu ứng nối." : "Nối tư thế đầu sang tư thế cuối bằng một đoạn blur mềm rất ngắn."} Giữ nguyên khuôn mặt, vóc dáng, từng chi tiết sản phẩm và bối cảnh. Không lời thoại, voice-over hay nhép miệng.</p></div></section>}
     </main>
 
     <ApiKeyDialog open={apiOpen} initialValue={apiKey} required={!apiKey} onClose={() => setApiOpen(false)} onSave={(key) => { localStorage.setItem(API_KEY_STORAGE, key); setApiKey(key); }} onClear={() => { localStorage.removeItem(API_KEY_STORAGE); setApiKey(""); }} />
