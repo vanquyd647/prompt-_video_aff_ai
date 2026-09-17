@@ -1,7 +1,8 @@
-import type { PromptGenerationResult } from "@/types";
+import type { PoseSelection, PromptGenerationResult } from "@/types";
 import { FASHION_POSE_COUNT } from "../prompts/fashion-defaults";
+import { validateSelectedPoses } from "../prompts/fitcheck-catalog";
 
-export function parseGeminiResponse(raw: string): PromptGenerationResult {
+export function parseGeminiResponse(raw: string, poseSelection: PoseSelection = [null, null]): PromptGenerationResult {
   const cleaned = raw.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
   let value: unknown;
   try {
@@ -20,5 +21,7 @@ export function parseGeminiResponse(raw: string): PromptGenerationResult {
   if (!Array.isArray(result.keyframes) || result.keyframes.length !== FASHION_POSE_COUNT) throw new Error("Gemini phải trả về chính xác 4 khung hình trong một ảnh 9:16.");
   const sorted = [...result.keyframes].sort((a, b) => a.index - b.index);
   if (sorted.some((item, i) => item.index !== i + 1 || !item.prompt?.trim())) throw new Error("Khung hình không đầy đủ hoặc sai thứ tự.");
+  validateSelectedPoses(sorted, poseSelection);
+  if (sorted.some((pose) => [pose.poseSummary, pose.bodyDirection, pose.faceDirection, pose.camera].some((field) => typeof field !== "string" || !field.trim()))) throw new Error("Phản hồi thiếu chi tiết tư thế đã chọn.");
   return { ...result, keyframes: sorted, version: result.version ?? 1 };
 }

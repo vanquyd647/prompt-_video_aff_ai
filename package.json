@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "catalog": "node scripts/generate-fitcheck-catalog.mjs",
+    "predev": "npm run catalog",
+    "prebuild": "npm run catalog",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/generate-fitcheck-catalog.mjs --check && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

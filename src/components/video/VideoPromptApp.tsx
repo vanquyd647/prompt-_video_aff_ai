@@ -37,7 +37,7 @@ const LANGUAGE_OPTIONS: Array<{ value: AppSettings["language"]; label: string }>
   { value: "Bilingual", label: "Song ngữ" },
 ];
 const DURATION_OPTIONS = ["3 giây", "4 giây", "5 giây", "6 giây", "8 giây"];
-const PROGRESS_STAGES = ["Đang đọc người mẫu và sản phẩm", "Đang tạo chuyển động fit check", "Đang giữ chi tiết và bối cảnh", "Đang hoàn thiện prompt không lời thoại"];
+const PROGRESS_STAGES = ["Đang phân tích nhân vật và trang phục", "Đang chọn kịch bản từ danh sách fit check", "Đang điều chỉnh chuyển động theo ảnh", "Đang hoàn thiện prompt không lời thoại"];
 
 function revoke(image?: UploadedImage) {
   if (image?.previewUrl) URL.revokeObjectURL(image.previewUrl);
@@ -227,14 +227,14 @@ export function VideoPromptApp() {
 
     <main id="top" className="app-main video-main">
       <section className="intro video-intro">
-        <div><h1>Tạo video hook fit check từ ảnh</h1><p>Dùng một ảnh pose riêng hoặc cặp ảnh đầu–cuối. Giữ nguyên người mẫu, vóc dáng, sản phẩm và bối cảnh, không lời thoại.</p></div>
+        <div><h1>Tạo video hook fit check từ ảnh</h1><p>AI phân tích chi tiết nhân vật, trang phục và tư thế, rồi chọn kịch bản phù hợp từ danh sách fitcheck_prompts. Giữ nguyên người mẫu, sản phẩm, bối cảnh và không lời thoại.</p></div>
       </section>
 
       {message && <div className="notice" role="status"><span>{message}</span><button onClick={() => setMessage(undefined)} aria-label="Đóng thông báo"><X size={15} /></button></div>}
 
       <fieldset className="video-mode-picker" disabled={generating || uploading}>
         <legend>Chọn cách tạo prompt</legend>
-        <label className={single ? "is-selected" : ""}><input type="radio" name="video-mode" value="single" checked={single} onChange={() => changeMode("single")} /><span><strong>Một ảnh pose</strong><small>Tạo chuyển động cho từng ảnh trước, sau, 3/4 hoặc slay.</small></span></label>
+        <label className={single ? "is-selected" : ""}><input type="radio" name="video-mode" value="single" checked={single} onChange={() => changeMode("single")} /><span><strong>Một ảnh pose</strong><small>Chọn kịch bản fit check cho từng ảnh pose riêng.</small></span></label>
         <label className={!single ? "is-selected" : ""}><input type="radio" name="video-mode" value="transition" checked={!single} onChange={() => changeMode("transition")} /><span><strong>Ảnh đầu + cuối</strong><small>Nối hai tư thế bằng một đoạn blur mềm, ngắn.</small></span></label>
       </fieldset>
 
@@ -269,6 +269,8 @@ export function VideoPromptApp() {
 
       {result && <section id="video-result" className="video-results" aria-labelledby="video-result-title">
         <div className="video-result-heading"><div><span className="result-status"><Check size={15} />Hoàn tất</span><h2 id="video-result-title">Prompt video đã sẵn sàng</h2><p>{result.title}</p></div><div className="prompt-tools"><button className="text-action" type="button" onClick={copyPrompt}>{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? "Đã sao chép" : "Sao chép"}</button><button className="text-action" type="button" onClick={toggleEdit}>{editing ? <Save size={15} /> : <Pencil size={15} />}{editing ? "Lưu chỉnh sửa" : "Chỉnh sửa"}</button></div></div>
+        <div className="video-scenario"><h3>Kịch bản #{result.scenario.id} · {result.scenario.title}</h3><p><strong>Lý do chọn:</strong> {result.scenario.reason}</p><p><strong>Điều chỉnh theo ảnh:</strong> {result.scenario.adaptation}</p><details><summary>Kịch bản gốc trong danh sách</summary><p>{result.scenario.sourcePrompt}</p></details></div>
+        <details className="video-analysis" open><summary>Phân tích nhân vật và trang phục</summary><div className="analysis-grid"><div><strong>Nhân vật</strong><p>{result.analysis.model}</p></div><div><strong>Trang phục / Sản phẩm</strong><p>{result.analysis.outfit}</p></div><div><strong>Tư thế</strong><p>{result.analysis.pose}</p></div><div><strong>Bối cảnh</strong><p>{result.analysis.background}</p></div></div>{result.analysis.motionConstraints.length > 0 && <ul>{result.analysis.motionConstraints.map((constraint, index) => <li key={index}>{constraint}</li>)}</ul>}</details>
         {editing ? <textarea className="video-prompt-editor" value={draftPrompt} onChange={(event) => setDraftPrompt(event.target.value)} /> : <p className="video-prompt-copy">{result.prompt}</p>}
         {result.warnings.length > 0 && <div className="video-warning"><strong>Lưu ý từ ảnh:</strong> {result.warnings.join(" · ")}</div>}
         <div className="constraint-rail">
@@ -278,7 +280,7 @@ export function VideoPromptApp() {
         </div>
       </section>}
 
-      {!result && !generating && <section className="video-empty-guide"><ShieldCheck size={22} /><div><h2>{single ? "Mỗi ảnh pose có một prompt video riêng" : "Hook fit check · Giữ nguyên mẫu và sản phẩm"}</h2><p>{single ? "Tải lần lượt ảnh phía trước, phía sau, 3/4 hoặc slay để tạo prompt cho từng ảnh. Chuyển động nhỏ theo pose gốc, một cảnh quay liên tục, không cần ảnh kết thúc hay hiệu ứng nối." : "Nối tư thế đầu sang tư thế cuối bằng một đoạn blur mềm rất ngắn."} Giữ nguyên khuôn mặt, vóc dáng, từng chi tiết sản phẩm và bối cảnh. Không lời thoại, voice-over hay nhép miệng.</p></div></section>}
+      {!result && !generating && <section className="video-empty-guide"><ShieldCheck size={22} /><div><h2>{single ? "Mỗi ảnh pose có một prompt video riêng" : "Hook fit check · Giữ nguyên mẫu và sản phẩm"}</h2><p>{single ? "Tải lần lượt từng ảnh pose để AI phân tích và chọn kịch bản fit check phù hợp. Chuyển động nhỏ theo pose gốc, một cảnh quay liên tục, không cần ảnh kết thúc hay hiệu ứng nối." : "Nối tư thế đầu sang tư thế cuối bằng một đoạn blur mềm rất ngắn."} Giữ nguyên khuôn mặt, vóc dáng, từng chi tiết sản phẩm và bối cảnh. Không lời thoại, voice-over hay nhép miệng.</p></div></section>}
     </main>
 
     <ApiKeyDialog open={apiOpen} initialValue={apiKey} required={!apiKey} onClose={() => setApiOpen(false)} onSave={(key) => { localStorage.setItem(API_KEY_STORAGE, key); setApiKey(key); }} onClear={() => { localStorage.removeItem(API_KEY_STORAGE); setApiKey(""); }} />

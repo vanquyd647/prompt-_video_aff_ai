@@ -3,7 +3,7 @@
 import { Check, ChevronDown, Clipboard, Copy, Pencil, RotateCw, Save, Sparkles, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { consistencyWarnings, formatAllPrompts, scorePoseDiversity } from "@/lib/prompts/quality";
-import { FASHION_POSE_COUNT } from "@/lib/prompts/fashion-defaults";
+import { hasCatalogPosePlan } from "@/lib/prompts/fitcheck-catalog";
 import type { PromptGenerationResult } from "@/types";
 
 interface PromptOutputProps {
@@ -26,7 +26,7 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const diversity = scorePoseDiversity(result);
   const semanticWarnings = consistencyWarnings(result);
-  const isLegacyLayout = result.keyframes.length !== FASHION_POSE_COUNT;
+  const isLegacyLayout = !hasCatalogPosePlan(result);
   const toggleMasterEdit = () => {
     if (editing === "master") {
       const prompt = drafts.master ?? result.masterPrompt.prompt;
@@ -51,7 +51,7 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
   return (
     <section className="results" id="results">
       <div className="results-heading">
-        <div><h2>Bộ prompt của bạn</h2><p>{isLegacyLayout ? "Bộ prompt đã lưu theo bố cục cũ. Nhấn Tạo bộ prompt để tạo lại 4 pose trong một ảnh 9:16." : "Master Prompt cho một ảnh 9:16 ghép 2×2, kèm 4 prompt mô tả từng ô: phía trước, phía sau, góc 3/4 và slay."}</p></div>
+        <div><h2>Bộ prompt của bạn</h2><p>{isLegacyLayout ? "Bộ prompt cũ chưa dùng danh sách pose. Nhấn Tạo bộ prompt để phân tích và chọn lại." : "Một ảnh 9:16 ghép 2×2: front, back và hai pose đã chọn từ danh sách. Khôi phục Master Prompt sẽ giữ nguyên bốn pose này."}</p></div>
         <div className="result-actions"><span className={`score score-${diversity.score >= 80 ? "great" : diversity.score >= 60 ? "good" : "weak"}`}><Sparkles size={15} />Độ đa dạng {diversity.score}/100</span><CopyButton text={formatAllPrompts(result)} label="Sao chép tất cả" /></div>
       </div>
 
@@ -82,6 +82,7 @@ export function PromptOutput({ result, onChange, onRegenerate, regenerating }: P
             <div className="keyframe-body">
               <div className="prompt-card-top"><div><h3>{keyframe.title}</h3><p>{keyframe.poseSummary}</p></div><div className="prompt-tools"><CopyButton text={keyframe.prompt} /><button className="text-action" type="button" onClick={() => toggleKeyframeEdit(position, key)}>{editing === key ? <Save size={15} /> : <Pencil size={15} />}{editing === key ? "Xong" : "Chỉnh sửa"}</button><button className="text-action" type="button" onClick={() => onRegenerate("keyframe", position)} disabled={Boolean(regenerating) || isLegacyLayout}><RotateCw className={regenerating === key ? "spin" : ""} size={15} />Tạo lại</button></div></div>
               <div className="pose-facts"><span>Cơ thể · {keyframe.bodyDirection}</span><span>Khuôn mặt · {keyframe.faceDirection}</span><span>Máy ảnh · {keyframe.camera}</span></div>
+              {keyframe.poseId && <p className="pose-selection-reason"><strong>Pose #{keyframe.poseId} · Lý do chọn:</strong> {keyframe.selectionReason}</p>}
               {editing === key ? <textarea className="prompt-editor compact" value={drafts[key] ?? keyframe.prompt} onChange={(e) => setDrafts((current) => ({ ...current, [key]: e.target.value }))} /> : <p className="prompt-copy compact">{keyframe.prompt}</p>}
             </div>
           </article>;

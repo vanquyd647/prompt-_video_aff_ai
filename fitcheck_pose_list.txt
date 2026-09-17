@@ -1,0 +1,74 @@
+DANH SÁCH POSE DÁNG FIT CHECK AI VIDEO
+
+1. neutral front pose
+2. front pose, arms relaxed
+3. front pose, one hand on waist
+4. front pose, both hands relaxed
+5. front pose, slight weight shift
+6. front pose, one leg slightly forward
+7. front pose, feet close together
+8. front pose, relaxed shoulders
+9. 3/4 left pose
+10. 3/4 right pose
+11. 3/4 pose, hand on waist
+12. 3/4 pose, one leg forward
+13. 3/4 pose, subtle shoulder turn
+14. side profile pose
+15. strict side pose
+16. side pose, arms relaxed
+17. side pose, slight weight shift
+18. side pose, head turned to camera
+19. back pose
+20. back pose, arms relaxed
+21. back pose, slight shoulder turn
+22. back pose, looking over shoulder
+23. 3/4 back left pose
+24. 3/4 back right pose
+25. contrapposto pose
+26. relaxed standing pose
+27. casual standing pose
+28. fashion catalog pose
+29. editorial standing pose
+30. static mannequin pose
+31. one hand touching hair
+32. one hand adjusting sleeve
+33. one hand adjusting collar
+34. one hand holding jacket edge
+35. hands lightly clasped in front
+36. hands behind back
+37. arms crossed softly
+38. one arm relaxed, one hand on waist
+39. slight body lean
+40. subtle hip shift
+41. gentle body sway
+42. small quarter turn
+43. half turn pose
+44. turn and hold pose
+45. front to 3/4 pose
+46. 3/4 to side pose
+47. side to back pose
+48. back to 3/4 pose
+49. two-step stop pose
+50. walk then hold pose
+51. mirror selfie pose
+52. mirror fit check pose
+53. phone covering face pose
+54. faceless standing pose
+55. OOTD pose
+56. streetwear fit check pose
+57. luxury fashion pose
+58. minimal fashion pose
+59. soft elegant pose
+60. clean product showcase pose
+
+POSE GỢI Ý ỔN ĐỊNH CHO AI
+neutral front pose
+3/4 left pose
+3/4 right pose
+strict side pose
+back pose
+3/4 back pose
+one hand on waist
+slight weight shift
+quarter turn
+turn and hold pose

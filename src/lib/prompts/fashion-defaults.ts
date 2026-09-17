@@ -1,8 +1,10 @@
 import type { PromptGenerationResult } from "@/types";
+import { FITCHECK_POSES, validateSelectedPoses } from "./fitcheck-catalog";
 
-export const DEFAULT_FASHION_POSES = [
+export const REQUIRED_FASHION_POSES = [
   {
     index: 1,
+    poseId: 1,
     title: "Phía trước",
     poseSummary: "Đứng chính diện toàn thân để thấy rõ mặt trước và phom dáng sản phẩm.",
     bodyDirection: "Vai và hông hướng thẳng về máy ảnh, đứng cân bằng tự nhiên, hai tay thả nhẹ không che trang phục",
@@ -11,44 +13,29 @@ export const DEFAULT_FASHION_POSES = [
   },
   {
     index: 2,
+    poseId: 19,
     title: "Phía sau",
     poseSummary: "Đứng quay lưng hoàn toàn về máy ảnh để thấy rõ mặt sau sản phẩm, không xoay 3/4 hay nhìn qua vai.",
     bodyDirection: "Lưng, vai và hông quay thẳng về phía máy ảnh, hai tay thả tự nhiên không che chi tiết phía sau",
     faceDirection: "Đầu cùng hướng với cơ thể, nhìn ra xa máy ảnh; không quay mặt lại, không ép thấy khuôn mặt ở góc sau",
     camera: "Giữ nguyên camera và bối cảnh như ô 1; người mẫu quay lưng về máy, toàn thân trong ô dọc 9:16 phía trên bên phải",
   },
-  {
-    index: 3,
-    title: "Góc 3/4",
-    poseSummary: "Đứng chếch khoảng 45 độ về phía máy ảnh, đồng thời thấy mặt trước và một bên sản phẩm.",
-    bodyDirection: "Vai và hông xoay khoảng 45 độ so với máy ảnh, trọng tâm dồn nhẹ vào chân sau, tay không che đường nét outfit",
-    faceDirection: "Mặt chếch nhẹ theo cơ thể, mắt hướng về ống kính, giữ rõ đường nét khuôn mặt",
-    camera: "Giữ nguyên camera và bối cảnh như ô 1; người mẫu xoay 45 độ để thấy góc 3/4 phía trước, toàn thân trong ô dọc 9:16 phía dưới bên trái",
-  },
-  {
-    index: 4,
-    title: "Slay",
-    poseSummary: "Pose thời trang nổi bật nhất: một tay đặt nhẹ ở eo, một chân đưa lên trước, thần thái tự tin và sắc sảo.",
-    bodyDirection: "Đứng thẳng, dồn trọng tâm vào chân sau, đặt chân trước lên trước tự nhiên nhưng không kéo dài chân hoặc thay đổi tỷ lệ cơ thể, hông lệch nhẹ; một tay đặt eo không che chi tiết sản phẩm, tay còn lại thả mềm",
-    faceDirection: "Nhìn trực diện máy ảnh, cằm nâng rất nhẹ, thần thái slay mạnh và cuốn hút",
-    camera: "Giữ nguyên camera và bối cảnh như ô 1; toàn thân, phối cảnh tự nhiên, không dùng góc rộng kéo dài chân hoặc bóp dáng, trong ô dọc 9:16 phía dưới bên phải",
-  },
 ] as const;
 
-export const FASHION_POSE_COUNT = DEFAULT_FASHION_POSES.length;
+export const FASHION_POSE_COUNT = 4;
 export const DEFAULT_FASHION_MASTER_TITLE = "Master Prompt mặc định · 4 ảnh dọc 9:16 trong 1 ảnh 9:16";
 
 export const FASHION_REFERENCE_LOCK = `KHÓA THAM CHIẾU BẮT BUỘC CHO CẢ 4 Ô
 01 — Người mẫu / Nhận diện: Giữ nguyên người mẫu, khuôn mặt, làn da, tóc và toàn bộ vóc dáng, kích thước tương đối, tỷ lệ vai–ngực–eo–hông, chiều dài thân, tay và chân theo ảnh 01. Giữ nguyên mọi số đo thực tế do người dùng cung cấp rõ ràng; không suy đoán số đo cm, chiều cao hay cân nặng từ ảnh. Không làm gầy hoặc đầy hơn, không tăng giảm ngực/eo/hông, không kéo dài chân, không áp dáng đồng hồ cát, không lấy cơ thể từ ảnh sản phẩm. Nếu ảnh 01 không thấy đủ cơ thể, nêu rõ phần chưa xác định và yêu cầu ảnh toàn thân để giữ đúng vóc dáng; không khẳng định độ chính xác cho phần không nhìn thấy.
 02 — Sản phẩm / Trang phục: Sao chép đúng sản phẩm từ ảnh 02: thiết kế, màu sắc, chất liệu, bề mặt vải, họa tiết và vị trí họa tiết, logo/chữ, đường may, cổ áo, tay áo, túi, nút, khóa, gấu, chiều dài và cấu trúc phom. Chỉ cho phép nếp vải, độ rủ và độ căng thay đổi tự nhiên khi mặc lên cơ thể ảnh 01; không sửa cơ thể để vừa đồ, không cắt sửa thiết kế hoặc thêm/bớt chi tiết. Không bịa chi tiết mặt sau hay phần bị che; ghi rõ thiếu ảnh bổ trợ nếu chưa xác định.
-03 — Bối cảnh: Tái hiện đúng ảnh bối cảnh 03: địa điểm, kiến trúc, nền/tường/sàn, vật thể và vị trí tương đối, chất liệu, màu sắc, hướng sáng, độ mềm của ánh sáng và bóng đổ. Không thay cảnh, không dùng nền từ ảnh 01/02, không thêm/bớt đồ vật, không tự trang trí hay đổi ánh sáng. Đặt người mẫu tự nhiên trong đúng không gian đó; giữ cùng camera và bố cục nền, chỉ đổi tư thế/hướng cơ thể để có phía trước, phía sau, góc 3/4 và slay. Không dựng thêm phần bối cảnh chưa nhìn thấy.
+03 — Bối cảnh: Tái hiện đúng ảnh bối cảnh 03: địa điểm, kiến trúc, nền/tường/sàn, vật thể và vị trí tương đối, chất liệu, màu sắc, hướng sáng, độ mềm của ánh sáng và bóng đổ. Không thay cảnh, không dùng nền từ ảnh 01/02, không thêm/bớt đồ vật, không tự trang trí hay đổi ánh sáng. Đặt người mẫu tự nhiên trong đúng không gian đó; giữ cùng camera và bố cục nền, chỉ đổi tư thế/hướng cơ thể theo bốn pose đã chọn. Không dựng thêm phần bối cảnh chưa nhìn thấy.
 Các khóa trên có ưu tiên cao hơn yêu cầu làm đẹp, phong cách slay hoặc ghi chú mâu thuẫn. Cả 4 ô phải dùng cùng cơ thể, cùng sản phẩm và cùng bối cảnh; chỉ thay đổi tư thế.`;
 
-const POSE_SECTION = DEFAULT_FASHION_POSES.map((pose) =>
-  `${pose.index}. ${pose.title}: ${pose.poseSummary} Cơ thể: ${pose.bodyDirection}. Khuôn mặt: ${pose.faceDirection}. Góc máy: ${pose.camera}.`,
-).join("\n");
-
-export const DEFAULT_FASHION_MASTER_PROMPT = `Tạo duy nhất 1 ảnh dọc tỷ lệ 9:16 chứa 4 khung ảnh dọc 9:16 theo concept review model thời trang, bố cục lưới 2×2.
+export function buildFashionMasterPrompt(poses?: PromptGenerationResult["keyframes"]): string {
+  const poseSection = (poses ?? REQUIRED_FASHION_POSES).map((pose) =>
+    `${pose.index}. ${pose.title} (pose #${pose.poseId}): ${pose.poseSummary} Cơ thể: ${pose.bodyDirection}. Khuôn mặt: ${pose.faceDirection}. Góc máy: ${pose.camera}.`,
+  ).join("\n") + (poses ? "" : "\n3. Ô dưới trái: chọn một pose phù hợp từ fitcheck_pose_list.\n4. Ô dưới phải: chọn một pose khác từ fitcheck_pose_list.");
+  return `Tạo duy nhất 1 ảnh dọc tỷ lệ 9:16 chứa 4 khung ảnh dọc 9:16 theo concept review model thời trang, bố cục lưới 2×2.
 
 1. Quy tắc sử dụng ảnh tham chiếu
 ${FASHION_REFERENCE_LOCK}
@@ -67,46 +54,39 @@ Giữ nguyên tỷ lệ và kích thước tương đối của cơ thể trong 
 5. Yêu cầu về trang phục
 Tái hiện chính xác sản phẩm từ ảnh 02 theo khóa tham chiếu, không biến tấu thiết kế hay thay chất liệu, màu sắc hoặc chi tiết. Trang phục nằm tự nhiên trên body giữ nguyên của ảnh 01; độ rủ/nếp gấp có thể đổi theo tư thế nhưng cấu trúc sản phẩm phải nhất quán ở cả 4 ô. Chi tiết chưa thấy trong ảnh phải được ghi nhận là chưa xác định.
 
-6. Bốn tư thế mặc định bắt buộc
-Mỗi ô chỉ sử dụng đúng một tư thế dưới đây, theo thứ tự đọc từ trái sang phải, từ trên xuống dưới: phía trước (trên trái), phía sau (trên phải), góc 3/4 (dưới trái), slay (dưới phải). Không tự đổi pose hoặc hoán đổi vị trí. Ô 4 là pose “slay” nổi bật nhất; ô 2 phải thể hiện đúng mặt sau, không nhìn qua vai.
-${POSE_SECTION}
+6. Bốn tư thế từ danh sách fitcheck_pose_list
+Mỗi ô chỉ sử dụng một pose, theo thứ tự từ trái sang phải và từ trên xuống dưới: front ở trên trái, back ở trên phải, hai pose được chọn ở dưới trái và dưới phải. Hai pose cuối phải khác nhau và khác hai pose bắt buộc. Giữ đúng lựa chọn người dùng nếu có; nếu để tự động, phân tích người mẫu, sản phẩm và không gian để chọn pose phù hợp. Ô 2 thể hiện đúng mặt sau, không nhìn qua vai. Không thêm người, đồ vật hoặc che chi tiết sản phẩm để thực hiện pose.
+${poseSection}
 
 7. Yêu cầu về background và tính nhất quán
 Giữ nguyên đúng bối cảnh ảnh 03 cho cả 4 ô, bao gồm bố cục vật thể, màu sắc, chất liệu, ánh sáng và bóng đổ. Giữ camera cố định so với bối cảnh; người mẫu đổi hướng và tư thế theo bốn pose đã khóa, không dựng góc phòng mới. Người mẫu phải hòa hợp tự nhiên với background trong từng ô, đúng phối cảnh, tỷ lệ và ánh sáng nguồn. Giữ cỡ người mẫu nhất quán giữa các ô, không kéo giãn người hoặc sản phẩm để lấp đầy khung.
 
 8. Yêu cầu chất lượng hình ảnh
 Phong cách fashion review photography; chân thực, sắc nét, high detail; giữ đúng ánh sáng ảnh 03, da thật theo ảnh 01 và chất liệu vải theo ảnh 02. Không retouch làm đổi hình thể, không nâng cấp hay thay thế bối cảnh để đạt vẻ sang trọng. Gương mặt rõ ở mọi góc thấy mặt. Không để tóc, tay hoặc phụ kiện che mặt quá nhiều. Không lỗi giải phẫu, không méo người, không thừa tay chân, không sai tỷ lệ cơ thể, không xuyên vật thể và không lỗi phối cảnh.`;
+}
 
-export function attachLockedPoseBlueprint(position: number, prompt: string): string {
-  const pose = DEFAULT_FASHION_POSES[position];
-  if (!pose) return prompt;
-  const marker = `TƯ THẾ MẶC ĐỊNH ${pose.index} — ${pose.title}`;
+export const DEFAULT_FASHION_MASTER_PROMPT = buildFashionMasterPrompt();
+
+export function attachLockedPoseBlueprint(pose: PromptGenerationResult["keyframes"][number], prompt: string): string {
+  const marker = `TƯ THẾ ${pose.index} — ${pose.title} · pose #${pose.poseId}`;
   if (prompt.startsWith(marker) && prompt.includes(FASHION_REFERENCE_LOCK)) return prompt;
   const content = prompt.startsWith(marker) ? prompt : `${marker}\n${pose.poseSummary}\nCơ thể: ${pose.bodyDirection}.\nKhuôn mặt: ${pose.faceDirection}.\nGóc máy: ${pose.camera}.\n\n${prompt}`;
   return `${content}\n\n${FASHION_REFERENCE_LOCK}`;
 }
 
 export function applyDefaultFashionPlan(result: PromptGenerationResult): PromptGenerationResult {
-  if (result.keyframes.length !== FASHION_POSE_COUNT) throw new Error("Bộ prompt phải có đúng 4 pose: phía trước, phía sau, góc 3/4 và slay.");
+  validateSelectedPoses(result.keyframes);
+  const keyframes = result.keyframes.map((keyframe, position) => {
+    const required = REQUIRED_FASHION_POSES[position];
+    const pose = { ...keyframe, ...(required ?? {}), title: required?.title ?? FITCHECK_POSES.find(({ id }) => id === keyframe.poseId)!.name };
+    return { ...pose, prompt: attachLockedPoseBlueprint(pose, keyframe.prompt) };
+  });
   return {
     ...result,
     masterPrompt: {
       title: DEFAULT_FASHION_MASTER_TITLE,
-      prompt: DEFAULT_FASHION_MASTER_PROMPT,
+      prompt: buildFashionMasterPrompt(keyframes),
     },
-    keyframes: result.keyframes.map((keyframe, position) => {
-      const pose = DEFAULT_FASHION_POSES[position];
-      if (!pose) return keyframe;
-      return {
-        ...keyframe,
-        index: pose.index,
-        title: pose.title,
-        poseSummary: pose.poseSummary,
-        bodyDirection: pose.bodyDirection,
-        faceDirection: pose.faceDirection,
-        camera: pose.camera,
-        prompt: attachLockedPoseBlueprint(position, keyframe.prompt),
-      };
-    }),
+    keyframes,
   };
 }

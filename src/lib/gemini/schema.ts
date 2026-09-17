@@ -1,4 +1,5 @@
 import { FASHION_POSE_COUNT } from "../prompts/fashion-defaults";
+import { FITCHECK_POSES, getEligibleScenarios } from "../prompts/fitcheck-catalog";
 import type { VideoPromptMode } from "@/types";
 
 export const RESPONSE_SCHEMA = {
@@ -39,8 +40,9 @@ export const RESPONSE_SCHEMA = {
     masterPrompt: { type: "object", required: ["title", "prompt"], properties: { title: { type: "string" }, prompt: { type: "string" } } },
     keyframes: {
       type: "array", minItems: FASHION_POSE_COUNT, maxItems: FASHION_POSE_COUNT,
-      description: "Exactly four panel prompts in order: front (top-left), back (top-right), front three-quarter (bottom-left), slay (bottom-right), within one 9:16 composite image.",
-      items: { type: "object", required: ["index", "title", "poseSummary", "bodyDirection", "faceDirection", "camera", "prompt"], properties: {
+      description: "Four distinct catalog poses: poseId 1 front (top-left), poseId 19 back (top-right), then two catalog poses chosen after reference analysis or specified by the user.",
+      items: { type: "object", required: ["index", "poseId", "selectionReason", "title", "poseSummary", "bodyDirection", "faceDirection", "camera", "prompt"], properties: {
+        poseId: { type: "integer", enum: FITCHECK_POSES.map(({ id }) => id) }, selectionReason: { type: "string", description: "Brief reason this catalog pose suits the observed model, product details and background; acknowledge a user-specified selection when applicable." },
         index: { type: "integer", minimum: 1, maximum: FASHION_POSE_COUNT }, title: { type: "string" }, poseSummary: { type: "string" }, bodyDirection: { type: "string" }, faceDirection: { type: "string" }, camera: { type: "string" }, prompt: { type: "string" },
       } },
     },
@@ -52,9 +54,27 @@ export function getVideoPromptSchema(mode: VideoPromptMode) {
   const single = mode === "single";
   return {
     type: "object",
-    required: ["title", "prompt", "summary", "warnings"],
+    required: ["title", "prompt", "analysis", "scenario", "summary", "warnings"],
     properties: {
       title: { type: "string" },
+      analysis: {
+        type: "object", required: ["model", "outfit", "pose", "background", "motionConstraints"],
+        properties: {
+          model: { type: "string", description: "Detailed visible identity, hair, body proportions and expression to preserve; no invented measurements." },
+          outfit: { type: "string", description: "Observed garment category, silhouette, color, fabric, construction, logos, closures, hem and details relevant to safe fit-check movement. Mark unknown details." },
+          pose: { type: "string", description: "Opening body orientation, hands, feet, visible garment sides, and closing pose compatibility in two-image mode." },
+          background: { type: "string", description: "Actual scene, lighting and available space; no invented props." },
+          motionConstraints: { type: "array", items: { type: "string" }, description: "Specific motion limits implied by framing, garment, visible body and reference poses." },
+        },
+      },
+      scenario: {
+        type: "object", required: ["id", "reason", "adaptation"],
+        properties: {
+          id: { type: "integer", enum: getEligibleScenarios(mode).map(({ id }) => id) },
+          reason: { type: "string", description: "Brief evidence-based reason for choosing this fitcheck_prompts scenario using the model and outfit analysis." },
+          adaptation: { type: "string", description: "How this exact scenario is adapted to visible references, duration, selected mode, no speech and continuity locks without changing its core motion." },
+        },
+      },
       prompt: { type: "string", description: `Standalone fit-check hook video prompt explicitly preserving model identity, body proportions, background and all visible product details, requiring no speech, voice-over or lip-sync. ${single ? "Animate only the supplied single image in one continuous sharp shot, no transition or blur bridge, no invented second reference." : "Move between the two supplied poses with exactly one short soft-blur bridge and no other transition effects."}` },
       summary: {
         type: "object",

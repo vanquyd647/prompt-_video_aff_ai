@@ -1,0 +1,396 @@
+{
+  "poses": [
+    {
+      "id": 1,
+      "name": "neutral front pose"
+    },
+    {
+      "id": 2,
+      "name": "front pose, arms relaxed"
+    },
+    {
+      "id": 3,
+      "name": "front pose, one hand on waist"
+    },
+    {
+      "id": 4,
+      "name": "front pose, both hands relaxed"
+    },
+    {
+      "id": 5,
+      "name": "front pose, slight weight shift"
+    },
+    {
+      "id": 6,
+      "name": "front pose, one leg slightly forward"
+    },
+    {
+      "id": 7,
+      "name": "front pose, feet close together"
+    },
+    {
+      "id": 8,
+      "name": "front pose, relaxed shoulders"
+    },
+    {
+      "id": 9,
+      "name": "3/4 left pose"
+    },
+    {
+      "id": 10,
+      "name": "3/4 right pose"
+    },
+    {
+      "id": 11,
+      "name": "3/4 pose, hand on waist"
+    },
+    {
+      "id": 12,
+      "name": "3/4 pose, one leg forward"
+    },
+    {
+      "id": 13,
+      "name": "3/4 pose, subtle shoulder turn"
+    },
+    {
+      "id": 14,
+      "name": "side profile pose"
+    },
+    {
+      "id": 15,
+      "name": "strict side pose"
+    },
+    {
+      "id": 16,
+      "name": "side pose, arms relaxed"
+    },
+    {
+      "id": 17,
+      "name": "side pose, slight weight shift"
+    },
+    {
+      "id": 18,
+      "name": "side pose, head turned to camera"
+    },
+    {
+      "id": 19,
+      "name": "back pose"
+    },
+    {
+      "id": 20,
+      "name": "back pose, arms relaxed"
+    },
+    {
+      "id": 21,
+      "name": "back pose, slight shoulder turn"
+    },
+    {
+      "id": 22,
+      "name": "back pose, looking over shoulder"
+    },
+    {
+      "id": 23,
+      "name": "3/4 back left pose"
+    },
+    {
+      "id": 24,
+      "name": "3/4 back right pose"
+    },
+    {
+      "id": 25,
+      "name": "contrapposto pose"
+    },
+    {
+      "id": 26,
+      "name": "relaxed standing pose"
+    },
+    {
+      "id": 27,
+      "name": "casual standing pose"
+    },
+    {
+      "id": 28,
+      "name": "fashion catalog pose"
+    },
+    {
+      "id": 29,
+      "name": "editorial standing pose"
+    },
+    {
+      "id": 30,
+      "name": "static mannequin pose"
+    },
+    {
+      "id": 31,
+      "name": "one hand touching hair"
+    },
+    {
+      "id": 32,
+      "name": "one hand adjusting sleeve"
+    },
+    {
+      "id": 33,
+      "name": "one hand adjusting collar"
+    },
+    {
+      "id": 34,
+      "name": "one hand holding jacket edge"
+    },
+    {
+      "id": 35,
+      "name": "hands lightly clasped in front"
+    },
+    {
+      "id": 36,
+      "name": "hands behind back"
+    },
+    {
+      "id": 37,
+      "name": "arms crossed softly"
+    },
+    {
+      "id": 38,
+      "name": "one arm relaxed, one hand on waist"
+    },
+    {
+      "id": 39,
+      "name": "slight body lean"
+    },
+    {
+      "id": 40,
+      "name": "subtle hip shift"
+    },
+    {
+      "id": 41,
+      "name": "gentle body sway"
+    },
+    {
+      "id": 42,
+      "name": "small quarter turn"
+    },
+    {
+      "id": 43,
+      "name": "half turn pose"
+    },
+    {
+      "id": 44,
+      "name": "turn and hold pose"
+    },
+    {
+      "id": 45,
+      "name": "front to 3/4 pose"
+    },
+    {
+      "id": 46,
+      "name": "3/4 to side pose"
+    },
+    {
+      "id": 47,
+      "name": "side to back pose"
+    },
+    {
+      "id": 48,
+      "name": "back to 3/4 pose"
+    },
+    {
+      "id": 49,
+      "name": "two-step stop pose"
+    },
+    {
+      "id": 50,
+      "name": "walk then hold pose"
+    },
+    {
+      "id": 51,
+      "name": "mirror selfie pose"
+    },
+    {
+      "id": 52,
+      "name": "mirror fit check pose"
+    },
+    {
+      "id": 53,
+      "name": "phone covering face pose"
+    },
+    {
+      "id": 54,
+      "name": "faceless standing pose"
+    },
+    {
+      "id": 55,
+      "name": "OOTD pose"
+    },
+    {
+      "id": 56,
+      "name": "streetwear fit check pose"
+    },
+    {
+      "id": 57,
+      "name": "luxury fashion pose"
+    },
+    {
+      "id": 58,
+      "name": "minimal fashion pose"
+    },
+    {
+      "id": 59,
+      "name": "soft elegant pose"
+    },
+    {
+      "id": 60,
+      "name": "clean product showcase pose"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": 1,
+      "title": "Static fit check",
+      "prompt": "static outfit check, standing in place, subtle weight shift, natural pose, minimal movement"
+    },
+    {
+      "id": 2,
+      "title": "Front → 3/4",
+      "prompt": "front pose, slowly turn to 3/4 view, outfit check, subtle movement"
+    },
+    {
+      "id": 3,
+      "title": "Front → Side",
+      "prompt": "front to side pose, slow quarter turn, fashion fit check, natural movement"
+    },
+    {
+      "id": 4,
+      "title": "Front → Back",
+      "prompt": "front pose, slowly turn to back view, outfit showcase, minimal movement"
+    },
+    {
+      "id": 5,
+      "title": "3/4 Back",
+      "prompt": "3/4 back outfit check, subtle weight shift, slight shoulder turn, natural pose"
+    },
+    {
+      "id": 6,
+      "title": "Back → 3/4",
+      "prompt": "back view, slowly turn to 3/4 pose, outfit check, gentle movement"
+    },
+    {
+      "id": 7,
+      "title": "Side Fit Check",
+      "prompt": "side profile outfit check, subtle body sway, relaxed arms, static camera"
+    },
+    {
+      "id": 8,
+      "title": "Mirror Fit Check",
+      "prompt": "mirror outfit check, phone in hand, subtle pose change, natural movement"
+    },
+    {
+      "id": 9,
+      "title": "Hand on Waist",
+      "prompt": "outfit check, hand on waist, slight body turn, subtle weight shift"
+    },
+    {
+      "id": 10,
+      "title": "Hair Touch",
+      "prompt": "fashion fit check, gently touch hair, subtle weight shift, standing still"
+    },
+    {
+      "id": 11,
+      "title": "Adjust Outfit",
+      "prompt": "outfit check, gently adjust sleeve and waist, natural movement, standing in place"
+    },
+    {
+      "id": 12,
+      "title": "Slow Push-In",
+      "prompt": "static outfit check, subtle pose change, slow camera push in"
+    },
+    {
+      "id": 13,
+      "title": "Slow Pull-Back",
+      "prompt": "full body outfit reveal, model standing still, slow camera pull back"
+    },
+    {
+      "id": 14,
+      "title": "Camera Slide",
+      "prompt": "outfit check, model standing still, slow lateral camera slide, subtle pose"
+    },
+    {
+      "id": 15,
+      "title": "Mini Orbit",
+      "prompt": "fashion outfit check, model standing still, slow 20 degree camera orbit"
+    },
+    {
+      "id": 16,
+      "title": "Light Sweep Reveal",
+      "prompt": "static outfit check, cinematic light sweep, pose reveal, minimal movement"
+    },
+    {
+      "id": 17,
+      "title": "Foreground Wipe",
+      "prompt": "foreground wipe transition, reveal new fashion pose, standing outfit check"
+    },
+    {
+      "id": 18,
+      "title": "Beat Pose Change",
+      "prompt": "beat sync pose change, front pose, side pose, 3/4 pose, outfit check"
+    },
+    {
+      "id": 19,
+      "title": "Flash Transition",
+      "prompt": "camera flash transition, new pose reveal, fashion fit check, minimal movement"
+    },
+    {
+      "id": 20,
+      "title": "Two-Step Fit Check",
+      "prompt": "take two slow steps forward, stop and pose, outfit check, natural movement"
+    },
+    {
+      "id": 21,
+      "title": "Turn and Hold",
+      "prompt": "slow quarter turn, stop, hold pose, fashion outfit showcase"
+    },
+    {
+      "id": 22,
+      "title": "Small Body Sway",
+      "prompt": "static fit check, gentle body sway, relaxed arms, subtle fabric movement"
+    },
+    {
+      "id": 23,
+      "title": "Skirt/Dress Movement",
+      "prompt": "dress outfit check, gentle body turn, natural fabric movement, static camera"
+    },
+    {
+      "id": 24,
+      "title": "Jacket Fit Check",
+      "prompt": "jacket outfit check, gently adjust collar, slight 3/4 turn, minimal movement"
+    },
+    {
+      "id": 25,
+      "title": "Full Body Product Showcase",
+      "prompt": "full body fashion showcase, standing still, subtle pose change, clean camera movement"
+    },
+    {
+      "id": 26,
+      "title": "Faceless Fit Check",
+      "prompt": "faceless full body outfit check, subtle weight shift, slow camera push in"
+    },
+    {
+      "id": 27,
+      "title": "No Walk – Premium",
+      "prompt": "luxury fashion fit check, standing in place, elegant subtle movement, slow cinematic camera"
+    },
+    {
+      "id": 28,
+      "title": "OOTD Style",
+      "prompt": "casual OOTD fit check, relaxed standing pose, slight turn, natural movement"
+    },
+    {
+      "id": 29,
+      "title": "TVC Style",
+      "prompt": "premium fashion commercial, static model, subtle pose change, slow push in, soft lighting"
+    },
+    {
+      "id": 30,
+      "title": "TikTok/FYP Style",
+      "prompt": "TikTok outfit check, quick pose change, subtle body movement, handheld camera feel"
+    }
+  ]
+}

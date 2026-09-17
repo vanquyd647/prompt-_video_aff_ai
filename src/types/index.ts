@@ -1,6 +1,7 @@
 export type OutputLanguage = "Vietnamese" | "English" | "Bilingual";
 export type DetailLevel = "Compact" | "Standard" | "Detailed";
 export type BodyReferenceConfidence = "low" | "medium" | "high";
+export type PoseSelection = [number | null, number | null];
 
 export interface AppSettings {
   modelId: string;
@@ -58,6 +59,8 @@ export interface PromptGenerationResult {
   masterPrompt: { title: string; prompt: string };
   keyframes: Array<{
     index: number;
+    poseId?: number;
+    selectionReason?: string;
     title: string;
     poseSummary: string;
     bodyDirection: string;
@@ -75,6 +78,14 @@ export type VideoPromptMode = "single" | "transition";
 export interface VideoPromptResult {
   title: string;
   prompt: string;
+  analysis: {
+    model: string;
+    outfit: string;
+    pose: string;
+    background: string;
+    motionConstraints: string[];
+  };
+  scenario: { id: number; title: string; sourcePrompt: string; reason: string; adaptation: string };
   summary: {
     subjectContinuity: string;
     poseTransition: string;
@@ -95,6 +106,7 @@ export interface PromptHistoryItem {
     background?: StoredImage;
   };
   notes: string;
+  poseSelection?: PoseSelection;
   result: PromptGenerationResult;
 }
 

@@ -1,0 +1,104 @@
+DANH SÁCH PROMPT FIT CHECK NGẮN - SẴN COPY/PASTE
+Dùng cho Veo 3.1 / Flow / Kling / Hailuo
+
+1. Static fit check
+static outfit check, standing in place, subtle weight shift, natural pose, minimal movement
+
+2. Front → 3/4
+front pose, slowly turn to 3/4 view, outfit check, subtle movement
+
+3. Front → Side
+front to side pose, slow quarter turn, fashion fit check, natural movement
+
+4. Front → Back
+front pose, slowly turn to back view, outfit showcase, minimal movement
+
+5. 3/4 Back
+3/4 back outfit check, subtle weight shift, slight shoulder turn, natural pose
+
+6. Back → 3/4
+back view, slowly turn to 3/4 pose, outfit check, gentle movement
+
+7. Side Fit Check
+side profile outfit check, subtle body sway, relaxed arms, static camera
+
+8. Mirror Fit Check
+mirror outfit check, phone in hand, subtle pose change, natural movement
+
+9. Hand on Waist
+outfit check, hand on waist, slight body turn, subtle weight shift
+
+10. Hair Touch
+fashion fit check, gently touch hair, subtle weight shift, standing still
+
+11. Adjust Outfit
+outfit check, gently adjust sleeve and waist, natural movement, standing in place
+
+12. Slow Push-In
+static outfit check, subtle pose change, slow camera push in
+
+13. Slow Pull-Back
+full body outfit reveal, model standing still, slow camera pull back
+
+14. Camera Slide
+outfit check, model standing still, slow lateral camera slide, subtle pose
+
+15. Mini Orbit
+fashion outfit check, model standing still, slow 20 degree camera orbit
+
+16. Light Sweep Reveal
+static outfit check, cinematic light sweep, pose reveal, minimal movement
+
+17. Foreground Wipe
+foreground wipe transition, reveal new fashion pose, standing outfit check
+
+18. Beat Pose Change
+beat sync pose change, front pose, side pose, 3/4 pose, outfit check
+
+19. Flash Transition
+camera flash transition, new pose reveal, fashion fit check, minimal movement
+
+20. Two-Step Fit Check
+take two slow steps forward, stop and pose, outfit check, natural movement
+
+21. Turn and Hold
+slow quarter turn, stop, hold pose, fashion outfit showcase
+
+22. Small Body Sway
+static fit check, gentle body sway, relaxed arms, subtle fabric movement
+
+23. Skirt/Dress Movement
+dress outfit check, gentle body turn, natural fabric movement, static camera
+
+24. Jacket Fit Check
+jacket outfit check, gently adjust collar, slight 3/4 turn, minimal movement
+
+25. Full Body Product Showcase
+full body fashion showcase, standing still, subtle pose change, clean camera movement
+
+26. Faceless Fit Check
+faceless full body outfit check, subtle weight shift, slow camera push in
+
+27. No Walk – Premium
+luxury fashion fit check, standing in place, elegant subtle movement, slow cinematic camera
+
+28. OOTD Style
+casual OOTD fit check, relaxed standing pose, slight turn, natural movement
+
+29. TVC Style
+premium fashion commercial, static model, subtle pose change, slow push in, soft lighting
+
+30. TikTok/FYP Style
+TikTok outfit check, quick pose change, subtle body movement, handheld camera feel
+
+CÔNG THỨC DÙNG CHUNG
+[pose] + outfit check + [body movement] + [camera movement] + minimal movement
+
+VÍ DỤ
+3/4 back outfit check, subtle weight shift, slight shoulder turn, slow push in, minimal movement
+
+Ví dụ ngắn hơn:
+static fit check, quarter turn, subtle weight shift, slow push in
+
+TỪ KHÓA GỢI Ý CHO VEO 3.1
+standing in place, subtle weight shift, quarter turn, 3/4 pose, back reveal, slow push in, camera slide, mini orbit, minimal movement

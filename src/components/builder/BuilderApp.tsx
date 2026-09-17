@@ -14,10 +14,11 @@ import { createUploadedImage, fromStoredImage, toStoredImage } from "@/lib/image
 import { API_KEY_STORAGE, DEFAULT_SETTINGS, loadSettings, saveSettings } from "@/lib/storage/local-settings";
 import { clearHistory, deleteHistoryItem, getHistory, saveHistoryItem } from "@/lib/storage/history";
 import { createId } from "@/lib/utils/id";
-import { DEFAULT_FASHION_POSES } from "@/lib/prompts/fashion-defaults";
-import type { AppSettings, PromptGenerationResult, PromptHistoryItem, UploadedImage } from "@/types";
+import { REQUIRED_FASHION_POSES } from "@/lib/prompts/fashion-defaults";
+import { OPTIONAL_FITCHECK_POSES } from "@/lib/prompts/fitcheck-catalog";
+import type { AppSettings, PoseSelection, PromptGenerationResult, PromptHistoryItem, UploadedImage } from "@/types";
 
-const PROGRESS_STAGES = ["Đang đọc ảnh người mẫu", "Đang phân tích sản phẩm", "Đang phân tích bối cảnh", "Đang xếp 4 pose vào ảnh 9:16", "Đang hoàn thiện bộ prompt"];
+const PROGRESS_STAGES = ["Đang đọc ảnh người mẫu", "Đang phân tích sản phẩm", "Đang phân tích bối cảnh", "Đang chọn 4 pose từ danh sách", "Đang hoàn thiện bộ prompt"];
 
 const LANGUAGE_OPTIONS = [
   { value: "Vietnamese", label: "Tiếng Việt" },
@@ -41,6 +42,7 @@ export function BuilderApp() {
   const [products, setProducts] = useState<UploadedImage[]>([]);
   const [background, setBackground] = useState<UploadedImage>();
   const [notes, setNotes] = useState("");
+  const [poseSelection, setPoseSelection] = useState<PoseSelection>([null, null]);
   const [result, setResult] = useState<PromptGenerationResult>();
   const [history, setHistory] = useState<PromptHistoryItem[]>([]);
   const [currentHistoryId, setCurrentHistoryId] = useState<string>();
@@ -102,20 +104,20 @@ export function BuilderApp() {
     const item: PromptHistoryItem = {
       id, createdAt: existing?.createdAt ?? now, updatedAt: now, modelId: settings.modelId, settings,
       references: { model: toStoredImage(modelImage), products: products.map(toStoredImage), background: background ? toStoredImage(background) : undefined },
-      notes, result: nextResult,
+      notes, poseSelection, result: nextResult,
     };
     await saveHistoryItem(item);
     setHistory((items) => [item, ...items.filter((entry) => entry.id !== id)]);
     setCurrentHistoryId(id);
     return id;
-  }, [background, currentHistoryId, history, modelImage, notes, products, settings]);
+  }, [background, currentHistoryId, history, modelImage, notes, poseSelection, products, settings]);
 
   const handleGenerate = async () => {
     if (!apiKey || !modelImage || products.length === 0 || !background) return;
     const controller = new AbortController(); abortRef.current = controller;
     setGenerating(true); setProgressStage(0); setError(undefined);
     try {
-      const next = await generatePromptSet({ apiKey, model: modelImage, products, background, notes, settings, signal: controller.signal });
+      const next = await generatePromptSet({ apiKey, model: modelImage, products, background, notes, settings, poseSelection, signal: controller.signal });
       setResult(next); setCurrentHistoryId(undefined); await persist(next, createId());
       window.setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
     } catch (cause) {
@@ -155,7 +157,7 @@ export function BuilderApp() {
     if (keep === "none") { revoke(modelImage); setModelImage(undefined); }
     products.forEach(revoke); setProducts([]);
     if (keep !== "model-background") { revoke(background); setBackground(undefined); }
-    setNotes(""); setResult(undefined); setCurrentHistoryId(undefined); setError(undefined); window.scrollTo({ top: 0, behavior: "smooth" });
+    setNotes(""); setPoseSelection([null, null]); setResult(undefined); setCurrentHistoryId(undefined); setError(undefined); window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const openHistory = (item: PromptHistoryItem) => {
@@ -163,7 +165,7 @@ export function BuilderApp() {
     setModelImage(item.references.model ? fromStoredImage(item.references.model) : undefined);
     setProducts(item.references.products.map(fromStoredImage));
     setBackground(item.references.background ? fromStoredImage(item.references.background) : undefined);
-    setNotes(item.notes); setSettings(item.settings); setResult(item.result); setCurrentHistoryId(item.id); setHistoryOpen(false);
+    setNotes(item.notes); setPoseSelection(item.poseSelection ?? [null, null]); setSettings(item.settings); setResult(item.result); setCurrentHistoryId(item.id); setHistoryOpen(false);
     window.setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth" }), 50);
   };
 
@@ -192,7 +194,7 @@ export function BuilderApp() {
 
     <main id="top" className="app-main">
       <section className="intro">
-        <div><h1>Tạo câu chuyện thời trang nhất quán</h1><p>Tạo prompt cho 4 khung dọc 9:16 trong một ảnh 9:16, bố cục 2×2: phía trước, phía sau, góc 3/4 và slay. Giữ nguyên cơ thể ảnh 01, chính xác sản phẩm ảnh 02 và bối cảnh ảnh 03.</p></div>
+        <div><h1>Tạo câu chuyện thời trang nhất quán</h1><p>4 khung dọc 9:16 trong một ảnh 9:16, bố cục 2×2: front, back và hai pose do AI chọn từ danh sách hoặc bạn chọn trước. Giữ nguyên cơ thể ảnh 01, chính xác sản phẩm ảnh 02 và bối cảnh ảnh 03.</p></div>
         <div className="step-thread" aria-label="Bốn bước thêm ảnh tham chiếu">{["01", "02", "03", "04"].map((step) => <span key={step}>{step}<i /></span>)}</div>
       </section>
 
@@ -204,6 +206,13 @@ export function BuilderApp() {
         <UploadCard index="03" title="Bối cảnh" description="Bắt buộc có ảnh để giữ đúng không gian, đồ vật, bố cục và ánh sáng trong cả 4 ô. Không tự thay bối cảnh." images={background ? [background] : []} onFiles={(files) => setSingle("background", files)} onRemove={() => { revoke(background); setBackground(undefined); }} />
         <section className="upload-card notes-card" aria-labelledby="slot-04"><span className="watermark" aria-hidden>04</span><div className="card-heading"><div><h2 id="slot-04">04 — Ghi chú bổ sung</h2><p>Nhập số đo thực tế nếu có hoặc chi tiết cần chú ý. Luôn giữ nguyên cơ thể, sản phẩm, bối cảnh và thứ tự 4 pose.</p></div><span className="optional-label">Không bắt buộc</span></div><textarea value={notes} maxLength={3000} onChange={(e) => setNotes(e.target.value)} placeholder="Nhập số đo thực tế của người mẫu (nếu biết). Ví dụ ghi chú: không bóp eo, không kéo dài chân; giữ đúng logo, đường may và ánh sáng của bối cảnh." /><span className="character-count">{notes.length} / 3000</span></section>
       </div>
+
+      <fieldset className="pose-selection" disabled={generating || Boolean(regenerating)}>
+        <legend>Chọn pose cho lần tạo tiếp theo</legend>
+        <div><strong>01 · Front</strong><small>Phía trước · Cố định</small></div>
+        <div><strong>02 · Back</strong><small>Phía sau · Cố định</small></div>
+        {([0, 1] as const).map((slot) => <label key={slot}><span>Pose {slot + 3} · {slot === 0 ? "Dưới trái" : "Dưới phải"}</span><select aria-label={`Pose ${slot + 3}`} value={poseSelection[slot] ?? "auto"} onChange={(event) => setPoseSelection((current) => { const next: PoseSelection = [...current]; next[slot] = event.target.value === "auto" ? null : Number(event.target.value); return next; })}><option value="auto">AI tự chọn sau khi phân tích</option>{OPTIONAL_FITCHECK_POSES.map((pose) => <option key={pose.id} value={pose.id} disabled={pose.id === poseSelection[1 - slot]}>#{pose.id} · {pose.name}</option>)}</select></label>)}
+      </fieldset>
 
       <section className="generation-rail" aria-label="Cài đặt tạo prompt">
         <Control label="Mô hình"><div className="select-control"><Sparkles size={16} /><select aria-label="Mô hình Gemini" value={settings.modelId} onChange={(e) => setSettings({ ...settings, modelId: e.target.value })}>{modelOptions.map((model) => <option key={model.id} value={model.id}>{model.label}{model.recommended ? " · Đề xuất" : ""}</option>)}</select><ChevronDown size={15} /></div><button className="refresh-models" onClick={refreshModels} title="Làm mới danh sách mô hình" aria-label="Làm mới danh sách mô hình Gemini"><RefreshCw size={15} /></button></Control>
@@ -218,7 +227,7 @@ export function BuilderApp() {
 
       {error && <section className="error-panel" role="alert"><div><h3>{error.status === 429 ? "Đã chạm giới hạn Gemini" : "Không thể hoàn tất quá trình tạo"}</h3><p>{error.message}</p>{error.technical && <details><summary>Chi tiết kỹ thuật</summary><pre>{error.technical}</pre></details>}</div><div>{error.status === 429 && <a href={RATE_LIMITS_URL} target="_blank" rel="noreferrer">Xem giới hạn <ExternalLink size={15} /></a>}<button onClick={handleGenerate}>Thử lại</button><button onClick={() => setError(undefined)} aria-label="Đóng lỗi"><X size={17} /></button></div></section>}
 
-      {!result && !generating && <section className="empty-guide pose-guide"><h2>4 pose trong một ảnh dọc 9:16.</h2><ol>{DEFAULT_FASHION_POSES.map((pose) => <li key={pose.index}><strong>{String(pose.index).padStart(2, "0")} · {pose.title}</strong><span>{pose.poseSummary}</span></li>)}</ol><p>Lưới 2×2, đọc từ trái sang phải và từ trên xuống dưới. Mỗi ô dọc 9:16 chứa một pose; chỉ xuất một file ảnh tổng 9:16.</p></section>}
+      {!result && !generating && <section className="empty-guide pose-guide"><h2>Front + back + 2 pose phù hợp.</h2><ol>{REQUIRED_FASHION_POSES.map((pose) => <li key={pose.index}><strong>{String(pose.index).padStart(2, "0")} · {pose.title}</strong><span>{pose.poseSummary}</span></li>)}{([0, 1] as const).map((slot) => <li key={slot + 3}><strong>0{slot + 3} · {OPTIONAL_FITCHECK_POSES.find(({ id }) => id === poseSelection[slot])?.name ?? "AI tự chọn"}</strong><span>Chọn từ danh sách dựa trên vóc dáng, trang phục và không gian.</span></li>)}</ol><p>Lưới 2×2, đọc từ trái sang phải và từ trên xuống dưới. AI nêu lý do chọn mỗi pose và giữ nguyên các khóa tham chiếu.</p></section>}
       {result && <PromptOutput result={result} onChange={handleResultChange} onRegenerate={handleRegenerate} regenerating={regenerating} />}
     </main>
 
