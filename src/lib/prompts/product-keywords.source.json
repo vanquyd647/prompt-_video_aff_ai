@@ -1,0 +1,7339 @@
+{
+  "meta": {
+    "name": "Keyword Concept Data - Image & Video",
+    "version": "2.0.0",
+    "language": "vi",
+    "purpose": "Thư viện gợi ý concept nhanh cho PC, mobile và thời trang: chọn một key concept; tùy chọn thêm kỹ thuật.",
+    "generated_date": "2026-09-28",
+    "keyword_rule": "Canonical keyword ưu tiên 1 từ sau dấu / để người dùng gõ nhanh và app có thể map sang prompt chi tiết.",
+    "keyword_count": 161,
+    "product_profile_count": 37,
+    "preset_count": 9
+  },
+  "conventions": {
+    "display_format": "/{token}",
+    "canonical_keyword": "Một token tiếng Anh ngắn, không khoảng trắng.",
+    "media_types": [
+      "image",
+      "video"
+    ],
+    "industries": [
+      "general",
+      "pc_components",
+      "mobile_accessories",
+      "fashion"
+    ],
+    "usage_formula_image": "[product] + [concept] + [composition] + [mood]",
+    "usage_formula_video": "[product] + [interaction] + [camera_motion] + [feature] + [mood]",
+    "selection_rule": "One concept keyword is sufficient. Modifiers and Auto Mix are optional.",
+    "keyword_roles": [
+      "concept",
+      "modifier"
+    ]
+  },
+  "keywords": [
+    {
+      "key": "/flatlay",
+      "token": "flatlay",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components",
+        "fashion"
+      ],
+      "meaning_vi": "Chụp sản phẩm từ trên xuống, sắp đặt đạo cụ gọn đẹp.",
+      "prompt_hint_en": "top-down flat lay product photography, carefully arranged props, clean commercial composition",
+      "aliases": [
+        "/topdown"
+      ],
+      "tags": [
+        "commerce",
+        "layout"
+      ],
+      "role": "concept",
+      "concept_label": "Flat lay",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/editorial",
+      "token": "editorial",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Ảnh kiểu tạp chí/quảng cáo có art direction.",
+      "prompt_hint_en": "high-end editorial campaign photography, art-directed composition, polished magazine aesthetic",
+      "aliases": [],
+      "tags": [
+        "fashion",
+        "campaign"
+      ],
+      "role": "concept",
+      "concept_label": "Editorial",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/minimal",
+      "token": "minimal",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components",
+        "fashion"
+      ],
+      "meaning_vi": "Tối giản, ít đạo cụ, tập trung sản phẩm.",
+      "prompt_hint_en": "minimal product photography, uncluttered scene, strong negative space, product-first composition",
+      "aliases": [],
+      "tags": [
+        "minimal"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/luxury",
+      "token": "luxury",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style",
+        "mood"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Sang trọng, vật liệu cao cấp, ánh sáng mềm.",
+      "prompt_hint_en": "luxury commercial product scene, refined materials, premium lighting, elegant styling",
+      "aliases": [
+        "/premium"
+      ],
+      "tags": [
+        "premium"
+      ],
+      "role": "concept",
+      "concept_label": "Luxury showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/industrial",
+      "token": "industrial",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style",
+        "environment"
+      ],
+      "industries": [
+        "pc_components",
+        "general"
+      ],
+      "meaning_vi": "Không gian kỹ thuật/xưởng, kim loại, máy móc.",
+      "prompt_hint_en": "industrial tech workshop, metallic surfaces, precision tools, engineered atmosphere",
+      "aliases": [
+        "/workshop"
+      ],
+      "tags": [
+        "tech",
+        "workbench"
+      ],
+      "role": "concept",
+      "concept_label": "Industrial showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/cyberpunk",
+      "token": "cyberpunk",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories",
+        "general"
+      ],
+      "meaning_vi": "Neon, cyber, tương lai, tương phản mạnh.",
+      "prompt_hint_en": "cyberpunk technology aesthetic, neon lighting, futuristic urban mood, dramatic contrast",
+      "aliases": [
+        "/cyber"
+      ],
+      "tags": [
+        "neon",
+        "future"
+      ],
+      "role": "concept",
+      "concept_label": "Cyberpunk",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/gaming",
+      "token": "gaming",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style",
+        "usecase"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Không khí gaming, RGB, hiệu năng.",
+      "prompt_hint_en": "gaming product showcase, RGB ambience, performance-oriented setup, energetic tech mood",
+      "aliases": [],
+      "tags": [
+        "rgb",
+        "performance"
+      ],
+      "role": "concept",
+      "concept_label": "Gaming showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/lifestyle",
+      "token": "lifestyle",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style",
+        "usecase"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Đặt sản phẩm trong tình huống sử dụng đời thường.",
+      "prompt_hint_en": "lifestyle product scene, natural everyday use, believable real-world context",
+      "aliases": [],
+      "tags": [
+        "daily",
+        "human"
+      ],
+      "role": "concept",
+      "concept_label": "Lifestyle",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/futuristic",
+      "token": "futuristic",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Phong cách công nghệ tương lai.",
+      "prompt_hint_en": "futuristic product visualization, advanced materials, sleek high-tech environment",
+      "aliases": [],
+      "tags": [
+        "future"
+      ],
+      "role": "concept",
+      "concept_label": "Futuristic showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/clean",
+      "token": "clean",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components",
+        "fashion"
+      ],
+      "meaning_vi": "Ảnh sạch, sáng, thương mại.",
+      "prompt_hint_en": "clean commercial product photography, bright controlled lighting, crisp presentation",
+      "aliases": [],
+      "tags": [
+        "commerce"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/dark",
+      "token": "dark",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "mood"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Nền tối, tương phản cao, cảm giác mạnh.",
+      "prompt_hint_en": "dark studio product scene, high contrast, controlled rim lighting, dramatic mood",
+      "aliases": [],
+      "tags": [
+        "dramatic"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/neon",
+      "token": "neon",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting",
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Ánh sáng neon nổi bật.",
+      "prompt_hint_en": "neon-lit product scene, colored glow, reflective highlights, high-energy aesthetic",
+      "aliases": [],
+      "tags": [
+        "rgb"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/pastel",
+      "token": "pastel",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "palette",
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Tông pastel nhẹ nhàng.",
+      "prompt_hint_en": "soft pastel product styling, gentle palette, airy and friendly visual mood",
+      "aliases": [],
+      "tags": [
+        "soft"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/studio",
+      "token": "studio",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "environment"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components",
+        "fashion"
+      ],
+      "meaning_vi": "Bối cảnh studio kiểm soát ánh sáng.",
+      "prompt_hint_en": "controlled studio product setup, professional commercial lighting, clean backdrop",
+      "aliases": [],
+      "tags": [
+        "commercial"
+      ],
+      "role": "concept",
+      "concept_label": "Studio showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/workbench",
+      "token": "workbench",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "environment"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Bàn kỹ thuật/lắp ráp linh kiện.",
+      "prompt_hint_en": "PC hardware workbench scene, tools, anti-static surface, technical environment",
+      "aliases": [],
+      "tags": [
+        "pc",
+        "industrial"
+      ],
+      "role": "concept",
+      "concept_label": "Workbench review",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/showcase",
+      "token": "showcase",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition",
+        "intent"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Trưng bày sản phẩm như hero display.",
+      "prompt_hint_en": "hero product showcase, product centered and clearly presented, premium commercial framing",
+      "aliases": [],
+      "tags": [
+        "hero"
+      ],
+      "role": "concept",
+      "concept_label": "Product showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/macro",
+      "token": "macro",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "camera",
+        "detail"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components",
+        "fashion"
+      ],
+      "meaning_vi": "Cận cực gần chi tiết vật liệu/cổng/kết cấu.",
+      "prompt_hint_en": "macro close-up emphasizing material texture, ports, components and fine details",
+      "aliases": [
+        "/closeup"
+      ],
+      "tags": [
+        "detail"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/handheld",
+      "token": "handheld",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Sản phẩm được cầm trên tay để review/thể hiện kích thước.",
+      "prompt_hint_en": "product held naturally in hand, realistic review framing, scale clearly visible",
+      "aliases": [],
+      "tags": [
+        "human"
+      ],
+      "role": "concept",
+      "concept_label": "Handheld review",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/floating",
+      "token": "floating",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition",
+        "effect"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Sản phẩm lơ lửng trong không gian.",
+      "prompt_hint_en": "floating product presentation, clean suspended composition, premium commercial effect",
+      "aliases": [],
+      "tags": [
+        "3d",
+        "hero"
+      ],
+      "role": "concept",
+      "concept_label": "Floating product",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/travel",
+      "token": "travel",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "general"
+      ],
+      "meaning_vi": "Bối cảnh đi lại, balo, sân bay, cafe.",
+      "prompt_hint_en": "travel lifestyle product scene, bag, airport or cafe context, portable-use storytelling",
+      "aliases": [],
+      "tags": [
+        "portable"
+      ],
+      "role": "concept",
+      "concept_label": "Travel essentials",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/urban",
+      "token": "urban",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "environment"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "general"
+      ],
+      "meaning_vi": "Bối cảnh thành thị hiện đại.",
+      "prompt_hint_en": "modern urban lifestyle setting, city textures, contemporary street-tech mood",
+      "aliases": [],
+      "tags": [
+        "city"
+      ],
+      "role": "concept",
+      "concept_label": "Urban lifestyle",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/business",
+      "token": "business",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style",
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "general"
+      ],
+      "meaning_vi": "Phong cách văn phòng/doanh nhân.",
+      "prompt_hint_en": "professional business-tech setting, refined desk, executive minimalism",
+      "aliases": [],
+      "tags": [
+        "office"
+      ],
+      "role": "concept",
+      "concept_label": "Business lifestyle",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/creator",
+      "token": "creator",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "general"
+      ],
+      "meaning_vi": "Bối cảnh content creator/quay chụp.",
+      "prompt_hint_en": "content creator setup, camera and phone workflow, modern creative desk environment",
+      "aliases": [],
+      "tags": [
+        "vlog"
+      ],
+      "role": "concept",
+      "concept_label": "Creator setup",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/fitness",
+      "token": "fitness",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Bối cảnh vận động, thể thao, smartwatch/tai nghe.",
+      "prompt_hint_en": "fitness lifestyle scene, active use, workout-oriented product storytelling",
+      "aliases": [],
+      "tags": [
+        "sport"
+      ],
+      "role": "concept",
+      "concept_label": "Fitness lifestyle",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/cute",
+      "token": "cute",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Dễ thương, trẻ trung.",
+      "prompt_hint_en": "cute playful product styling, charming props, youthful visual direction",
+      "aliases": [],
+      "tags": [
+        "girly"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/kawaii",
+      "token": "kawaii",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Phong cách kawaii Nhật, đáng yêu.",
+      "prompt_hint_en": "kawaii product styling, playful Japanese-inspired cute aesthetic",
+      "aliases": [],
+      "tags": [
+        "cute"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/sporty",
+      "token": "sporty",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style",
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "general"
+      ],
+      "meaning_vi": "Năng động, thể thao.",
+      "prompt_hint_en": "sporty product presentation, dynamic active-lifestyle mood, energetic composition",
+      "aliases": [],
+      "tags": [
+        "fitness"
+      ],
+      "role": "concept",
+      "concept_label": "Sport lifestyle",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/retro",
+      "token": "retro",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "style"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Phong cách hoài cổ.",
+      "prompt_hint_en": "retro commercial styling, nostalgic textures, vintage-inspired composition",
+      "aliases": [],
+      "tags": [
+        "vintage"
+      ],
+      "role": "concept",
+      "concept_label": "Retro showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/softluxury",
+      "token": "softluxury",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style",
+        "mood"
+      ],
+      "industries": [
+        "fashion",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Sang nhẹ, tinh tế, ánh sáng mềm.",
+      "prompt_hint_en": "soft luxury editorial styling, elegant neutral palette, gentle premium lighting",
+      "aliases": [
+        "/soft-luxury"
+      ],
+      "tags": [
+        "premium",
+        "soft"
+      ],
+      "role": "concept",
+      "concept_label": "Soft luxury",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/nudetone",
+      "token": "nudetone",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "palette"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Tông nude/be/kem đồng bộ sản phẩm.",
+      "prompt_hint_en": "nude beige tonal palette, warm neutral styling, cohesive soft commercial look",
+      "aliases": [
+        "/nude-tone"
+      ],
+      "tags": [
+        "beige"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/comfort",
+      "token": "comfort",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "usecase",
+        "mood"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Nhấn cảm giác mặc êm, dùng hằng ngày.",
+      "prompt_hint_en": "comfort-first lingerie product imagery, soft everyday mood, gentle natural styling",
+      "aliases": [],
+      "tags": [
+        "daily"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/lingerie",
+      "token": "lingerie",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style",
+        "industry"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Concept tổng cho ảnh thời trang nội y.",
+      "prompt_hint_en": "tasteful lingerie product campaign, elegant fashion presentation, product-focused styling",
+      "aliases": [],
+      "tags": [
+        "fashion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/orbit",
+      "token": "orbit",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Camera xoay quanh sản phẩm.",
+      "prompt_hint_en": "smooth cinematic orbit around the product, stable hero framing",
+      "aliases": [
+        "/hero-orbit"
+      ],
+      "tags": [
+        "motion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/reveal",
+      "token": "reveal",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "transition",
+        "intent"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Từ ẩn/tối sang lộ sản phẩm.",
+      "prompt_hint_en": "cinematic product reveal from shadow or occlusion into a clean hero shot",
+      "aliases": [
+        "/product-reveal"
+      ],
+      "tags": [
+        "intro"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/scan",
+      "token": "scan",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion",
+        "detail"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Camera quét lần lượt qua các chi tiết.",
+      "prompt_hint_en": "precision detail scan across key product features, smooth controlled camera motion",
+      "aliases": [
+        "/detail-scan"
+      ],
+      "tags": [
+        "detail"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/rotate",
+      "token": "rotate",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction",
+        "camera_motion"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Xoay sản phẩm để thấy nhiều mặt.",
+      "prompt_hint_en": "smooth product rotation showing front, side and back surfaces",
+      "aliases": [
+        "/hand-rotate",
+        "/turntable"
+      ],
+      "tags": [
+        "motion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/pickup",
+      "token": "pickup",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Tay nhấc sản phẩm lên khỏi bàn/hộp.",
+      "prompt_hint_en": "natural hand pickup from desk or packaging, clean review-style movement",
+      "aliases": [
+        "/desk-pickup"
+      ],
+      "tags": [
+        "hand"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/pushin",
+      "token": "pushin",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Camera tiến gần sản phẩm.",
+      "prompt_hint_en": "slow cinematic push-in toward product hero detail",
+      "aliases": [
+        "/push-in"
+      ],
+      "tags": [
+        "motion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/pan",
+      "token": "pan",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Camera lia ngang qua sản phẩm.",
+      "prompt_hint_en": "smooth lateral camera pan across the product",
+      "aliases": [],
+      "tags": [
+        "motion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/tilt",
+      "token": "tilt",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Camera lia dọc/lên xuống.",
+      "prompt_hint_en": "controlled camera tilt revealing product from base to top",
+      "aliases": [],
+      "tags": [
+        "motion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/tracking",
+      "token": "tracking",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Camera đi theo chủ thể hoặc thao tác.",
+      "prompt_hint_en": "smooth tracking shot following product use or hand movement",
+      "aliases": [],
+      "tags": [
+        "motion"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/parallax",
+      "token": "parallax",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion",
+        "effect"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Tạo chiều sâu bằng chuyển động lớp trước/sau.",
+      "prompt_hint_en": "parallax camera move with foreground-background depth separation",
+      "aliases": [],
+      "tags": [
+        "depth"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/unboxing",
+      "token": "unboxing",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Mở hộp và lấy sản phẩm.",
+      "prompt_hint_en": "clean premium unboxing sequence, hands opening package and revealing product",
+      "aliases": [],
+      "tags": [
+        "hand"
+      ],
+      "role": "concept",
+      "concept_label": "Unboxing",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/installation",
+      "token": "installation",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction",
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Thao tác lắp/dán/gắn sản phẩm.",
+      "prompt_hint_en": "clear installation demonstration, precise hand placement and fit",
+      "aliases": [],
+      "tags": [
+        "demo"
+      ],
+      "role": "concept",
+      "concept_label": "Installation demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/assembly",
+      "token": "assembly",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Lắp ráp linh kiện thành hệ thống.",
+      "prompt_hint_en": "PC component assembly sequence, precise technical hand movements",
+      "aliases": [],
+      "tags": [
+        "pcbuild"
+      ],
+      "role": "concept",
+      "concept_label": "Assembly demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/charging",
+      "token": "charging",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Cắm sạc/hiển thị trạng thái sạc.",
+      "prompt_hint_en": "charging demonstration, cable or wireless connection, visible power response",
+      "aliases": [
+        "/charging-demo"
+      ],
+      "tags": [
+        "power"
+      ],
+      "role": "concept",
+      "concept_label": "Charging demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/benchmark",
+      "token": "benchmark",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "usecase"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Concept hiệu năng/đo kiểm/tốc độ.",
+      "prompt_hint_en": "performance benchmark concept, data-driven tech mood, speed and stability emphasis",
+      "aliases": [],
+      "tags": [
+        "performance"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/thermal",
+      "token": "thermal",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Nhấn tản nhiệt/nhiệt độ.",
+      "prompt_hint_en": "thermal performance concept, cooling surfaces, heat dissipation emphasis",
+      "aliases": [],
+      "tags": [
+        "cooling"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/airflow",
+      "token": "airflow",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Nhấn luồng gió/tản nhiệt.",
+      "prompt_hint_en": "visualized airflow around cooling hardware, fan-driven motion and ventilation emphasis",
+      "aliases": [],
+      "tags": [
+        "cooling"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/powerup",
+      "token": "powerup",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "transition"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Thiết bị bật nguồn, sáng lên.",
+      "prompt_hint_en": "power-up moment with LEDs or screen activating, clean dramatic reveal",
+      "aliases": [
+        "/power-on"
+      ],
+      "tags": [
+        "power"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/lightsweep",
+      "token": "lightsweep",
+      "media": [
+        "video",
+        "image"
+      ],
+      "categories": [
+        "lighting",
+        "effect"
+      ],
+      "industries": [
+        "general",
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Vệt sáng quét qua bề mặt để lộ chi tiết.",
+      "prompt_hint_en": "controlled light sweep across product surfaces to reveal texture and form",
+      "aliases": [
+        "/light-sweep"
+      ],
+      "tags": [
+        "lighting"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/rgbflow",
+      "token": "rgbflow",
+      "media": [
+        "video",
+        "image"
+      ],
+      "categories": [
+        "lighting",
+        "effect"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Hiệu ứng RGB chuyển màu mượt.",
+      "prompt_hint_en": "smooth RGB light flow across the product and surrounding setup",
+      "aliases": [
+        "/rgb-flow"
+      ],
+      "tags": [
+        "rgb"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/dataflow",
+      "token": "dataflow",
+      "media": [
+        "video",
+        "image"
+      ],
+      "categories": [
+        "effect",
+        "feature"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Hiệu ứng dòng dữ liệu/tốc độ.",
+      "prompt_hint_en": "subtle data-flow visualization suggesting transfer speed and digital performance",
+      "aliases": [
+        "/data-flow"
+      ],
+      "tags": [
+        "speed"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/fanspin",
+      "token": "fanspin",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "motion"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Quạt quay, nhấn cooling.",
+      "prompt_hint_en": "fan blades spinning smoothly, cooling performance emphasized",
+      "aliases": [
+        "/fan-spin"
+      ],
+      "tags": [
+        "cooling"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/screenreveal",
+      "token": "screenreveal",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "transition"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Màn hình bật/sáng để reveal giao diện.",
+      "prompt_hint_en": "screen turns on into a crisp interface reveal, controlled reflections",
+      "aliases": [
+        "/screen-reveal"
+      ],
+      "tags": [
+        "screen"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/screenswipe",
+      "token": "screenswipe",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction",
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Vuốt/chạm màn hình để demo.",
+      "prompt_hint_en": "natural finger swipe across screen, responsive interface demonstration",
+      "aliases": [
+        "/screen-swipe"
+      ],
+      "tags": [
+        "screen"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/casesnap",
+      "token": "casesnap",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Gắn ốp vào điện thoại bằng thao tác snap.",
+      "prompt_hint_en": "phone case snaps neatly onto the device, precise fit emphasized",
+      "aliases": [
+        "/case-snap"
+      ],
+      "tags": [
+        "case"
+      ],
+      "role": "concept",
+      "concept_label": "Phone case installation",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/peeloff",
+      "token": "peeloff",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Bóc lớp film/bảo vệ.",
+      "prompt_hint_en": "peel protective film away cleanly in a close-up product demo",
+      "aliases": [
+        "/peel-off"
+      ],
+      "tags": [
+        "protector"
+      ],
+      "role": "concept",
+      "concept_label": "Peel-off reveal",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/aligndrop",
+      "token": "aligndrop",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Canh và thả kính cường lực đúng vị trí.",
+      "prompt_hint_en": "precision alignment and drop-on installation of screen protector",
+      "aliases": [
+        "/align-drop"
+      ],
+      "tags": [
+        "protector"
+      ],
+      "role": "concept",
+      "concept_label": "Screen protector alignment",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/bubblefree",
+      "token": "bubblefree",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Hiệu ứng bọt khí tự thoát khi dán kính.",
+      "prompt_hint_en": "air bubbles smoothly disappear during protector installation",
+      "aliases": [
+        "/bubble-release"
+      ],
+      "tags": [
+        "protector"
+      ],
+      "role": "concept",
+      "concept_label": "Screen protector application",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/plugin",
+      "token": "plugin",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Cắm đầu cáp/củ sạc/adapter.",
+      "prompt_hint_en": "clean plug-in action, connector aligns and inserts precisely",
+      "aliases": [
+        "/plug-in"
+      ],
+      "tags": [
+        "connector"
+      ],
+      "role": "concept",
+      "concept_label": "Plug-in demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/cableflex",
+      "token": "cableflex",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction",
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Uốn cáp nhẹ để thể hiện độ mềm/bền.",
+      "prompt_hint_en": "controlled cable flex demonstration showing durability and flexibility",
+      "aliases": [
+        "/cable-flex"
+      ],
+      "tags": [
+        "cable"
+      ],
+      "role": "concept",
+      "concept_label": "Cable flexibility demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/caseopen",
+      "token": "caseopen",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Mở hộp sạc tai nghe.",
+      "prompt_hint_en": "earbud charging case opens smoothly into a clean product reveal",
+      "aliases": [
+        "/case-open"
+      ],
+      "tags": [
+        "audio"
+      ],
+      "role": "concept",
+      "concept_label": "Earbud case reveal",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/earbudpickup",
+      "token": "earbudpickup",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấc tai nghe khỏi hộp.",
+      "prompt_hint_en": "hand picks one earbud from charging case in a clean macro shot",
+      "aliases": [
+        "/earbud-pickup"
+      ],
+      "tags": [
+        "audio"
+      ],
+      "role": "concept",
+      "concept_label": "Earbud pickup",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/wristshot",
+      "token": "wristshot",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition",
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Cận cảnh smartwatch đang đeo trên cổ tay.",
+      "prompt_hint_en": "close wrist-focused smartwatch shot, product screen and strap clearly visible",
+      "aliases": [
+        "/wrist-shot"
+      ],
+      "tags": [
+        "wearable"
+      ],
+      "role": "concept",
+      "concept_label": "Wrist showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/screenwake",
+      "token": "screenwake",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Màn hình đồng hồ/điện thoại sáng lên.",
+      "prompt_hint_en": "screen wakes naturally with a crisp interface and subtle glow",
+      "aliases": [
+        "/screen-wake"
+      ],
+      "tags": [
+        "screen"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/magnetic",
+      "token": "magnetic",
+      "media": [
+        "video",
+        "image"
+      ],
+      "categories": [
+        "interaction",
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Hút nam châm/MagSafe vào đúng vị trí.",
+      "prompt_hint_en": "magnetic snap connection, device aligns instantly and cleanly",
+      "aliases": [
+        "/magnetic-snap"
+      ],
+      "tags": [
+        "magsafe"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/phoneplace",
+      "token": "phoneplace",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Đặt điện thoại lên dock/stand/sạc.",
+      "prompt_hint_en": "phone placed smoothly onto stand, dock or charger with clear fit",
+      "aliases": [
+        "/phone-place"
+      ],
+      "tags": [
+        "stand"
+      ],
+      "role": "concept",
+      "concept_label": "Phone placement demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/adjust",
+      "token": "adjust",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Điều chỉnh góc/khớp sản phẩm.",
+      "prompt_hint_en": "hands adjust angle and hinge smoothly, demonstrating flexible positioning",
+      "aliases": [
+        "/angle-adjust"
+      ],
+      "tags": [
+        "stand"
+      ],
+      "role": "concept",
+      "concept_label": "Adjustment demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/unfold",
+      "token": "unfold",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Mở/gập tripod, gimbal, stand.",
+      "prompt_hint_en": "product unfolds smoothly from compact form into ready-to-use position",
+      "aliases": [
+        "/fold-unfold"
+      ],
+      "tags": [
+        "portable"
+      ],
+      "role": "concept",
+      "concept_label": "Unfolding demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/trackingdemo",
+      "token": "trackingdemo",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "feature",
+        "camera_motion"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Demo gimbal/theo dõi chủ thể.",
+      "prompt_hint_en": "subject tracking demonstration showing stabilized follow movement",
+      "aliases": [
+        "/tracking-demo"
+      ],
+      "tags": [
+        "gimbal"
+      ],
+      "role": "concept",
+      "concept_label": "Tracking demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/clipon",
+      "token": "clipon",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Kẹp micro/lavalier lên áo.",
+      "prompt_hint_en": "clip-on microphone attached neatly to clothing, quick creator demo",
+      "aliases": [
+        "/clip-on"
+      ],
+      "tags": [
+        "mic"
+      ],
+      "role": "concept",
+      "concept_label": "Clip-on demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/performance",
+      "token": "performance",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn hiệu năng mạnh.",
+      "prompt_hint_en": "performance-first hardware presentation, speed and power emphasis",
+      "aliases": [],
+      "tags": [
+        "pc"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/speed",
+      "token": "speed",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn tốc độ.",
+      "prompt_hint_en": "speed-focused tech concept, fast response and transfer emphasis",
+      "aliases": [],
+      "tags": [
+        "fast"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/cooling",
+      "token": "cooling",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Nhấn khả năng làm mát.",
+      "prompt_hint_en": "cooling-focused hardware concept, thermal control and airflow emphasis",
+      "aliases": [],
+      "tags": [
+        "thermal"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/power",
+      "token": "power",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn công suất/năng lượng.",
+      "prompt_hint_en": "power-focused technology presentation, energy delivery and performance emphasis",
+      "aliases": [],
+      "tags": [
+        "watt"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/build",
+      "token": "build",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Bối cảnh build PC.",
+      "prompt_hint_en": "PC build context with compatible components and clean technical setup",
+      "aliases": [
+        "/pc-build"
+      ],
+      "tags": [
+        "assembly"
+      ],
+      "role": "concept",
+      "concept_label": "PC build scene",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/socket",
+      "token": "socket",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "detail"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Focus socket CPU.",
+      "prompt_hint_en": "macro focus on CPU socket and surrounding motherboard components",
+      "aliases": [
+        "/socket-focus"
+      ],
+      "tags": [
+        "motherboard"
+      ],
+      "role": "concept",
+      "concept_label": "CPU installation",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/slotin",
+      "token": "slotin",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Cắm RAM/SSD vào khe.",
+      "prompt_hint_en": "precise component slot-in action, aligned insertion into motherboard slot",
+      "aliases": [
+        "/slot-in"
+      ],
+      "tags": [
+        "ram",
+        "ssd"
+      ],
+      "role": "concept",
+      "concept_label": "Component installation",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/cablefocus",
+      "token": "cablefocus",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "detail"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Nhấn dây/cổng kết nối.",
+      "prompt_hint_en": "detailed focus on power cables, connectors and routing",
+      "aliases": [
+        "/cable-focus"
+      ],
+      "tags": [
+        "psu"
+      ],
+      "role": "concept",
+      "concept_label": "Cable showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/liquidflow",
+      "token": "liquidflow",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "effect",
+        "feature"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Hiệu ứng dòng chất lỏng trong AIO.",
+      "prompt_hint_en": "subtle liquid flow visualization through AIO cooling tubes",
+      "aliases": [
+        "/liquid-flow"
+      ],
+      "tags": [
+        "aio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/pumpglow",
+      "token": "pumpglow",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "effect",
+        "feature"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Pump AIO sáng lên.",
+      "prompt_hint_en": "AIO pump head illumination with controlled RGB glow",
+      "aliases": [
+        "/pump-glow"
+      ],
+      "tags": [
+        "aio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/heatrise",
+      "token": "heatrise",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "effect",
+        "feature"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Biểu diễn nhiệt tăng.",
+      "prompt_hint_en": "heat visualization rising from component before cooling takes effect",
+      "aliases": [
+        "/heat-rise"
+      ],
+      "tags": [
+        "thermal"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/flagship",
+      "token": "flagship",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "product_positioning"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Phong cách điện thoại flagship cao cấp.",
+      "prompt_hint_en": "flagship smartphone campaign, premium materials, refined lighting, high-end presentation",
+      "aliases": [],
+      "tags": [
+        "phone"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/camera",
+      "token": "camera",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn cụm camera.",
+      "prompt_hint_en": "camera-module focused smartphone presentation, lens detail and imaging capability emphasis",
+      "aliases": [
+        "/camera-focus"
+      ],
+      "tags": [
+        "phone"
+      ],
+      "role": "concept",
+      "concept_label": "Camera showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/selfie",
+      "token": "selfie",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Concept selfie/camera trước.",
+      "prompt_hint_en": "front-camera selfie lifestyle concept, natural creator use",
+      "aliases": [],
+      "tags": [
+        "phone"
+      ],
+      "role": "concept",
+      "concept_label": "Selfie demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/portable",
+      "token": "portable",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn nhỏ gọn, mang theo.",
+      "prompt_hint_en": "portable everyday-carry presentation, compact and travel-friendly",
+      "aliases": [],
+      "tags": [
+        "daily"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/compact",
+      "token": "compact",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn kích thước nhỏ gọn.",
+      "prompt_hint_en": "compact product hero shot emphasizing small size and efficient design",
+      "aliases": [],
+      "tags": [
+        "portable"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/protective",
+      "token": "protective",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn bảo vệ/chống sốc.",
+      "prompt_hint_en": "protective accessory concept emphasizing coverage, fit and durability",
+      "aliases": [],
+      "tags": [
+        "case"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/transparent",
+      "token": "transparent",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "style",
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn chất liệu trong suốt.",
+      "prompt_hint_en": "transparent accessory product photography with clean edge highlights",
+      "aliases": [],
+      "tags": [
+        "case"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/wireless",
+      "token": "wireless",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "pc_components"
+      ],
+      "meaning_vi": "Nhấn kết nối/sạc không dây.",
+      "prompt_hint_en": "wireless technology concept, cable-free use, clean connectivity visualization",
+      "aliases": [],
+      "tags": [
+        "connectivity"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/audio",
+      "token": "audio",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "category",
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Concept tai nghe/loa âm thanh.",
+      "prompt_hint_en": "premium audio product campaign, music lifestyle and acoustic product focus",
+      "aliases": [],
+      "tags": [
+        "earbuds"
+      ],
+      "role": "concept",
+      "concept_label": "Audio showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/daily",
+      "token": "daily",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Dùng hằng ngày, gần gũi.",
+      "prompt_hint_en": "everyday lifestyle use, natural practical setting, approachable mood",
+      "aliases": [],
+      "tags": [
+        "lifestyle"
+      ],
+      "role": "concept",
+      "concept_label": "Daily use",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/magsafe",
+      "token": "magsafe",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Concept phụ kiện MagSafe.",
+      "prompt_hint_en": "MagSafe-style magnetic accessory presentation with precise alignment",
+      "aliases": [],
+      "tags": [
+        "magnetic"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/fastcharge",
+      "token": "fastcharge",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn sạc nhanh.",
+      "prompt_hint_en": "fast-charging concept, clear power delivery and rapid charging emphasis",
+      "aliases": [
+        "/fast-charge"
+      ],
+      "tags": [
+        "charging"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/display",
+      "token": "display",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "feature"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Nhấn màn hình/hiển thị.",
+      "prompt_hint_en": "display-focused product presentation with crisp screen visibility and controlled reflections",
+      "aliases": [],
+      "tags": [
+        "screen"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/music",
+      "token": "music",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "usecase",
+        "mood"
+      ],
+      "industries": [
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Vibe nghe nhạc.",
+      "prompt_hint_en": "music lifestyle scene, immersive audio mood, premium listening context",
+      "aliases": [
+        "/music-vibe"
+      ],
+      "tags": [
+        "audio"
+      ],
+      "role": "concept",
+      "concept_label": "Music lifestyle",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/threequarter",
+      "token": "threequarter",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Góc chụp ba phần tư để thấy mặt trước và một cạnh sản phẩm.",
+      "prompt_hint_en": "three-quarter view of the exact product, showing its verified front and side proportions without inventing hidden details",
+      "aliases": [
+        "3/4 view",
+        "three quarter view"
+      ],
+      "tags": [
+        "angle",
+        "product"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/symmetry",
+      "token": "symmetry",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Bố cục cân xứng quanh sản phẩm, nhấn vào hình dáng thật.",
+      "prompt_hint_en": "balanced symmetrical composition around the unchanged product",
+      "aliases": [
+        "symmetrical composition"
+      ],
+      "tags": [
+        "balance",
+        "layout"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/negativespace",
+      "token": "negativespace",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Chừa khoảng trống có chủ ý quanh sản phẩm để tạo điểm nhìn rõ ràng.",
+      "prompt_hint_en": "generous negative space around the product, uncluttered composition, no added text or graphic overlays",
+      "aliases": [
+        "negative space",
+        "empty space composition"
+      ],
+      "tags": [
+        "layout",
+        "clean"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/leadinglines",
+      "token": "leadinglines",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Dùng đường nét của bối cảnh dẫn mắt về sản phẩm.",
+      "prompt_hint_en": "subtle leading lines in the scene direct attention to the product without altering its physical design",
+      "aliases": [
+        "leading lines"
+      ],
+      "tags": [
+        "layout",
+        "direction"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/diagonal",
+      "token": "diagonal",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Sắp đặt sản phẩm và đạo cụ theo đường chéo có kiểm soát.",
+      "prompt_hint_en": "diagonal composition with the exact product as the clear focal point",
+      "aliases": [
+        "diagonal composition"
+      ],
+      "tags": [
+        "layout",
+        "dynamic"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/scale",
+      "token": "scale",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Đặt sản phẩm cạnh bàn tay hoặc vật quen thuộc để người xem cảm nhận kích thước.",
+      "prompt_hint_en": "honest visual size context using a hand or familiar prop, without inventing dimensions or changing product proportions",
+      "aliases": [
+        "scale reference",
+        "size context"
+      ],
+      "tags": [
+        "commerce",
+        "size"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/pedestal",
+      "token": "pedestal",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Đặt sản phẩm trên bục trưng bày đơn giản.",
+      "prompt_hint_en": "product displayed on a simple pedestal, with all physical features preserved",
+      "aliases": [
+        "product pedestal"
+      ],
+      "tags": [
+        "display",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/whitebackdrop",
+      "token": "whitebackdrop",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "environment"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Nền trắng liền mạch để nhìn rõ sản phẩm như ảnh catalogue.",
+      "prompt_hint_en": "clean seamless white background, accurate product color and readable visible markings",
+      "aliases": [
+        "white background",
+        "white seamless"
+      ],
+      "tags": [
+        "catalogue",
+        "commerce"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/colorblock",
+      "token": "colorblock",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "palette"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Dùng các mảng màu ở nền hoặc đạo cụ, không đổi màu sản phẩm.",
+      "prompt_hint_en": "color-blocked background and props only, keeping the product color exactly as referenced",
+      "aliases": [
+        "color block background"
+      ],
+      "tags": [
+        "background",
+        "graphic"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/framewithin",
+      "token": "framewithin",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Dùng yếu tố bối cảnh làm khung dẫn mắt về sản phẩm.",
+      "prompt_hint_en": "frame-within-frame scene composition that draws attention to the unchanged product",
+      "aliases": [
+        "frame within a frame"
+      ],
+      "tags": [
+        "layout",
+        "focus"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/eyelevel",
+      "token": "eyelevel",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "camera"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Góc máy ngang tầm sản phẩm, thể hiện hình dáng tự nhiên.",
+      "prompt_hint_en": "eye-level product angle with natural perspective and accurate proportions",
+      "aliases": [
+        "eye level shot"
+      ],
+      "tags": [
+        "angle",
+        "perspective"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/highkey",
+      "token": "highkey",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Ánh sáng sáng, bóng nhẹ, vẫn giữ màu và chữ trên sản phẩm.",
+      "prompt_hint_en": "bright high-key lighting with soft shadows, accurate product colors and legible markings",
+      "aliases": [
+        "high key lighting"
+      ],
+      "tags": [
+        "bright",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/lowkey",
+      "token": "lowkey",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Ánh sáng tối có kiểm soát, tạo tương phản mà không che mất chi tiết quan trọng.",
+      "prompt_hint_en": "controlled low-key lighting with rich shadows while keeping the referenced product and its markings visible",
+      "aliases": [
+        "low key lighting"
+      ],
+      "tags": [
+        "dramatic",
+        "contrast"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/softbox",
+      "token": "softbox",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Ánh sáng tản mềm để giảm phản xạ gắt và nhìn rõ vật liệu.",
+      "prompt_hint_en": "large softbox illumination, soft controlled highlights, faithful material texture",
+      "aliases": [
+        "softbox lighting",
+        "diffused studio light"
+      ],
+      "tags": [
+        "soft",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/rimlight",
+      "token": "rimlight",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Viền sáng từ phía sau giúp tách hình dáng sản phẩm khỏi nền.",
+      "prompt_hint_en": "subtle rim light outlines the existing product silhouette without adding glowing hardware",
+      "aliases": [
+        "rim lighting",
+        "edge light"
+      ],
+      "tags": [
+        "contour",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/backlight",
+      "token": "backlight",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Nguồn sáng phía sau tạo chiều sâu, mặt sản phẩm vẫn đủ rõ.",
+      "prompt_hint_en": "gentle backlighting separates the product from the background while preserving visible front details",
+      "aliases": [
+        "back lighting",
+        "backlit"
+      ],
+      "tags": [
+        "depth",
+        "lighting"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/windowlight",
+      "token": "windowlight",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Ánh sáng cửa sổ tự nhiên, hợp bối cảnh đời thường.",
+      "prompt_hint_en": "soft natural window light across the unchanged product in a plausible real-world setting",
+      "aliases": [
+        "window light"
+      ],
+      "tags": [
+        "natural",
+        "lifestyle"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/shadowplay",
+      "token": "shadowplay",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Dùng bóng đổ của bối cảnh tạo nhịp thị giác quanh sản phẩm.",
+      "prompt_hint_en": "controlled scenic shadows create visual rhythm around the product without obscuring its identity",
+      "aliases": [
+        "shadow play"
+      ],
+      "tags": [
+        "contrast",
+        "mood"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/reflection",
+      "token": "reflection",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "composition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Phản chiếu sản phẩm trên mặt bàn hoặc nền bóng, giữ đúng màu và chất liệu.",
+      "prompt_hint_en": "subtle reflection on the supporting surface, with the real product finish and geometry unchanged",
+      "aliases": [
+        "reflective surface"
+      ],
+      "tags": [
+        "surface",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/gradientbg",
+      "token": "gradientbg",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "palette"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Nền chuyển sắc nhẹ để tách sản phẩm khỏi bối cảnh.",
+      "prompt_hint_en": "soft gradient background only, preserving the product colors and materials",
+      "aliases": [
+        "gradient background"
+      ],
+      "tags": [
+        "background",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/spotlight",
+      "token": "spotlight",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "lighting"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Vùng sáng tập trung làm rõ sản phẩm và chi tiết quan trọng.",
+      "prompt_hint_en": "controlled spotlight on the product, with all visible branding and details still readable",
+      "aliases": [
+        "focused spotlight"
+      ],
+      "tags": [
+        "focus",
+        "studio"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/bokeh",
+      "token": "bokeh",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "camera"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Hậu cảnh mờ để sản phẩm nổi bật và vẫn sắc nét.",
+      "prompt_hint_en": "shallow depth of field with soft background bokeh and the entire important product detail sharp",
+      "aliases": [
+        "background bokeh"
+      ],
+      "tags": [
+        "depth",
+        "focus"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/deepfocus",
+      "token": "deepfocus",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "camera"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Độ sâu trường ảnh lớn để nhiều chi tiết trên sản phẩm cùng rõ.",
+      "prompt_hint_en": "deep depth of field keeps all verified product details in focus",
+      "aliases": [
+        "deep depth of field"
+      ],
+      "tags": [
+        "clarity",
+        "detail"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/focusstack",
+      "token": "focusstack",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "camera"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Ảnh cận cảnh ghép vùng nét để giữ nhiều chi tiết nhỏ sắc nét.",
+      "prompt_hint_en": "focus-stacked macro product photograph with accurate, sharp surface details and no invented features",
+      "aliases": [
+        "focus stacking",
+        "stacked focus"
+      ],
+      "tags": [
+        "macro",
+        "clarity"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/texture",
+      "token": "texture",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "detail"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Làm nổi bật bề mặt và chất liệu đã thấy trên ảnh tham chiếu.",
+      "prompt_hint_en": "close view of the material texture actually visible in the references, with true finish and color",
+      "aliases": [
+        "material texture",
+        "surface detail"
+      ],
+      "tags": [
+        "material",
+        "detail"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/labelshot",
+      "token": "labelshot",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "detail"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Cận cảnh logo, nhãn hoặc chữ có thể đọc được trên sản phẩm.",
+      "prompt_hint_en": "close-up of only the logos, labels and printed text verifiably visible in the references",
+      "aliases": [
+        "label close up",
+        "branding detail"
+      ],
+      "tags": [
+        "branding",
+        "text"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/portdetail",
+      "token": "portdetail",
+      "media": [
+        "image"
+      ],
+      "categories": [
+        "detail"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Cận cảnh cổng và đầu nối thực sự nhìn thấy trên sản phẩm.",
+      "prompt_hint_en": "clear close-up of the exact visible ports and connectors, preserving their count, shape and position",
+      "aliases": [
+        "port close up",
+        "connector detail"
+      ],
+      "tags": [
+        "ports",
+        "hardware"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/packageview",
+      "token": "packageview",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "detail"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Cho thấy bao bì thật nếu ảnh tham chiếu có bao bì.",
+      "prompt_hint_en": "show the exact packaging visible in the references, preserving its colors, branding and printed text",
+      "aliases": [
+        "packaging shot",
+        "box view"
+      ],
+      "tags": [
+        "packaging",
+        "commerce"
+      ],
+      "role": "concept",
+      "concept_label": "Packaging showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/pullout",
+      "token": "pullout",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Máy quay lùi dần để mở rộng bối cảnh quanh sản phẩm.",
+      "prompt_hint_en": "smooth camera pull-out from verified product detail to a wider scene, with product identity unchanged",
+      "aliases": [
+        "pull out",
+        "dolly out"
+      ],
+      "tags": [
+        "camera",
+        "reveal"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/slideby",
+      "token": "slideby",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Máy quay trượt ngang qua sản phẩm để tạo thị sai nhẹ.",
+      "prompt_hint_en": "smooth lateral camera slide past the stationary product, revealing only verified surfaces",
+      "aliases": [
+        "lateral slide",
+        "sideways dolly"
+      ],
+      "tags": [
+        "camera",
+        "movement"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/rackfocus",
+      "token": "rackfocus",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Chuyển điểm nét giữa bối cảnh và chi tiết sản phẩm.",
+      "prompt_hint_en": "rack focus from the setting to a verified product detail, keeping the product physically unchanged",
+      "aliases": [
+        "rack focus",
+        "focus pull"
+      ],
+      "tags": [
+        "focus",
+        "camera"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/slowmotion",
+      "token": "slowmotion",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Làm chậm thao tác thật để người xem thấy rõ chuyển động.",
+      "prompt_hint_en": "natural slow motion of a plausible hand interaction or camera move, without changing product hardware",
+      "aliases": [
+        "slow motion"
+      ],
+      "tags": [
+        "motion",
+        "detail"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/speedramp",
+      "token": "speedramp",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Thay đổi tốc độ đoạn quay có kiểm soát, không làm biến dạng sản phẩm.",
+      "prompt_hint_en": "restrained speed ramp in camera movement or real interaction, preserving product geometry across frames",
+      "aliases": [
+        "speed ramp",
+        "speed ramping"
+      ],
+      "tags": [
+        "motion",
+        "edit"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/matchcut",
+      "token": "matchcut",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "transition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Nối hai cảnh bằng bố cục hoặc chuyển động tương đồng.",
+      "prompt_hint_en": "match cut between two views of the same exact product using corresponding shape or motion",
+      "aliases": [
+        "match cut"
+      ],
+      "tags": [
+        "editing",
+        "continuity"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/crossfade",
+      "token": "crossfade",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "transition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Chuyển cảnh hòa tan nhẹ giữa hai góc quay cùng sản phẩm.",
+      "prompt_hint_en": "gentle crossfade between verified views of the same product, maintaining visual continuity",
+      "aliases": [
+        "cross fade",
+        "dissolve transition"
+      ],
+      "tags": [
+        "editing",
+        "soft"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/whippan",
+      "token": "whippan",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Quét máy nhanh để nối hai góc nhìn, dùng vừa phải.",
+      "prompt_hint_en": "brief whip pan between shots of the same product, then settle on an accurate clear view",
+      "aliases": [
+        "whip pan"
+      ],
+      "tags": [
+        "camera",
+        "dynamic"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/staticshot",
+      "token": "staticshot",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Khung hình cố định giúp nhìn rõ hình dáng và chữ.",
+      "prompt_hint_en": "steady locked-off shot of the exact product with readable visible markings",
+      "aliases": [
+        "locked off shot",
+        "static camera"
+      ],
+      "tags": [
+        "clarity",
+        "camera"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/loop",
+      "token": "loop",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "transition"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Chuyển động kết thúc khớp với đầu video để phát lặp mượt.",
+      "prompt_hint_en": "seamless video loop using the same product pose and lighting at the opening and closing frames",
+      "aliases": [
+        "seamless loop",
+        "looping video"
+      ],
+      "tags": [
+        "editing",
+        "continuity"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/crane",
+      "token": "crane",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "camera_motion"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Máy quay nâng hoặc hạ dọc để chuyển từ tổng thể sang sản phẩm.",
+      "prompt_hint_en": "gentle vertical camera rise or descent around the unchanged product, with plausible perspective",
+      "aliases": [
+        "crane shot",
+        "vertical camera move"
+      ],
+      "tags": [
+        "camera",
+        "movement"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/buttonpress",
+      "token": "buttonpress",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Bấm nút thực sự xuất hiện trên sản phẩm.",
+      "prompt_hint_en": "hand presses only a button visibly present on the referenced product, preserving its location and behavior",
+      "aliases": [
+        "press button"
+      ],
+      "tags": [
+        "interaction",
+        "buttons"
+      ],
+      "role": "modifier",
+      "concept_label": null,
+      "selection_hint_vi": "Tùy chỉnh thêm cho concept đã chọn."
+    },
+    {
+      "key": "/frontback",
+      "token": "frontback",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Chuyển lần lượt giữa mặt trước và mặt sau khi cả hai đều có ảnh tham chiếu.",
+      "prompt_hint_en": "show verified front and back views of the same exact product without inventing an unseen side",
+      "aliases": [
+        "front and back views"
+      ],
+      "tags": [
+        "angles",
+        "continuity"
+      ],
+      "role": "concept",
+      "concept_label": "Front and back showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/portcheck",
+      "token": "portcheck",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "interaction"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Đưa máy quay hoặc tay đến từng cổng được nhìn thấy, không thêm cổng mới.",
+      "prompt_hint_en": "inspect only the visible ports and connectors with a controlled camera move or hand gesture",
+      "aliases": [
+        "port demonstration"
+      ],
+      "tags": [
+        "ports",
+        "interaction"
+      ],
+      "role": "concept",
+      "concept_label": "Port walkthrough",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/fitcheck",
+      "token": "fitcheck",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Khoe outfit đang mặc.",
+      "prompt_hint_en": "Fit check",
+      "aliases": [
+        "fit check"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Fit check",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/ootd",
+      "token": "ootd",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Outfit trong ngày.",
+      "prompt_hint_en": "Outfit of the day",
+      "aliases": [
+        "outfit of the day"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Outfit of the day",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/grwm",
+      "token": "grwm",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Cùng chuẩn bị và phối đồ.",
+      "prompt_hint_en": "Get ready with me",
+      "aliases": [
+        "get ready with me"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Get ready with me",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/tryon",
+      "token": "tryon",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Thử trang phục hoặc phụ kiện.",
+      "prompt_hint_en": "Try-on",
+      "aliases": [
+        "try-on"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Try-on",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/lookbook",
+      "token": "lookbook",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Bộ ảnh hoặc video giới thiệu cách mặc.",
+      "prompt_hint_en": "Lookbook",
+      "aliases": [
+        "lookbook"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Lookbook",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/styling",
+      "token": "styling",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Gợi ý phối sản phẩm vào outfit.",
+      "prompt_hint_en": "Styling",
+      "aliases": [
+        "styling"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Styling",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/streetstyle",
+      "token": "streetstyle",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Phong cách thời trang đường phố.",
+      "prompt_hint_en": "Street style",
+      "aliases": [
+        "street style"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Street style",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/onfeet",
+      "token": "onfeet",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Giới thiệu giày khi mang trên chân.",
+      "prompt_hint_en": "On-feet showcase",
+      "aliases": [
+        "on-feet showcase"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "On-feet showcase",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/outfittransition",
+      "token": "outfittransition",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "fashion"
+      ],
+      "meaning_vi": "Chuyển cảnh để reveal outfit.",
+      "prompt_hint_en": "Outfit transition",
+      "aliases": [
+        "outfit transition"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Outfit transition",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/haul",
+      "token": "haul",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Giới thiệu những món thực tế có trong bộ sản phẩm.",
+      "prompt_hint_en": "Shopping haul",
+      "aliases": [
+        "shopping haul"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Shopping haul",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/desksetup",
+      "token": "desksetup",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Giới thiệu sản phẩm trong góc làm việc.",
+      "prompt_hint_en": "Desk setup",
+      "aliases": [
+        "desk setup"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Desk setup",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/pcbuild",
+      "token": "pcbuild",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Lắp ráp PC với linh kiện đã xác nhận.",
+      "prompt_hint_en": "PC build",
+      "aliases": [
+        "pc build"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "PC build",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/buildlog",
+      "token": "buildlog",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "pc_components"
+      ],
+      "meaning_vi": "Nhật ký quá trình lắp hoặc nâng cấp PC.",
+      "prompt_hint_en": "PC build log",
+      "aliases": [
+        "pc build log"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "PC build log",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/techreview",
+      "token": "techreview",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "pc_components",
+        "mobile_accessories"
+      ],
+      "meaning_vi": "Review công nghệ tập trung vào sản phẩm.",
+      "prompt_hint_en": "Tech review",
+      "aliases": [
+        "tech review"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Tech review",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/firstlook",
+      "token": "firstlook",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Cái nhìn đầu tiên về sản phẩm.",
+      "prompt_hint_en": "First look",
+      "aliases": [
+        "first look"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "First look",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/tutorial",
+      "token": "tutorial",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Hướng dẫn thao tác với sản phẩm.",
+      "prompt_hint_en": "How-to tutorial",
+      "aliases": [
+        "how-to tutorial"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "How-to tutorial",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/edc",
+      "token": "edc",
+      "media": [
+        "image",
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Bộ đồ mang theo hằng ngày.",
+      "prompt_hint_en": "Everyday carry",
+      "aliases": [
+        "everyday carry"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Everyday carry",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/whatsinmybag",
+      "token": "whatsinmybag",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Khám phá món đồ trong túi.",
+      "prompt_hint_en": "What's in my bag",
+      "aliases": [
+        "what's in my bag"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "What's in my bag",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/dayinlife",
+      "token": "dayinlife",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Sản phẩm trong một ngày thường.",
+      "prompt_hint_en": "Day in the life",
+      "aliases": [
+        "day in the life"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Day in the life",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/asmr",
+      "token": "asmr",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Trải nghiệm sản phẩm qua thao tác và âm thanh gần.",
+      "prompt_hint_en": "Product ASMR",
+      "aliases": [
+        "product asmr"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Product ASMR",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/productdemo",
+      "token": "productdemo",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "general"
+      ],
+      "meaning_vi": "Demo công dụng đã được xác nhận.",
+      "prompt_hint_en": "Product demo",
+      "aliases": [
+        "product demo"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Product demo",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    },
+    {
+      "key": "/packwithme",
+      "token": "packwithme",
+      "media": [
+        "video"
+      ],
+      "categories": [
+        "concept"
+      ],
+      "industries": [
+        "mobile_accessories",
+        "fashion"
+      ],
+      "meaning_vi": "Chuẩn bị đồ cho chuyến đi.",
+      "prompt_hint_en": "Pack with me",
+      "aliases": [
+        "pack with me"
+      ],
+      "tags": [
+        "format"
+      ],
+      "role": "concept",
+      "concept_label": "Pack with me",
+      "selection_hint_vi": "Chọn riêng key này để bắt đầu concept."
+    }
+  ],
+  "product_profiles": {
+    "cpu": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/performance",
+        "/thermal",
+        "/macro",
+        "/industrial",
+        "/benchmark",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/focusstack",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/pickup",
+        "/macro",
+        "/thermal",
+        "/socket",
+        "/orbit",
+        "/lightsweep",
+        "/benchmark",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/pullout",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/industrial",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/performance",
+        "/thermal",
+        "/macro",
+        "/benchmark",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/focusstack",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/socket",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/macro",
+        "/thermal",
+        "/orbit",
+        "/lightsweep",
+        "/benchmark",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/pullout"
+      ]
+    },
+    "gpu": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/gaming",
+        "/dark",
+        "/neon",
+        "/performance",
+        "/showcase",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/focusstack",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/orbit",
+        "/fanspin",
+        "/power",
+        "/rgbflow",
+        "/reveal",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/portcheck",
+        "/crane",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/gaming",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/dark",
+        "/neon",
+        "/performance",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/focusstack",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/orbit",
+        "/fanspin",
+        "/power",
+        "/rgbflow",
+        "/reveal",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane"
+      ]
+    },
+    "ram": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/gaming",
+        "/rgbflow",
+        "/clean",
+        "/macro",
+        "/showcase",
+        "/floating",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/focusstack",
+        "/labelshot",
+        "/deepfocus",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/pickup",
+        "/rotate",
+        "/macro",
+        "/rgbflow",
+        "/slotin",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/pullout",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/gaming",
+        "/showcase",
+        "/floating",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/rgbflow",
+        "/clean",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/focusstack",
+        "/labelshot",
+        "/deepfocus"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/slotin",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/rotate",
+        "/macro",
+        "/rgbflow",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/pullout"
+      ]
+    },
+    "ssd_m2": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/speed",
+        "/macro",
+        "/clean",
+        "/floating",
+        "/benchmark",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/portdetail",
+        "/focusstack",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/pickup",
+        "/macro",
+        "/dataflow",
+        "/slotin",
+        "/lightsweep",
+        "/benchmark",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/floating",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/speed",
+        "/macro",
+        "/clean",
+        "/benchmark",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/portdetail",
+        "/focusstack"
+      ],
+      "video_concepts": [
+        "/slotin",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/macro",
+        "/dataflow",
+        "/lightsweep",
+        "/benchmark",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "ssd_sata": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/clean",
+        "/minimal",
+        "/macro",
+        "/showcase",
+        "/floating",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/portdetail",
+        "/focusstack",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/pickup",
+        "/plugin",
+        "/macro",
+        "/reveal",
+        "/speed",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/showcase",
+        "/floating",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/minimal",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/portdetail",
+        "/focusstack"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/plugin",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/macro",
+        "/reveal",
+        "/speed",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "motherboard": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/industrial",
+        "/workbench",
+        "/macro",
+        "/showcase",
+        "/gaming",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/focusstack",
+        "/portdetail",
+        "/labelshot",
+        "/deepfocus",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/scan",
+        "/orbit",
+        "/socket",
+        "/lightsweep",
+        "/build",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/portcheck",
+        "/crane",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/industrial",
+        "/workbench",
+        "/showcase",
+        "/gaming",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/focusstack",
+        "/portdetail",
+        "/labelshot",
+        "/deepfocus"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/socket",
+        "/build",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/scan",
+        "/orbit",
+        "/lightsweep",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane"
+      ]
+    },
+    "psu": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/industrial",
+        "/dark",
+        "/power",
+        "/macro",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/labelshot",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/fanspin",
+        "/cablefocus",
+        "/powerup",
+        "/orbit",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/industrial",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/dark",
+        "/power",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/cablefocus",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/fanspin",
+        "/powerup",
+        "/orbit",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "air_cooler": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/cooling",
+        "/thermal",
+        "/industrial",
+        "/macro",
+        "/gaming",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/shadowplay",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/fanspin",
+        "/airflow",
+        "/thermal",
+        "/orbit",
+        "/lightsweep",
+        "/build",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane",
+        "/slowmotion",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/industrial",
+        "/gaming",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/cooling",
+        "/thermal",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/shadowplay",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/build",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/fanspin",
+        "/airflow",
+        "/thermal",
+        "/orbit",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane",
+        "/slowmotion"
+      ]
+    },
+    "aio": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/cooling",
+        "/gaming",
+        "/neon",
+        "/showcase",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/liquidflow",
+        "/pumpglow",
+        "/rgbflow",
+        "/fanspin",
+        "/thermal",
+        "/orbit",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane",
+        "/slowmotion",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/gaming",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/cooling",
+        "/neon",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/liquidflow",
+        "/pumpglow",
+        "/rgbflow",
+        "/fanspin",
+        "/thermal",
+        "/orbit",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane",
+        "/slowmotion"
+      ]
+    },
+    "pc_case": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/gaming",
+        "/rgbflow",
+        "/showcase",
+        "/dark",
+        "/industrial",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/reflection",
+        "/shadowplay",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/reveal",
+        "/rgbflow",
+        "/scan",
+        "/orbit",
+        "/build",
+        "/powerup",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane",
+        "/slowmotion",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/gaming",
+        "/showcase",
+        "/industrial",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/rgbflow",
+        "/dark",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/reflection",
+        "/shadowplay"
+      ],
+      "video_concepts": [
+        "/build",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/reveal",
+        "/rgbflow",
+        "/scan",
+        "/orbit",
+        "/powerup",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/crane",
+        "/slowmotion"
+      ]
+    },
+    "case_fan": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/gaming",
+        "/rgbflow",
+        "/macro",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/reflection",
+        "/focusstack",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/fanspin",
+        "/airflow",
+        "/rgbflow",
+        "/orbit",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/slowmotion",
+        "/loop",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/gaming",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/rgbflow",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/reflection",
+        "/focusstack"
+      ],
+      "video_concepts": [
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/fanspin",
+        "/airflow",
+        "/rgbflow",
+        "/orbit",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/slowmotion",
+        "/loop"
+      ]
+    },
+    "thermal_pad": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/macro",
+        "/thermal",
+        "/clean",
+        "/flatlay",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/deepfocus",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/pickup",
+        "/macro",
+        "/thermal",
+        "/installation",
+        "/heatrise",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/pullout",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/flatlay",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/macro",
+        "/thermal",
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/deepfocus"
+      ],
+      "video_concepts": [
+        "/installation",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/macro",
+        "/thermal",
+        "/heatrise",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/pullout"
+      ]
+    },
+    "wifi_card": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/clean",
+        "/macro",
+        "/showcase",
+        "/wireless",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/focusstack",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/plugin",
+        "/macro",
+        "/wireless",
+        "/lightsweep",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/macro",
+        "/wireless",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/portdetail",
+        "/focusstack"
+      ],
+      "video_concepts": [
+        "/plugin",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/macro",
+        "/wireless",
+        "/lightsweep",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "hdd": {
+      "industry": "pc_components",
+      "image_keywords": [
+        "/industrial",
+        "/macro",
+        "/showcase",
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/portdetail",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/powerup",
+        "/benchmark",
+        "/macro",
+        "/industrial",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/industrial",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/macro",
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/rimlight",
+        "/texture",
+        "/negativespace",
+        "/softbox",
+        "/labelshot",
+        "/portdetail"
+      ],
+      "video_concepts": [
+        "/industrial",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/asmr",
+        "/productdemo",
+        "/pcbuild",
+        "/buildlog",
+        "/tutorial"
+      ],
+      "video_modifiers": [
+        "/powerup",
+        "/benchmark",
+        "/macro",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "smartphone_flagship": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/flagship",
+        "/luxury",
+        "/showcase",
+        "/floating",
+        "/macro",
+        "/editorial",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/colorblock",
+        "/labelshot",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/rotate",
+        "/screenreveal",
+        "/camera",
+        "/orbit",
+        "/lightsweep",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/buttonpress",
+        "/speedramp",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/luxury",
+        "/showcase",
+        "/floating",
+        "/editorial",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/flagship",
+        "/macro",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/colorblock",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/camera",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/rotate",
+        "/screenreveal",
+        "/orbit",
+        "/lightsweep",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/speedramp"
+      ]
+    },
+    "smartphone_gaming": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/gaming",
+        "/cyberpunk",
+        "/neon",
+        "/dark",
+        "/performance",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/colorblock",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/gaming",
+        "/rgbflow",
+        "/orbit",
+        "/powerup",
+        "/screenreveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/buttonpress",
+        "/speedramp",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/gaming",
+        "/cyberpunk",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/neon",
+        "/dark",
+        "/performance",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/colorblock"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/gaming",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/rgbflow",
+        "/orbit",
+        "/powerup",
+        "/screenreveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/speedramp"
+      ]
+    },
+    "smartphone_midrange": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/lifestyle",
+        "/daily",
+        "/minimal",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/labelshot",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/screenreveal",
+        "/rotate",
+        "/lifestyle",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/buttonpress",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/lifestyle",
+        "/daily",
+        "/showcase",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/lifestyle",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/screenreveal",
+        "/rotate",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress"
+      ]
+    },
+    "phone_case": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/flatlay",
+        "/macro",
+        "/protective",
+        "/transparent",
+        "/cute",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/deepfocus",
+        "/colorblock",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/casesnap",
+        "/handheld",
+        "/rotate",
+        "/macro",
+        "/installation",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/matchcut",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/flatlay",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/macro",
+        "/protective",
+        "/transparent",
+        "/cute",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/deepfocus",
+        "/colorblock"
+      ],
+      "video_concepts": [
+        "/casesnap",
+        "/handheld",
+        "/installation",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/rotate",
+        "/macro",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "screen_protector": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/macro",
+        "/protective",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/deepfocus",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/peeloff",
+        "/aligndrop",
+        "/bubblefree",
+        "/screenswipe",
+        "/installation",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/matchcut",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/macro",
+        "/protective",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/deepfocus",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/peeloff",
+        "/aligndrop",
+        "/bubblefree",
+        "/installation",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "video_modifiers": [
+        "/screenswipe",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/matchcut"
+      ]
+    },
+    "charger": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/compact",
+        "/fastcharge",
+        "/showcase",
+        "/floating",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/labelshot",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/pickup",
+        "/plugin",
+        "/fastcharge",
+        "/powerup",
+        "/macro",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/showcase",
+        "/floating",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/compact",
+        "/fastcharge",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/plugin",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/fastcharge",
+        "/powerup",
+        "/macro",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot"
+      ]
+    },
+    "charging_cable": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/flatlay",
+        "/macro",
+        "/fastcharge",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/texture",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/plugin",
+        "/cableflex",
+        "/macro",
+        "/charging",
+        "/handheld",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/flatlay",
+        "/showcase",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/macro",
+        "/fastcharge",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/texture"
+      ],
+      "video_concepts": [
+        "/plugin",
+        "/cableflex",
+        "/charging",
+        "/handheld",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/macro",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot"
+      ]
+    },
+    "power_bank": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/travel",
+        "/daily",
+        "/handheld",
+        "/clean",
+        "/compact",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/labelshot",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/pickup",
+        "/charging",
+        "/display",
+        "/travel",
+        "/rotate",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/portcheck",
+        "/buttonpress",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/travel",
+        "/daily",
+        "/handheld",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/compact",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/charging",
+        "/travel",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/display",
+        "/rotate",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress"
+      ]
+    },
+    "earbuds": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/audio",
+        "/clean",
+        "/luxury",
+        "/floating",
+        "/music",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/deepfocus",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/caseopen",
+        "/earbudpickup",
+        "/macro",
+        "/music",
+        "/reveal",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/loop",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/audio",
+        "/luxury",
+        "/floating",
+        "/music",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/deepfocus"
+      ],
+      "video_concepts": [
+        "/caseopen",
+        "/earbudpickup",
+        "/music",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/macro",
+        "/reveal",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/loop"
+      ]
+    },
+    "headphones": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/audio",
+        "/luxury",
+        "/creator",
+        "/travel",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/handheld",
+        "/rotate",
+        "/music",
+        "/orbit",
+        "/reveal",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/loop",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/audio",
+        "/luxury",
+        "/creator",
+        "/travel",
+        "/showcase",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/handheld",
+        "/music",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/rotate",
+        "/orbit",
+        "/reveal",
+        "/lightsweep",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/loop"
+      ]
+    },
+    "smartwatch": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/fitness",
+        "/wristshot",
+        "/lifestyle",
+        "/sporty",
+        "/luxury",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/labelshot",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/wristshot",
+        "/screenwake",
+        "/screenswipe",
+        "/fitness",
+        "/tracking",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/fitness",
+        "/wristshot",
+        "/lifestyle",
+        "/sporty",
+        "/luxury",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/reflection",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/wristshot",
+        "/fitness",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/screenwake",
+        "/screenswipe",
+        "/tracking",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress"
+      ]
+    },
+    "bluetooth_speaker": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/audio",
+        "/portable",
+        "/travel",
+        "/lifestyle",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/pickup",
+        "/powerup",
+        "/music",
+        "/rgbflow",
+        "/travel",
+        "/orbit",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/loop",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/audio",
+        "/travel",
+        "/lifestyle",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/portable",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/music",
+        "/travel",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "video_modifiers": [
+        "/pickup",
+        "/powerup",
+        "/rgbflow",
+        "/orbit",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/loop"
+      ]
+    },
+    "phone_stand": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/business",
+        "/lifestyle",
+        "/showcase",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/deepfocus",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/phoneplace",
+        "/adjust",
+        "/rotate",
+        "/handheld",
+        "/installation",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/loop",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/business",
+        "/lifestyle",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/deepfocus",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/phoneplace",
+        "/adjust",
+        "/handheld",
+        "/installation",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "video_modifiers": [
+        "/rotate",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/loop"
+      ]
+    },
+    "wireless_charger": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/wireless",
+        "/clean",
+        "/minimal",
+        "/floating",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/phoneplace",
+        "/charging",
+        "/powerup",
+        "/lightsweep",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/floating",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/wireless",
+        "/clean",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/phoneplace",
+        "/charging",
+        "/frontback",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "video_modifiers": [
+        "/powerup",
+        "/lightsweep",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot"
+      ]
+    },
+    "magsafe_powerbank": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/magsafe",
+        "/travel",
+        "/compact",
+        "/handheld",
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/reflection",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/magnetic",
+        "/charging",
+        "/handheld",
+        "/rotate",
+        "/travel",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/portcheck",
+        "/buttonpress",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/travel",
+        "/handheld",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/magsafe",
+        "/compact",
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/charging",
+        "/handheld",
+        "/travel",
+        "/portcheck",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/magnetic",
+        "/rotate",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress"
+      ]
+    },
+    "gimbal": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/creator",
+        "/travel",
+        "/showcase",
+        "/clean",
+        "/lifestyle",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/unfold",
+        "/trackingdemo",
+        "/tracking",
+        "/handheld",
+        "/orbit",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/crane",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/creator",
+        "/travel",
+        "/showcase",
+        "/lifestyle",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/reflection"
+      ],
+      "video_concepts": [
+        "/unfold",
+        "/trackingdemo",
+        "/handheld",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/tracking",
+        "/orbit",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/crane"
+      ]
+    },
+    "tripod_selfie_stick": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/creator",
+        "/travel",
+        "/portable",
+        "/clean",
+        "/showcase",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/deepfocus",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/unfold",
+        "/phoneplace",
+        "/adjust",
+        "/tracking",
+        "/handheld",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/creator",
+        "/travel",
+        "/showcase",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/portable",
+        "/clean",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/deepfocus"
+      ],
+      "video_concepts": [
+        "/unfold",
+        "/phoneplace",
+        "/adjust",
+        "/handheld",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/tracking",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress"
+      ]
+    },
+    "wireless_mic": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/creator",
+        "/clean",
+        "/showcase",
+        "/compact",
+        "/portable",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/labelshot",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "video_keywords": [
+        "/clipon",
+        "/plugin",
+        "/handheld",
+        "/reveal",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/creator",
+        "/showcase",
+        "/packageview",
+        "/desksetup",
+        "/edc"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/compact",
+        "/portable",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/texture",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/clipon",
+        "/plugin",
+        "/handheld",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife",
+        "/edc",
+        "/whatsinmybag",
+        "/packwithme",
+        "/asmr"
+      ],
+      "video_modifiers": [
+        "/reveal",
+        "/macro",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/buttonpress"
+      ]
+    },
+    "hub_otg": {
+      "industry": "mobile_accessories",
+      "image_keywords": [
+        "/clean",
+        "/business",
+        "/macro",
+        "/showcase",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/labelshot",
+        "/packageview",
+        "/desksetup"
+      ],
+      "video_keywords": [
+        "/plugin",
+        "/scan",
+        "/dataflow",
+        "/handheld",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "notes": "",
+      "image_concepts": [
+        "/business",
+        "/showcase",
+        "/packageview",
+        "/desksetup"
+      ],
+      "image_modifiers": [
+        "/clean",
+        "/macro",
+        "/minimal",
+        "/threequarter",
+        "/whitebackdrop",
+        "/softbox",
+        "/scale",
+        "/negativespace",
+        "/pedestal",
+        "/portdetail",
+        "/labelshot"
+      ],
+      "video_concepts": [
+        "/plugin",
+        "/handheld",
+        "/portcheck",
+        "/frontback",
+        "/packageview",
+        "/techreview",
+        "/firstlook",
+        "/productdemo",
+        "/tutorial",
+        "/dayinlife"
+      ],
+      "video_modifiers": [
+        "/scan",
+        "/dataflow",
+        "/reveal",
+        "/slideby",
+        "/rackfocus",
+        "/slowmotion",
+        "/staticshot"
+      ]
+    },
+    "lingerie_bra": {
+      "industry": "fashion",
+      "image_keywords": [
+        "/editorial",
+        "/softluxury",
+        "/nudetone",
+        "/flatlay",
+        "/minimal",
+        "/comfort",
+        "/lingerie",
+        "/whitebackdrop",
+        "/windowlight",
+        "/softbox",
+        "/texture",
+        "/symmetry",
+        "/negativespace",
+        "/colorblock",
+        "/packageview"
+      ],
+      "video_keywords": [
+        "/firstlook",
+        "/asmr",
+        "/productdemo"
+      ],
+      "notes": "Product-only presentation on a mannequin or flat lay. Preserve the exact garment; no invented garments or worn try-on required.",
+      "image_concepts": [
+        "/editorial",
+        "/softluxury",
+        "/flatlay",
+        "/packageview"
+      ],
+      "image_modifiers": [
+        "/nudetone",
+        "/minimal",
+        "/comfort",
+        "/lingerie",
+        "/whitebackdrop",
+        "/windowlight",
+        "/softbox",
+        "/texture",
+        "/symmetry",
+        "/negativespace",
+        "/colorblock"
+      ],
+      "video_concepts": [
+        "/firstlook",
+        "/asmr",
+        "/productdemo"
+      ],
+      "video_modifiers": []
+    },
+    "fashion_apparel": {
+      "industry": "fashion",
+      "image_keywords": [
+        "/ootd",
+        "/lookbook",
+        "/styling",
+        "/streetstyle",
+        "/editorial",
+        "/flatlay",
+        "/windowlight",
+        "/texture"
+      ],
+      "video_keywords": [
+        "/fitcheck",
+        "/ootd",
+        "/grwm",
+        "/tryon",
+        "/lookbook",
+        "/styling",
+        "/outfittransition",
+        "/haul",
+        "/firstlook",
+        "/dayinlife"
+      ],
+      "notes": "Giữ nguyên trang phục chính; chỉ phối thêm bối cảnh và trang phục phụ.",
+      "image_concepts": [
+        "/ootd",
+        "/lookbook",
+        "/styling",
+        "/streetstyle",
+        "/editorial",
+        "/flatlay"
+      ],
+      "image_modifiers": [
+        "/windowlight",
+        "/texture"
+      ],
+      "video_concepts": [
+        "/fitcheck",
+        "/ootd",
+        "/grwm",
+        "/tryon",
+        "/lookbook",
+        "/styling",
+        "/outfittransition",
+        "/haul",
+        "/firstlook",
+        "/dayinlife"
+      ],
+      "video_modifiers": []
+    },
+    "fashion_footwear": {
+      "industry": "fashion",
+      "image_keywords": [
+        "/onfeet",
+        "/streetstyle",
+        "/ootd",
+        "/flatlay",
+        "/texture",
+        "/whitebackdrop"
+      ],
+      "video_keywords": [
+        "/onfeet",
+        "/fitcheck",
+        "/tryon",
+        "/styling",
+        "/firstlook",
+        "/unboxing"
+      ],
+      "notes": "Giữ hình dáng, chất liệu, màu và logo đôi giày.",
+      "image_concepts": [
+        "/onfeet",
+        "/streetstyle",
+        "/ootd",
+        "/flatlay"
+      ],
+      "image_modifiers": [
+        "/texture",
+        "/whitebackdrop"
+      ],
+      "video_concepts": [
+        "/onfeet",
+        "/fitcheck",
+        "/tryon",
+        "/styling",
+        "/firstlook",
+        "/unboxing"
+      ],
+      "video_modifiers": []
+    },
+    "fashion_bag": {
+      "industry": "fashion",
+      "image_keywords": [
+        "/ootd",
+        "/styling",
+        "/edc",
+        "/flatlay",
+        "/texture"
+      ],
+      "video_keywords": [
+        "/whatsinmybag",
+        "/packwithme",
+        "/fitcheck",
+        "/styling",
+        "/firstlook",
+        "/unboxing"
+      ],
+      "notes": "Chỉ trình bày cấu tạo, ngăn và phụ kiện được xác nhận.",
+      "image_concepts": [
+        "/ootd",
+        "/styling",
+        "/edc",
+        "/flatlay"
+      ],
+      "image_modifiers": [
+        "/texture"
+      ],
+      "video_concepts": [
+        "/whatsinmybag",
+        "/packwithme",
+        "/fitcheck",
+        "/styling",
+        "/firstlook",
+        "/unboxing"
+      ],
+      "video_modifiers": []
+    }
+  },
+  "presets": [
+    {
+      "id": "pc_review_hand",
+      "media": "video",
+      "industry": "pc_components",
+      "keywords": [
+        "/pickup",
+        "/handheld",
+        "/macro",
+        "/industrial",
+        "/lightsweep"
+      ],
+      "description_vi": "Review linh kiện có tay cầm, cận cảnh kỹ thuật.",
+      "primary_concept": "/handheld",
+      "optional_keywords": [
+        "/pickup",
+        "/macro",
+        "/industrial",
+        "/lightsweep"
+      ]
+    },
+    {
+      "id": "pc_cinematic",
+      "media": "video",
+      "industry": "pc_components",
+      "keywords": [
+        "/reveal",
+        "/orbit",
+        "/dark",
+        "/lightsweep",
+        "/showcase"
+      ],
+      "description_vi": "Cinematic tech hero reveal.",
+      "primary_concept": "/showcase",
+      "optional_keywords": [
+        "/reveal",
+        "/orbit",
+        "/dark",
+        "/lightsweep"
+      ]
+    },
+    {
+      "id": "pc_gaming_rgb",
+      "media": "video",
+      "industry": "pc_components",
+      "keywords": [
+        "/gaming",
+        "/rgbflow",
+        "/orbit",
+        "/performance",
+        "/reveal"
+      ],
+      "description_vi": "Gaming/RGB nhấn hiệu năng.",
+      "primary_concept": "/gaming",
+      "optional_keywords": [
+        "/rgbflow",
+        "/orbit",
+        "/performance",
+        "/reveal"
+      ]
+    },
+    {
+      "id": "mobile_premium",
+      "media": "image",
+      "industry": "mobile_accessories",
+      "keywords": [
+        "/luxury",
+        "/showcase",
+        "/minimal",
+        "/macro"
+      ],
+      "description_vi": "Ảnh điện thoại/phụ kiện cao cấp.",
+      "primary_concept": "/luxury",
+      "optional_keywords": [
+        "/showcase",
+        "/minimal",
+        "/macro"
+      ]
+    },
+    {
+      "id": "mobile_hand_review",
+      "media": "video",
+      "industry": "mobile_accessories",
+      "keywords": [
+        "/pickup",
+        "/handheld",
+        "/rotate",
+        "/macro",
+        "/reveal"
+      ],
+      "description_vi": "Video review sản phẩm cầm tay.",
+      "primary_concept": "/handheld",
+      "optional_keywords": [
+        "/pickup",
+        "/rotate",
+        "/macro",
+        "/reveal"
+      ]
+    },
+    {
+      "id": "mobile_travel",
+      "media": "image",
+      "industry": "mobile_accessories",
+      "keywords": [
+        "/travel",
+        "/lifestyle",
+        "/portable",
+        "/clean"
+      ],
+      "description_vi": "Ảnh phụ kiện mang theo khi đi lại.",
+      "primary_concept": "/travel",
+      "optional_keywords": [
+        "/lifestyle",
+        "/portable",
+        "/clean"
+      ]
+    },
+    {
+      "id": "charger_fast",
+      "media": "video",
+      "industry": "mobile_accessories",
+      "keywords": [
+        "/pickup",
+        "/plugin",
+        "/charging",
+        "/fastcharge",
+        "/lightsweep"
+      ],
+      "description_vi": "Demo sạc nhanh.",
+      "primary_concept": "/plugin",
+      "optional_keywords": [
+        "/pickup",
+        "/charging",
+        "/fastcharge",
+        "/lightsweep"
+      ]
+    },
+    {
+      "id": "earbuds_audio",
+      "media": "video",
+      "industry": "mobile_accessories",
+      "keywords": [
+        "/caseopen",
+        "/earbudpickup",
+        "/macro",
+        "/music",
+        "/reveal"
+      ],
+      "description_vi": "Tai nghe TWS: mở case, nhấc tai nghe, macro.",
+      "primary_concept": "/caseopen",
+      "optional_keywords": [
+        "/earbudpickup",
+        "/macro",
+        "/music",
+        "/reveal"
+      ]
+    },
+    {
+      "id": "lingerie_flatlay",
+      "media": "image",
+      "industry": "fashion",
+      "keywords": [
+        "/flatlay",
+        "/softluxury",
+        "/nudetone",
+        "/editorial"
+      ],
+      "description_vi": "Flatlay nội y sang nhẹ, product-only.",
+      "primary_concept": "/flatlay",
+      "optional_keywords": [
+        "/softluxury",
+        "/nudetone",
+        "/editorial"
+      ]
+    }
+  ]
+}

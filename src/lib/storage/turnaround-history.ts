@@ -4,7 +4,8 @@ export interface TurnaroundHistoryItem {
   id: string;
   createdAt: string;
   modelId: string;
-  image: Blob;
+  image?: Blob;
+  prompt?: string;
   text: string;
   notes: string;
   references: StoredImage[];

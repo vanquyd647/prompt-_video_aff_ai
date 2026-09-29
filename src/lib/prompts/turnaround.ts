@@ -1,4 +1,5 @@
 export const TURNAROUND_VIEWS = ["FRONT", "3/4 FRONT", "STRICT SIDE", "BACK", "3/4 BACK"] as const;
+export const TURNAROUND_TEXT_MODEL = { id: "gemini-3.5-flash-lite", label: "Gemini 3.5 Flash Lite" } as const;
 
 export const TURNAROUND_PROMPT = `Create a photorealistic Character Turnaround Sheet based strictly on the original reference image(s).
 Use the original reference image(s) as the source of truth.

@@ -25,14 +25,92 @@ const catalog = load("src/lib/prompts/fitcheck-catalog.ts");
 const defaults = load("src/lib/prompts/fashion-defaults.ts");
 const { parseGeminiResponse } = load("src/lib/gemini/response-parser.ts");
 const client = load("src/lib/gemini/client.ts");
+const keywords = load("src/lib/prompts/video-keywords.ts");
 const image = { file: new File(["fixture"], "fixture.png", { type: "image/png" }) };
 const common = { apiKey: "mock-only", settings: { modelId: "test", language: "Vietnamese", detailLevel: "Compact", aspectRatio: "9:16" }, notes: "" };
 const reply = (value) => new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: JSON.stringify(value) }] } }] }));
 function mockFetch(t, handler) { const original = global.fetch; global.fetch = handler; t.after(() => { global.fetch = original; }); }
 
+test("video keyword library uses source meanings and aliases and excludes incompatible directions", () => {
+  assert.equal(keywords.VIDEO_KEYWORD_SOURCE.count, 161);
+  assert.equal(keywords.resolveVideoKeyword("fit check").key, "/fitcheck");
+  assert.equal(keywords.resolveVideoKeyword(" SLOW MOTION ").key, "/slowmotion");
+  assert.equal(keywords.resolveVideoKeyword("/flatlay"), undefined);
+  assert.ok(keywords.eligibleVideoKeywords("single").some(({ key }) => key === "/ootd"));
+  for (const key of ["/pushin", "/frontback", "/outfittransition", "/lightsweep", "/crossfade"]) assert.throws(() => keywords.validateVideoKeywords([key], "single"));
+  assert.ok(keywords.validateVideoKeywords(["/frontback", "/pushin"], "transition"));
+  assert.throws(() => keywords.validateVideoKeywords(["/loop"], "transition"));
+  assert.throws(() => keywords.validateVideoKeywords(["/staticshot", "/pushin"], "transition"));
+  assert.throws(() => keywords.validateVideoKeywords(["/fitcheck", "/ootd"], "single"));
+  assert.throws(() => keywords.validateVideoKeywords(["/texture", "/slowmotion", "/symmetry", "/loop"], "single"));
+  assert.deepEqual(keywords.validateVideoKeywords(["fit check", "/fitcheck"], "single").map(({ key }) => key), ["/fitcheck"]);
+});
+
+test("video generation expands source keys and validates AI's application for both modes", async (t) => {
+  let request;
+  const selectedKeywords = [{ key: "/fitcheck", reason: "Show the existing jacket fit with a small collar adjustment." }, { key: "/slowmotion", reason: "Slow the collar adjustment within the clip duration." }];
+  mockFetch(t, async (_, options) => { request = JSON.parse(options.body); return reply({ ...videoFixture(), selectedKeywords }); });
+  for (const mode of ["single", "transition"]) {
+    const result = await client.generateVideoPrompt({ ...common, mode, referenceOne: image, referenceTwo: image, duration: "3 seconds", keywordKeys: ["fit check", "slow motion"] });
+    assert.deepEqual(result.selectedKeywords, selectedKeywords);
+    const instructions = request.contents[0].parts.find(({ text }) => text?.includes("VIDEO KEYWORD LIBRARY")).text;
+    assert.ok(instructions.includes(keywords.resolveVideoKeyword("/slowmotion").prompt_hint_en));
+    assert.ok(instructions.includes('USER-SELECTED CANONICAL KEYS: ["/fitcheck","/slowmotion"]'));
+    assert.ok(request.generationConfig.responseJsonSchema.required.includes("selectedKeywords"));
+    assert.ok(!request.generationConfig.responseJsonSchema.properties.selectedKeywords.items.properties.key.enum.includes("/crossfade"));
+  }
+});
+
+test("video keywords support auto selection and reject missing, hallucinated or ignored selections", async (t) => {
+  let value;
+  mockFetch(t, async () => reply({ ...videoFixture(), selectedKeywords: value }));
+  const args = { ...common, mode: "single", referenceOne: image, duration: "3 seconds", keywordKeys: [] };
+  value = [{ key: "/ootd", reason: "Show the existing outfit." }];
+  assert.equal((await client.generateVideoPrompt(args)).selectedKeywords[0].key, "/ootd");
+  await assert.rejects(() => client.generateVideoPrompt({ ...args, keywordKeys: ["/fitcheck"] }));
+  for (value of [undefined, [], [{ key: "/invented", reason: "Unknown" }], [{ key: "/texture", reason: "No concept" }], [{ key: "fit check", reason: "Alias instead of canonical" }], [{ key: "/fitcheck", reason: "" }]]) await assert.rejects(() => client.generateVideoPrompt(args));
+});
+
+test("incompatible user video keywords fail before an API request", async (t) => {
+  mockFetch(t, () => assert.fail("Do not send invalid keywords to Gemini"));
+  await assert.rejects(() => client.generateVideoPrompt({ ...common, mode: "single", referenceOne: image, duration: "3 seconds", keywordKeys: ["/pushin"] }));
+});
+
 const turnaroundArgs = { apiKey: "mock-only", modelId: "gemini-3.1-flash-image", references: [image], products: [], notes: "Keep the original hairstyle" };
 const imageResponse = (parts, extra = {}) => new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts }, ...extra }] }));
 const outputImage = { inlineData: { mimeType: "image/png", data: btoa("image bytes") } };
+
+test("turnaround prompt uses Flash Lite text output, original references and locked five-view order", async (t) => {
+  let request;
+  mockFetch(t, async (url, options) => {
+    assert.ok(url.endsWith("gemini-3.5-flash-lite:generateContent"));
+    request = JSON.parse(options.body);
+    return imageResponse([{ thought: true, text: "Internal notes" }, { text: "Same character with the visible black jacket." }]);
+  });
+  const prompt = await client.generateTurnaroundPrompt({ ...turnaroundArgs, references: [image, image], products: [image], background: image });
+  assert.deepEqual(request.generationConfig.responseModalities, ["TEXT"]);
+  assert.equal(request.generationConfig.responseFormat, undefined);
+  assert.equal(request.contents[0].parts.filter((part) => part.inline_data).length, 4);
+  assert.ok(request.contents[0].parts.at(-1).text.includes(turnaroundArgs.notes));
+  assert.match(prompt, /FRONT, 3\/4 FRONT, STRICT SIDE, BACK, 3\/4 BACK/);
+  assert.match(prompt, /Same character with the visible black jacket/);
+  assert.ok(!prompt.includes("Internal notes"));
+});
+
+test("turnaround text generation rejects incomplete, empty and image-only responses", async (t) => {
+  let response;
+  mockFetch(t, async () => response);
+  for (response of [imageResponse([outputImage]), imageResponse([{ text: "" }]), imageResponse([{ text: "Partial prompt" }], { finishReason: "MAX_TOKENS" }), new Response("invalid json")]) await assert.rejects(() => client.generateTurnaroundPrompt(turnaroundArgs));
+});
+
+test("turnaround text generation validates input and preserves cancellation", async (t) => {
+  let calls = 0;
+  mockFetch(t, async () => { calls++; throw new DOMException("Canceled", "AbortError"); });
+  await assert.rejects(() => client.generateTurnaroundPrompt({ ...turnaroundArgs, references: [] }));
+  await assert.rejects(() => client.generateTurnaroundPrompt({ ...turnaroundArgs, apiKey: "" }));
+  assert.equal(calls, 0);
+  await assert.rejects(() => client.generateTurnaroundPrompt(turnaroundArgs), { name: "AbortError" });
+});
 
 test("turnaround requests a real image with five locked views and all original references", async (t) => {
   let request;

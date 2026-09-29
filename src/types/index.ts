@@ -76,6 +76,7 @@ export interface PromptGenerationResult {
 export type VideoPromptMode = "single" | "transition";
 
 export interface VideoPromptResult {
+  selectedKeywords?: Array<{ key: string; reason: string }>;
   title: string;
   prompt: string;
   analysis: {

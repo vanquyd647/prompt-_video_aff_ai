@@ -10,7 +10,6 @@ import {
   Film,
   Globe,
   Image as ImageIcon,
-  KeyRound,
   LoaderCircle,
   MoveRight,
   Pencil,
@@ -26,6 +25,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ApiKeyDialog } from "@/components/settings/ApiKeyDialog";
 import { UploadCard } from "@/components/builder/UploadCard";
+import { VideoKeywordPicker } from "./VideoKeywordPicker";
+import { keywordRestriction, resolveVideoKeyword } from "@/lib/prompts/video-keywords";
 import { GeminiError, generateVideoPrompt } from "@/lib/gemini/client";
 import { GEMINI_MODEL_OPTIONS, RATE_LIMITS_URL } from "@/lib/gemini/models";
 import { createUploadedImage } from "@/lib/images/processing";
@@ -54,6 +55,7 @@ export function VideoPromptApp() {
   const [mode, setMode] = useState<VideoPromptMode>("single");
   const [uploading, setUploading] = useState(false);
   const [notes, setNotes] = useState("");
+  const [keywordKeys, setKeywordKeys] = useState<string[]>([]);
   const [duration, setDuration] = useState("3 giây");
   const [result, setResult] = useState<VideoPromptResult>();
   const [draftPrompt, setDraftPrompt] = useState("");
@@ -137,11 +139,13 @@ export function VideoPromptApp() {
   const changeMode = (nextMode: VideoPromptMode) => {
     if (nextMode === mode || generating || uploading) return;
     setMode(nextMode);
+    const compatible = keywordKeys.filter((key) => { const keyword = resolveVideoKeyword(key); return keyword && !keywordRestriction(keyword, nextMode); });
+    setKeywordKeys(compatible);
     setResult(undefined);
     setDraftPrompt("");
     setEditing(false);
     setError(undefined);
-    setMessage(undefined);
+    setMessage(compatible.length !== keywordKeys.length ? "Đã bỏ các key không phù hợp với chế độ mới." : undefined);
     setCopied(false);
   };
 
@@ -172,6 +176,7 @@ export function VideoPromptApp() {
         ...references,
         notes,
         duration,
+        keywordKeys,
         settings,
         signal: controller.signal,
       });
@@ -230,7 +235,7 @@ export function VideoPromptApp() {
 
     <main id="top" className="app-main video-main">
       <section className="intro video-intro">
-        <div><h1>Tạo video hook fit check từ ảnh</h1><p>AI phân tích chi tiết nhân vật, trang phục và tư thế, rồi chọn kịch bản phù hợp từ danh sách fitcheck_prompts. Giữ nguyên người mẫu, sản phẩm, bối cảnh và không lời thoại.</p></div>
+        <div><h1>Tạo video hook fit check từ ảnh</h1><p>Chọn concept và từ khóa từ thư viện Product Concept, hoặc để AI chọn theo nhân vật, trang phục và tư thế. Kết hợp với kịch bản fit check, giữ nguyên người mẫu, sản phẩm, bối cảnh và không lời thoại.</p></div>
       </section>
 
       {message && <div className="notice" role="status"><span>{message}</span><button onClick={() => setMessage(undefined)} aria-label="Đóng thông báo"><X size={15} /></button></div>}
@@ -247,6 +252,8 @@ export function VideoPromptApp() {
         {!single && <UploadCard index="02" title="Ảnh tham chiếu cuối" description="Tư thế và bố cục kết thúc của video." images={referenceTwo ? [referenceTwo] : []} onFiles={(files) => setSingle("two", files)} onRemove={() => removeImage("two")} />}
       </fieldset>
       {uploading && <p role="status">Đang đọc ảnh…</p>}
+
+      <VideoKeywordPicker mode={mode} selected={keywordKeys} disabled={generating || uploading} onChange={(keys) => { setKeywordKeys(keys); setResult(undefined); setEditing(false); setCopied(false); setError(undefined); }} />
 
       <div className="transition-cue"><span /><div className="transition-cue-inner"><strong>{single ? "Một ảnh · Chuyển động liền mạch" : "Blur mềm · ngắn · mượt"}</strong><MoveRight size={20} /></div><span /></div>
 
@@ -273,6 +280,7 @@ export function VideoPromptApp() {
       {result && <section id="video-result" className="video-results" aria-labelledby="video-result-title">
         <div className="video-result-heading"><div><span className="result-status"><Check size={15} />Hoàn tất</span><h2 id="video-result-title">Prompt video đã sẵn sàng</h2><p>{result.title}</p></div><div className="prompt-tools"><button className="text-action" type="button" onClick={copyPrompt}>{copied ? <Check size={15} /> : <Copy size={15} />}{copied ? "Đã sao chép" : "Sao chép"}</button><button className="text-action" type="button" onClick={toggleEdit}>{editing ? <Save size={15} /> : <Pencil size={15} />}{editing ? "Lưu chỉnh sửa" : "Chỉnh sửa"}</button></div></div>
         <div className="video-scenario"><h3>Kịch bản #{result.scenario.id} · {result.scenario.title}</h3><p><strong>Lý do chọn:</strong> {result.scenario.reason}</p><p><strong>Điều chỉnh theo ảnh:</strong> {result.scenario.adaptation}</p><details><summary>Kịch bản gốc trong danh sách</summary><p>{result.scenario.sourcePrompt}</p></details></div>
+        {result.selectedKeywords && <section className="video-applied-keywords"><h3>Từ khóa đã áp dụng</h3>{result.selectedKeywords.map(({ key, reason }) => <div key={key}><strong>{key}</strong><span>{resolveVideoKeyword(key)?.meaning_vi}</span><p>{reason}</p></div>)}</section>}
         <details className="video-analysis" open><summary>Phân tích nhân vật và trang phục</summary><div className="analysis-grid"><div><strong>Nhân vật</strong><p>{result.analysis.model}</p></div><div><strong>Trang phục / Sản phẩm</strong><p>{result.analysis.outfit}</p></div><div><strong>Tư thế</strong><p>{result.analysis.pose}</p></div><div><strong>Bối cảnh</strong><p>{result.analysis.background}</p></div></div>{result.analysis.motionConstraints.length > 0 && <ul>{result.analysis.motionConstraints.map((constraint, index) => <li key={index}>{constraint}</li>)}</ul>}</details>
         {editing ? <textarea className="video-prompt-editor" value={draftPrompt} onChange={(event) => setDraftPrompt(event.target.value)} /> : <p className="video-prompt-copy">{result.prompt}</p>}
         {result.warnings.length > 0 && <div className="video-warning"><strong>Lưu ý từ ảnh:</strong> {result.warnings.join(" · ")}</div>}
