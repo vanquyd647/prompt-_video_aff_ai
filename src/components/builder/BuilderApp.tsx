@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronDown, Clock3, ExternalLink, Film, History as HistoryIcon, KeyRound, LoaderCircle, Plus, RefreshCw, Settings as SettingsIcon, Sparkles, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Clock3, ExternalLink, Film, Globe, History as HistoryIcon, KeyRound, LoaderCircle, Plus, RefreshCw, Settings as SettingsIcon, ShieldCheck, SlidersHorizontal, Smartphone, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ApiKeyDialog } from "@/components/settings/ApiKeyDialog";
@@ -182,6 +182,8 @@ export function BuilderApp() {
     <header className="app-header">
       <a className="brand" href="#top" aria-label="Trang chủ Fashion Prompt Builder">Fashion Prompt Builder</a>
       <nav aria-label="Điều hướng chính">
+        <Link href="/">Tạo ảnh 5 góc</Link>
+        <Link href="/outfit-3d">Outfit 3D</Link>
         <button onClick={() => reset()}><Plus size={17} />Tạo mới</button>
         <Link href="/video-prompt"><Film size={17} />Video Prompt</Link>
         <button onClick={() => setHistoryOpen(true)}><HistoryIcon size={17} />Lịch sử <span className="nav-count">{history.length}</span></button>
@@ -208,19 +210,19 @@ export function BuilderApp() {
       </div>
 
       <fieldset className="pose-selection" disabled={generating || Boolean(regenerating)}>
-        <legend>Chọn pose cho lần tạo tiếp theo</legend>
-        <div><strong>01 · Front</strong><small>Phía trước · Cố định</small></div>
-        <div><strong>02 · Back</strong><small>Phía sau · Cố định</small></div>
-        {([0, 1] as const).map((slot) => <label key={slot}><span>Pose {slot + 3} · {slot === 0 ? "Dưới trái" : "Dưới phải"}</span><select aria-label={`Pose ${slot + 3}`} value={poseSelection[slot] ?? "auto"} onChange={(event) => setPoseSelection((current) => { const next: PoseSelection = [...current]; next[slot] = event.target.value === "auto" ? null : Number(event.target.value); return next; })}><option value="auto">AI tự chọn sau khi phân tích</option>{OPTIONAL_FITCHECK_POSES.map((pose) => <option key={pose.id} value={pose.id} disabled={pose.id === poseSelection[1 - slot]}>#{pose.id} · {pose.name}</option>)}</select></label>)}
+        <legend>Bố cục 4 pose cho ảnh ghép 2×2</legend>
+        <div className="pose-slot-fixed"><strong>01 · Front</strong><small>Phía trước · Khung 01 · Cố định</small></div>
+        <div className="pose-slot-fixed"><strong>02 · Back</strong><small>Phía sau · Khung 02 · Cố định</small></div>
+        {([0, 1] as const).map((slot) => <label key={slot}><span>Pose {slot + 3} · {slot === 0 ? "Khung 03 (Dưới trái)" : "Khung 04 (Dưới phải)"}</span><select aria-label={`Pose ${slot + 3}`} value={poseSelection[slot] ?? "auto"} onChange={(event) => setPoseSelection((current) => { const next: PoseSelection = [...current]; next[slot] = event.target.value === "auto" ? null : Number(event.target.value); return next; })}><option value="auto">AI tự chọn sau khi phân tích</option>{OPTIONAL_FITCHECK_POSES.map((pose) => <option key={pose.id} value={pose.id} disabled={pose.id === poseSelection[1 - slot]}>#{pose.id} · {pose.name}</option>)}</select></label>)}
       </fieldset>
 
       <section className="generation-rail" aria-label="Cài đặt tạo prompt">
         <Control label="Mô hình"><div className="select-control"><Sparkles size={16} /><select aria-label="Mô hình Gemini" value={settings.modelId} onChange={(e) => setSettings({ ...settings, modelId: e.target.value })}>{modelOptions.map((model) => <option key={model.id} value={model.id}>{model.label}{model.recommended ? " · Đề xuất" : ""}</option>)}</select><ChevronDown size={15} /></div><button className="refresh-models" onClick={refreshModels} title="Làm mới danh sách mô hình" aria-label="Làm mới danh sách mô hình Gemini"><RefreshCw size={15} /></button></Control>
-        <Control label="Tỷ lệ"><div className="select-control locked-control" aria-label="Tỷ lệ khung hình cố định"><span>9:16 · Cố định</span></div></Control>
-        <Control label="Ngôn ngữ"><Select label="Ngôn ngữ đầu ra" value={settings.language} onChange={(value) => setSettings({ ...settings, language: value as AppSettings["language"] })} options={LANGUAGE_OPTIONS} /></Control>
-        <Control label="Mức độ chi tiết"><Select label="Mức độ chi tiết của prompt" value={settings.detailLevel} onChange={(value) => setSettings({ ...settings, detailLevel: value as AppSettings["detailLevel"] })} options={DETAIL_OPTIONS} /></Control>
+        <Control label="Tỷ lệ"><div className="select-control locked-control" aria-label="Tỷ lệ khung hình cố định"><Smartphone size={16} /><span>9:16 · Cố định</span></div></Control>
+        <Control label="Ngôn ngữ"><Select icon={<Globe size={16} />} label="Ngôn ngữ đầu ra" value={settings.language} onChange={(value) => setSettings({ ...settings, language: value as AppSettings["language"] })} options={LANGUAGE_OPTIONS} /></Control>
+        <Control label="Mức độ chi tiết"><Select icon={<SlidersHorizontal size={16} />} label="Mức độ chi tiết của prompt" value={settings.detailLevel} onChange={(value) => setSettings({ ...settings, detailLevel: value as AppSettings["detailLevel"] })} options={DETAIL_OPTIONS} /></Control>
         <button className="generate-button" type="button" disabled={!canGenerate} onClick={handleGenerate}>{generating ? <LoaderCircle className="spin" size={20} /> : <Sparkles size={20} />}{generating ? PROGRESS_STAGES[progressStage] : "Tạo bộ prompt"}{!generating && <ArrowRight size={20} />}</button>
-        <div className="privacy-line"><KeyRound size={14} /><span>Ảnh tham chiếu và lịch sử prompt được lưu cục bộ trên trình duyệt của bạn.</span></div>
+        <div className="privacy-line"><ShieldCheck size={16} /><span>Ảnh tham chiếu và lịch sử prompt được lưu cục bộ trên trình duyệt của bạn.</span></div>
       </section>
 
       {generating && <section className="progress-panel" aria-live="polite"><div className="progress-track"><i /></div><div><Clock3 size={18} /><span>{PROGRESS_STAGES[progressStage]}</span><button onClick={() => abortRef.current?.abort()}>Hủy</button></div></section>}
@@ -238,4 +240,4 @@ export function BuilderApp() {
 }
 
 function Control({ label, children }: { label: string; children: React.ReactNode }) { return <div className="control-group"><span>{label}</span><div className="control-inline">{children}</div></div>; }
-function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (value: string) => void; options: Array<{ value: string; label: string }> }) { return <div className="select-control"><select aria-label={label} value={value} onChange={(e) => onChange(e.target.value)}>{options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select><ChevronDown size={15} /></div>; }
+function Select({ label, icon, value, onChange, options }: { label: string; icon?: React.ReactNode; value: string; onChange: (value: string) => void; options: Array<{ value: string; label: string }> }) { return <div className="select-control">{icon}<select aria-label={label} value={value} onChange={(e) => onChange(e.target.value)}>{options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select><ChevronDown size={15} /></div>; }

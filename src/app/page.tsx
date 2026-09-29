@@ -1,5 +1,5 @@
-import { BuilderApp } from "@/components/builder/BuilderApp";
+import { TurnaroundApp } from "@/components/builder/TurnaroundApp";
 
 export default function Home() {
-  return <BuilderApp />;
+  return <TurnaroundApp />;
 }

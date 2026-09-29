@@ -30,6 +30,96 @@ const common = { apiKey: "mock-only", settings: { modelId: "test", language: "Vi
 const reply = (value) => new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: JSON.stringify(value) }] } }] }));
 function mockFetch(t, handler) { const original = global.fetch; global.fetch = handler; t.after(() => { global.fetch = original; }); }
 
+const turnaroundArgs = { apiKey: "mock-only", modelId: "gemini-3.1-flash-image", references: [image], products: [], notes: "Keep the original hairstyle" };
+const imageResponse = (parts, extra = {}) => new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts }, ...extra }] }));
+const outputImage = { inlineData: { mimeType: "image/png", data: btoa("image bytes") } };
+
+test("turnaround requests a real image with five locked views and all original references", async (t) => {
+  let request;
+  mockFetch(t, async (url, options) => {
+    assert.ok(url.endsWith("gemini-3.1-flash-image:generateContent"));
+    request = JSON.parse(options.body);
+    return imageResponse([{ thought: true, ...outputImage }, { text: "Image complete" }, outputImage]);
+  });
+  const result = await client.generateTurnaroundImage({ ...turnaroundArgs, references: [image, image], products: [image], background: image });
+  assert.equal(result.image.type, "image/png");
+  assert.equal(await result.image.text(), "image bytes");
+  assert.equal(result.text, "Image complete");
+  assert.deepEqual(request.generationConfig.responseModalities, ["TEXT", "IMAGE"]);
+  assert.deepEqual(request.generationConfig.responseFormat.image, { aspectRatio: "16:9", imageSize: "2K" });
+  const parts = request.contents[0].parts;
+  assert.equal(parts.filter((part) => part.inline_data).length, 4);
+  assert.match(parts[0].text, /FRONT, 3\/4 FRONT, STRICT SIDE, BACK, 3\/4 BACK/);
+  assert.match(parts[0].text, /original reference image\(s\) as the source of truth/);
+  assert.ok(parts.at(-1).text.includes(turnaroundArgs.notes));
+  assert.equal(request.generationConfig.responseMimeType, undefined);
+});
+
+test("turnaround accepts one original image without requiring products or background", async (t) => {
+  mockFetch(t, async (_, options) => {
+    assert.equal(JSON.parse(options.body).contents[0].parts.filter((part) => part.inline_data).length, 1);
+    return imageResponse([outputImage]);
+  });
+  assert.ok((await client.generateTurnaroundImage(turnaroundArgs)).image instanceof Blob);
+});
+
+test("turnaround rejects invalid inputs before sending a paid image request", async (t) => {
+  mockFetch(t, () => assert.fail("Must validate before fetching"));
+  for (const changes of [{ apiKey: "" }, { modelId: "gemini-2.5-flash" }, { references: [] }, { references: Array(15).fill(image) }, { references: [{ file: { size: 15 * 1024 * 1024 } }] }]) {
+    await assert.rejects(() => client.generateTurnaroundImage({ ...turnaroundArgs, ...changes }));
+  }
+});
+
+test("turnaround rejects text-only, blocked, truncated, malformed and multiple-image responses", async (t) => {
+  let response;
+  mockFetch(t, async () => response);
+  for (response of [imageResponse([{ text: "Here is your prompt" }]), imageResponse([outputImage], { finishReason: "MAX_TOKENS" }), imageResponse([outputImage, outputImage]), imageResponse([{ ...outputImage, thought: true }]), new Response("not json"), new Response(JSON.stringify({ promptFeedback: { blockReason: "SAFETY" } }))]) {
+    await assert.rejects(() => client.generateTurnaroundImage(turnaroundArgs));
+  }
+});
+
+test("turnaround propagates cancellation and handles rate limits", async (t) => {
+  const controller = new AbortController();
+  mockFetch(t, async (_, options) => { assert.equal(options.signal, controller.signal); throw new DOMException("Aborted", "AbortError"); });
+  await assert.rejects(() => client.generateTurnaroundImage({ ...turnaroundArgs, signal: controller.signal }), { name: "AbortError" });
+  global.fetch = async () => new Response("quota", { status: 429 });
+  await assert.rejects(() => client.generateTurnaroundImage(turnaroundArgs), (error) => error.status === 429);
+});
+
+test("outfit references preserve body count, individual garment assignments and landscape layout", async (t) => {
+  let request;
+  mockFetch(t, async (_, options) => {
+    request = JSON.parse(options.body);
+    return new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts: [{ thought: true, text: "private reasoning" }, { text: "A white mannequin wearing the reference outfit." }] } }] }));
+  });
+  const prompt = await client.generateOutfitPrompt({ ...common, bodies: [image, image], products: [{ ...image, category: "top" }, { ...image, category: "skirt" }], notes: "Tuck in the shirt" });
+  const parts = request.contents[0].parts;
+  assert.equal(parts.filter((part) => part.inline_data).length, 4);
+  assert.ok(parts.some((part) => part.text?.includes("BODY REFERENCE 2")));
+  assert.ok(parts.some((part) => part.text?.includes("assigned category = top")));
+  assert.ok(parts.some((part) => part.text?.includes("assigned category = skirt")));
+  assert.ok(parts.at(-1).text.includes("Tuck in the shirt"));
+  assert.match(prompt, /ONE landscape 16:9/);
+  assert.match(prompt, /FRONT.*SIDE.*BACK/);
+  assert.ok(!prompt.includes("private reasoning"));
+});
+
+test("outfit rejects missing references and unassigned categories before API requests", async (t) => {
+  mockFetch(t, () => { assert.fail("Invalid input must not call Gemini"); });
+  const args = { ...common, bodies: [image], products: [{ ...image, category: "trousers" }] };
+  await assert.rejects(() => client.generateOutfitPrompt({ ...args, bodies: [] }));
+  await assert.rejects(() => client.generateOutfitPrompt({ ...args, products: [] }));
+  await assert.rejects(() => client.generateOutfitPrompt({ ...args, products: [{ ...image, category: "" }] }));
+});
+
+test("outfit rejects empty and truncated Gemini output", async (t) => {
+  const args = { ...common, bodies: [image], products: [{ ...image, category: "top" }] };
+  mockFetch(t, async () => new Response(JSON.stringify({ candidates: [{ finishReason: "MAX_TOKENS", content: { parts: [{ text: "unfinished" }] } }] })));
+  await assert.rejects(() => client.generateOutfitPrompt(args));
+  global.fetch = async () => new Response(JSON.stringify({ candidates: [] }));
+  await assert.rejects(() => client.generateOutfitPrompt(args));
+});
+
 test("catalog imports the numbered source entries and filters incompatible effects", () => {
   assert.equal(catalog.FITCHECK_POSES.length, 60);
   assert.equal(catalog.FITCHECK_SCENARIOS.length, 30);

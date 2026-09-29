@@ -8,6 +8,7 @@ import {
   Clock3,
   Copy,
   Film,
+  Globe,
   Image as ImageIcon,
   KeyRound,
   LoaderCircle,
@@ -16,6 +17,7 @@ import {
   Save,
   Settings as SettingsIcon,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   UserRound,
   X,
@@ -215,6 +217,7 @@ export function VideoPromptApp() {
     <header className="app-header">
       <Link className="brand" href="/">Fashion Prompt Builder</Link>
       <nav aria-label="Điều hướng chính">
+        <Link href="/outfit-3d">Outfit 3D</Link>
         <Link href="/"><ImageIcon size={17} />Tạo ảnh</Link>
         <Link href="/video-prompt" className="active" aria-current="page"><Film size={17} />Video Prompt</Link>
         <Link href="/#history"><Clock3 size={17} />Lịch sử</Link>
@@ -245,7 +248,7 @@ export function VideoPromptApp() {
       </fieldset>
       {uploading && <p role="status">Đang đọc ảnh…</p>}
 
-      <div className="transition-cue"><span /><strong>{single ? "Một ảnh · Chuyển động liền mạch" : "Blur mềm · ngắn · mượt"}</strong><MoveRight size={20} /><span /></div>
+      <div className="transition-cue"><span /><div className="transition-cue-inner"><strong>{single ? "Một ảnh · Chuyển động liền mạch" : "Blur mềm · ngắn · mượt"}</strong><MoveRight size={20} /></div><span /></div>
 
       <section className="upload-card video-notes-card" aria-labelledby="video-notes-title">
         <span className="watermark" aria-hidden>{single ? "02" : "03"}</span>
@@ -256,11 +259,11 @@ export function VideoPromptApp() {
 
       <section className="generation-rail video-generation-rail" aria-label="Cài đặt tạo prompt video">
         <VideoControl label="Mô hình"><Sparkles size={16} /><select aria-label="Mô hình Gemini" value={settings.modelId} onChange={(event) => setSettings({ ...settings, modelId: event.target.value })}>{GEMINI_MODEL_OPTIONS.map((model) => <option key={model.id} value={model.id}>{model.label}</option>)}</select><ChevronDown size={15} /></VideoControl>
-        <VideoControl label="Tỷ lệ"><select aria-label="Tỷ lệ video" value={settings.aspectRatio} onChange={(event) => setSettings({ ...settings, aspectRatio: event.target.value })}>{ASPECT_RATIO_OPTIONS.map((ratio) => <option key={ratio}>{ratio}</option>)}</select><ChevronDown size={15} /></VideoControl>
-        <VideoControl label="Ngôn ngữ"><select aria-label="Ngôn ngữ prompt" value={settings.language} onChange={(event) => setSettings({ ...settings, language: event.target.value as AppSettings["language"] })}>{LANGUAGE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select><ChevronDown size={15} /></VideoControl>
+        <VideoControl label="Tỷ lệ"><Smartphone size={16} /><select aria-label="Tỷ lệ video" value={settings.aspectRatio} onChange={(event) => setSettings({ ...settings, aspectRatio: event.target.value })}>{ASPECT_RATIO_OPTIONS.map((ratio) => <option key={ratio}>{ratio}</option>)}</select><ChevronDown size={15} /></VideoControl>
+        <VideoControl label="Ngôn ngữ"><Globe size={16} /><select aria-label="Ngôn ngữ prompt" value={settings.language} onChange={(event) => setSettings({ ...settings, language: event.target.value as AppSettings["language"] })}>{LANGUAGE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select><ChevronDown size={15} /></VideoControl>
         <VideoControl label="Thời lượng"><Clock3 size={16} /><select aria-label="Thời lượng video" value={duration} onChange={(event) => setDuration(event.target.value)}>{DURATION_OPTIONS.map((option) => <option key={option}>{option}</option>)}</select><ChevronDown size={15} /></VideoControl>
         <button className="generate-button" type="button" disabled={!canGenerate} onClick={handleGenerate}>{generating ? <LoaderCircle className="spin" size={20} /> : <Sparkles size={20} />}{generating ? PROGRESS_STAGES[progressStage] : "Tạo prompt video"}{!generating && <ArrowRight size={20} />}</button>
-        <div className="privacy-line"><KeyRound size={14} /><span>Ảnh tham chiếu được gửi thẳng đến Gemini bằng API key của bạn.</span></div>
+        <div className="privacy-line"><ShieldCheck size={16} /><span>Ảnh tham chiếu được gửi thẳng đến Gemini bằng API key của bạn.</span></div>
       </section>
 
       {generating && <section className="progress-panel" aria-live="polite"><div className="progress-track"><i /></div><div><Clock3 size={18} /><span>{PROGRESS_STAGES[progressStage]}</span><button type="button" onClick={() => abortRef.current?.abort()}>Hủy</button></div></section>}

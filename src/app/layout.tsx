@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Fashion Prompt Builder",
-  description: "Tạo bộ prompt ảnh thời trang nhất quán từ các ảnh tham chiếu.",
+  description: "Tạo ảnh Character Turnaround Sheet chân thực với 5 góc nhìn nhất quán từ ảnh tham chiếu gốc.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
